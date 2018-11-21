@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="CidadeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="CidadeTextField" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="EstadoLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="EstadoTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LogradouroLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="DataLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="BairroLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="VitimaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="LogradouroTextField" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="NumeroLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="NumeroTextField" min="-2" pref="48" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="CepLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="BairroTextField" min="-2" pref="222" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ReferenciaLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="ReferenciaTextField" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ComplementoLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="DiaTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="Barra1Label" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="MesTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="Barra2Label" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="AnoTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="HoraLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="HoraTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="DoisPontosLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="MinutosTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="LocalDoCrimeLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="ComunicanteLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TestemunhaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="AutorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="AdicionarComunicanteButton" max="32767" attributes="0"/>
+                                          <Component id="AdicionarVitimaButton" max="32767" attributes="0"/>
+                                          <Component id="AdicionarAutorButton" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="AdicionarTestemunhaButton" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="EvidenciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="DelegadoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="AdicionarEvidenciaButton" min="-2" pref="136" max="-2" attributes="0"/>
+                                                  <Component id="AdicionarDelegadoButton" min="-2" pref="136" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="EquipePolicialLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="AdicionarEquipeButton" min="-2" pref="136" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="SegredoDeJustiçaRadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="CepTextField" max="32767" attributes="0"/>
+                          <Component id="ComplementoTextField" pref="181" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="SalvarButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="InfracaoLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="InfracaoTextField" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="InfracaoTextField" min="-2" max="-2" attributes="0"/>
+                  <Component id="InfracaoLabel" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="LocalDoCrimeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CidadeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CidadeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EstadoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EstadoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LogradouroLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="LogradouroTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="NumeroLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="NumeroTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CepLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CepTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="BairroLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="BairroTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ReferenciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ReferenciaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ComplementoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ComplementoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="DataLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DiaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Barra1Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="MesTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Barra2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AnoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="HoraLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="HoraTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DoisPontosLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="MinutosTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="VitimaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AdicionarVitimaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EvidenciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AdicionarEvidenciaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="AdicionarComunicanteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ComunicanteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DelegadoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AdicionarDelegadoButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="AdicionarTestemunhaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TestemunhaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EquipePolicialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AdicionarEquipeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="AutorLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="AdicionarAutorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SegredoDeJustiçaRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="107" max="32767" attributes="0"/>
+              <Component id="SalvarButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="InfracaoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Infra&#xe7;&#xe3;o"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="InfracaoTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InfracaoTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LocalDoCrimeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Local do Crime"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="CidadeTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="CidadeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cidade"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="EstadoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Estado"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="EstadoTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EstadoTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="LogradouroLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Logradouro"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="LogradouroTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogradouroTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="NumeroLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xba;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="NumeroTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NumeroTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="CepLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CEP"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="CepTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="BairroLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bairro"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="BairroTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BairroTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ReferenciaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Referencia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ReferenciaTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReferenciaTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ComplementoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Complemento"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ComplementoTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="DataLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="DiaTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DiaTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Barra1Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="MesTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="Barra2Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="AnoTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnoTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="HoraLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="HoraTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HoraTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="DoisPontosLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=":"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="MinutosTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="VitimaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="V&#xed;tima"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarVitimaButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar V&#xed;tima"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarVitimaButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ComunicanteLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Comunicante"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarComunicanteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Comunicante"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="TestemunhaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Testemunha"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarTestemunhaButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Testemunha"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarTestemunhaButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="AutorLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Autor"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarAutorButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Autor"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="EvidenciaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Evid&#xea;ncia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarEvidenciaButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="AdicionarEvid&#xea;ncia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="DelegadoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delegado"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarDelegadoButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Delegado"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarDelegadoButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="EquipePolicialLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Equipe Policial"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AdicionarEquipeButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adicionar Equipe"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="SegredoDeJusti&#xe7;aRadioButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Segredo de justi&#xe7;a"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SegredoDeJusti&#xe7;aRadioButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="SalvarButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
