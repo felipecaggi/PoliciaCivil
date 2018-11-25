@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.view;
+package view;
+
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -31,20 +35,26 @@ public class AdicionarVitima extends javax.swing.JFrame {
         TabelaResultados = new javax.swing.JTable();
         PesquisarTextField = new javax.swing.JTextField();
         PesquisarButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        CadastrarVitimaButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableAdicionados = new javax.swing.JTable();
+        AdicionarVitimaButton = new javax.swing.JButton();
+        VoltarButton = new javax.swing.JButton();
+        SalvarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TabelaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", null, null},
-                {"", null, null},
-                {"", null, null},
-                {null, null, null}
+                {"Gui", "079"},
+                {"Vi", "455"},
+                {"Hue", null},
+                {null, null}
             },
             new String [] {
-                "Nome", "CPF", "Adicionar"
+                "Nome", "CPF"
             }
         ));
         jScrollPane1.setViewportView(TabelaResultados);
@@ -56,32 +66,87 @@ public class AdicionarVitima extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cadastrar Vítima");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CadastrarVitimaButton.setText("Cadastrar Vítima");
+        CadastrarVitimaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CadastrarVitimaButtonActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Resultados da pesquisa");
+
+        jLabel2.setText("Vítimas adicionadas");
+
+        TableAdicionados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "CPF"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TableAdicionados);
+
+        AdicionarVitimaButton.setText("Adicionar Linhas Selecionadas");
+        AdicionarVitimaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdicionarVitimaButtonActionPerformed(evt);
+            }
+        });
+
+        VoltarButton.setText("Voltar");
+        VoltarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarButtonActionPerformed(evt);
+            }
+        });
+
+        SalvarButton.setText("Salvar");
+        SalvarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PesquisarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PesquisarButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                                .addComponent(CadastrarVitimaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(288, 288, 288)
+                        .addComponent(AdicionarVitimaButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(VoltarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SalvarButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,25 +156,83 @@ public class AdicionarVitima extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PesquisarButton)
-                    .addComponent(jButton1))
+                    .addComponent(CadastrarVitimaButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(AdicionarVitimaButton)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VoltarButton)
+                    .addComponent(SalvarButton))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Pesquisa a vítima no Banco de Dados
+     * @param evt 
+     */
     private void PesquisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_PesquisarButtonActionPerformed
+    
+    /**
+     * Cadastra uma nova vítima no Banco de Dados
+     * @param evt 
+     */
+    private void CadastrarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVitimaButtonActionPerformed
+        
+    }//GEN-LAST:event_CadastrarVitimaButtonActionPerformed
+    
+    /**
+     * Transfere a pessoa resultado da pesquisa para a tabela de vítimas
+     * @param evt 
+     */
+    private void AdicionarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarVitimaButtonActionPerformed
+        
+        TableModel model1 = TabelaResultados.getModel();
+        
+        int[] index = TabelaResultados.getSelectedRows();
+        
+        Object[] row = new Object[2];
+        
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        
+        for(int i = 0; i < index.length; i++){
+            
+            row[0] = model1.getValueAt(index[i], 0);
+            row[1] = model1.getValueAt(index[i], 1);
+            model2.addRow(row);
+        }
+        
+    }//GEN-LAST:event_AdicionarVitimaButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Salva as vítimas selecionadas
+     * @param evt 
+     */
+    private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_SalvarButtonActionPerformed
+    
+    /**
+     * Volta para a tela anterior
+     * @param evt 
+     */
+    private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
 
+    }//GEN-LAST:event_VoltarButtonActionPerformed
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -146,11 +269,17 @@ public class AdicionarVitima extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AdicionarVitimaButton;
+    private javax.swing.JButton CadastrarVitimaButton;
     private javax.swing.JButton PesquisarButton;
     private javax.swing.JTextField PesquisarTextField;
+    private javax.swing.JButton SalvarButton;
     private javax.swing.JTable TabelaResultados;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable TableAdicionados;
+    private javax.swing.JButton VoltarButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
