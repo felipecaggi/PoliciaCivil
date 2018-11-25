@@ -10,11 +10,10 @@ DROP TABLE IF EXISTS policiaschema.cidadao CASCADE;
 DROP TABLE IF EXISTS policiaschema.policial CASCADE;
 DROP TABLE IF EXISTS policiaschema.endereco CASCADE;
 DROP TABLE IF EXISTS policiaschema.possuiPais CASCADE;
-DROP TABLE IF EXISTS policiaschema.moraEm CASCADE;
 DROP TABLE IF EXISTS policiaschema.envolvido CASCADE;
 DROP TABLE IF EXISTS policiaschema.testemunha CASCADE;
-DROP TABLE IF EXISTS policiaschema.sobre CASCADE;
-DROP TABLE IF EXISTS policiaschema.comete CASCADE;
+DROP TABLE IF EXISTS policiaschema.vitima CASCADE;
+DROP TABLE IF EXISTS policiaschema.autor CASCADE;
 DROP TABLE IF EXISTS policiaschema.delegacia CASCADE;
 DROP TABLE IF EXISTS policiaschema.delegado CASCADE;
 DROP TABLE IF EXISTS policiaschema.mandado CASCADE;
@@ -24,7 +23,7 @@ DROP TABLE IF EXISTS policiaschema.veiculo CASCADE;
 DROP TABLE IF EXISTS policiaschema.objeto CASCADE;
 DROP TABLE IF EXISTS policiaschema.substancia CASCADE;
 DROP TABLE IF EXISTS policiaschema.celular CASCADE;
-DROP TABLE IF EXISTS policiaschema.apresenta CASCADE;
+DROP TABLE IF EXISTS policiaschema.evidencia_ocorrencia CASCADE;
 
 CREATE TABLE policiaschema.policial(
 idPol INT PRIMARY KEY,
@@ -37,13 +36,12 @@ cargo VARCHAR(80) NOT NULL
 CREATE TABLE policiaschema.endereco(
 idEnd INT PRIMARY KEY,
 cep VARCHAR (8) NOT NULL,
-rua VARCHAR (80) NOT NULL,
+logradouro VARCHAR (80) NOT NULL,
 numero INTEGER NOT NULL, 
 bairro VARCHAR (80) NOT NULL,
 complemento VARCHAR (80),
 estado VARCHAR (2) NOT NULL,
-cidade VARCHAR (80) NOT NULL,
-logradouro VARCHAR (80)
+cidade VARCHAR (80) NOT NULL
 );
 
 CREATE TABLE policiaschema.delegacia(
@@ -67,7 +65,8 @@ segredoJustica BOOLEAN NOT NULL,
 idPolicial INT NOT NULL,
 idEndereco INT NOT NULL,
 idDelegacia INT NOT NULL,
-idDelegado INT NOT NULL	
+idDelegado INT NOT NULL,
+idComunicante VARCHAR (11) NOT NULL
 );
 
 CREATE TABLE policiaschema.cidadao(
@@ -79,7 +78,8 @@ telefone INT NOT NULL,
 estadoOrigem VARCHAR (2) NOT NULL,
 cidadeOrigem VARCHAR (80) NOT NULL,
 status VARCHAR (30),
-alcunha VARCHAR (30)
+alcunha VARCHAR (30),
+idEndereco INT NOT NULL
 );
 
 CREATE TABLE policiaschema.possuiPais(
@@ -94,22 +94,16 @@ cpfCidadao VARCHAR (11),
 PRIMARY KEY(idOcorrencia, cpfCidadao)
 );
 
-CREATE TABLE policiaschema.sobre(
+CREATE TABLE policiaschema.vitima(
 idOcorrencia INT,
 cpfCidadao VARCHAR (11),
 PRIMARY KEY(idOcorrencia, cpfCidadao)
 );
 
-CREATE TABLE policiaschema.comete(
+CREATE TABLE policiaschema.autor(
 idOcorrencia INT,
 cpfCidadao VARCHAR (11),
 PRIMARY KEY(idOcorrencia, cpfCidadao)	
-);
-
-CREATE TABLE policiaschema.moraEm(
-idEndereco INT,
-cpfCid VARCHAR (11),
-PRIMARY KEY(idEndereco, cpfCid)
 );
 
 CREATE TABLE policiaschema.envolvido(
@@ -183,7 +177,7 @@ idEvidencia INT,
 PRIMARY KEY(imei, idEvidencia)
 );
 
-CREATE TABLE policiaschema.apresenta(
+CREATE TABLE policiaschema.evidencia_ocorrencia(
 idOcorrencia INT,
 idEvidencia INT,
 PRIMARY KEY(idOcorrencia, idEvidencia)
@@ -197,6 +191,9 @@ ALTER TABLE ONLY policiaschema.delegado
 	
 ALTER TABLE ONLY policiaschema.ocorrencia 
 	ADD CONSTRAINT ocorrenciaPolicial_fkey FOREIGN KEY (idPolicial) REFERENCES policiaschema.policial(idPol);
+
+ALTER TABLE ONLY policiaschema.ocorrencia 
+	ADD CONSTRAINT ocorrenciaCidadao_fkey FOREIGN KEY (idComunicante) REFERENCES policiaschema.cidadao(cpf);
 
 ALTER TABLE ONLY policiaschema.ocorrencia 
 	ADD CONSTRAINT ocorrenciaEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEnd);
@@ -219,24 +216,21 @@ ALTER TABLE ONLY policiaschema.testemunha
 ALTER TABLE ONLY policiaschema.testemunha
 	ADD CONSTRAINT testemunhaCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
 	
-ALTER TABLE ONLY policiaschema.sobre
-	ADD CONSTRAINT sobreOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+ALTER TABLE ONLY policiaschema.vitima
+	ADD CONSTRAINT vitimaOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
 	
-ALTER TABLE ONLY policiaschema.sobre
-	ADD CONSTRAINT sobreCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
+ALTER TABLE ONLY policiaschema.vitima
+	ADD CONSTRAINT vitimaCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
 	
-ALTER TABLE ONLY policiaschema.comete
-	ADD CONSTRAINT cometeOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+ALTER TABLE ONLY policiaschema.autor
+	ADD CONSTRAINT autorOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
 
-ALTER TABLE ONLY policiaschema.comete
-	ADD CONSTRAINT cometeCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
+ALTER TABLE ONLY policiaschema.autor
+	ADD CONSTRAINT autorCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
 	
 
-ALTER TABLE ONLY policiaschema.moraEm
-	ADD CONSTRAINT moraemEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEnd);
-	
-ALTER TABLE ONLY policiaschema.moraEm
-	ADD CONSTRAINT moraemCidadao_fkey FOREIGN KEY (cpfCid) REFERENCES policiaschema.cidadao(cpf);
+ALTER TABLE ONLY policiaschema.cidadao
+	ADD CONSTRAINT cidadaoEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEnd);
 	
 ALTER TABLE ONLY policiaschema.envolvido
 	ADD CONSTRAINT envolvidoOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
@@ -265,10 +259,8 @@ ALTER TABLE ONLY policiaschema.substancia
 ALTER TABLE ONLY policiaschema.celular
 	ADD CONSTRAINT celularEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
 
-ALTER TABLE ONLY policiaschema.apresenta
+ALTER TABLE ONLY policiaschema.evidencia_ocorrencia
 	ADD CONSTRAINT OcorrenciaEvidencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
 	
-ALTER TABLE ONLY policiaschema.apresenta
-	ADD CONSTRAINT apresentaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
-
-
+ALTER TABLE ONLY policiaschema.evidencia_ocorrencia
+	ADD CONSTRAINT evidencia_ocorrenciaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);

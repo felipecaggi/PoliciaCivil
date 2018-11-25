@@ -5,12 +5,18 @@
  */
 package view;
 
+import model.entity.Cidadao;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author Asus
  */
 public class CadastrarOcorrencia extends javax.swing.JFrame {
 
+    public static List<Cidadao> vitimas = new LinkedList<Cidadao>();
+    
     /**
      * Creates new form CadastrarOcorrencia
      */
@@ -308,7 +314,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                             .addComponent(CepTextField)
                             .addComponent(ComplementoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SalvarButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(InfracaoLabel)
@@ -394,7 +400,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InfracaoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfracaoTextFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_InfracaoTextFieldActionPerformed
 
     private void EstadoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadoTextFieldActionPerformed
@@ -431,6 +437,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
 
     private void AdicionarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarVitimaButtonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AdicionarVitima().setVisible(true);
             }

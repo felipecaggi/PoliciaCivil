@@ -5,9 +5,12 @@
  */
 package view;
 
+import java.util.LinkedList;
+import java.util.List;
+import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
+import model.entity.Cidadao;
 
 /**
  *
@@ -15,11 +18,26 @@ import javax.swing.table.TableModel;
  */
 public class AdicionarVitima extends javax.swing.JFrame {
 
+    private List<Cidadao> initVitimas;
+    
     /**
      * Creates new form AdicionarVitima
      */
     public AdicionarVitima() {
+        
         initComponents();
+        
+        initVitimas=new LinkedList<>();
+        initVitimas.addAll(CadastrarOcorrencia.vitimas);
+        
+        Object[] row = new Object[2];
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        for (int i = 0; i < initVitimas.size(); i++) {
+            Cidadao temp = initVitimas.get(i);
+            row[0] = temp.getNome();
+            row[1] = temp.getCpf();
+            model2.addRow(row);
+        }
     }
 
     /**
@@ -30,7 +48,11 @@ public class AdicionarVitima extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        policiaPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("policiaPU").createEntityManager();
+        cidadaoQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT c FROM Cidadao c");
+        cidadaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : cidadaoQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaResultados = new javax.swing.JTable();
         PesquisarTextField = new javax.swing.JTextField();
@@ -46,17 +68,15 @@ public class AdicionarVitima extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TabelaResultados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Gui", "079"},
-                {"Vi", "455"},
-                {"Hue", null},
-                {null, null}
-            },
-            new String [] {
-                "Nome", "CPF"
-            }
-        ));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cidadaoList, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
+        columnBinding.setColumnName("CPF");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
 
         PesquisarButton.setText("Pesquisar");
@@ -82,18 +102,12 @@ public class AdicionarVitima extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF"
+                "null", "Título 2"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
+        TableAdicionados.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(TableAdicionados);
+        TableAdicionados.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         AdicionarVitimaButton.setText("Adicionar Linhas Selecionadas");
         AdicionarVitimaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -174,65 +188,80 @@ public class AdicionarVitima extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * Pesquisa a vítima no Banco de Dados
-     * @param evt 
+     *
+     * @param evt
      */
     private void PesquisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarButtonActionPerformed
-        
+
     }//GEN-LAST:event_PesquisarButtonActionPerformed
-    
+
     /**
      * Cadastra uma nova vítima no Banco de Dados
-     * @param evt 
+     *
+     * @param evt
      */
     private void CadastrarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarVitimaButtonActionPerformed
-        
+
     }//GEN-LAST:event_CadastrarVitimaButtonActionPerformed
-    
+
     /**
      * Transfere a pessoa resultado da pesquisa para a tabela de vítimas
-     * @param evt 
+     *
+     * @param evt
      */
     private void AdicionarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarVitimaButtonActionPerformed
-        
+
         TableModel model1 = TabelaResultados.getModel();
-        
+
         int[] index = TabelaResultados.getSelectedRows();
-        
+
         Object[] row = new Object[2];
-        
+
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
-        
-        for(int i = 0; i < index.length; i++){
-            
+
+        for (int i = 0; i < index.length; i++) {
+
             row[0] = model1.getValueAt(index[i], 0);
             row[1] = model1.getValueAt(index[i], 1);
             model2.addRow(row);
+
+            String cpf = (String) model1.getValueAt(index[i], 1);
+
+            List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+                return x.getCpf().equals(cpf);
+            }).collect(toList());
+            CadastrarOcorrencia.vitimas.addAll(collect);
         }
-        
+
     }//GEN-LAST:event_AdicionarVitimaButtonActionPerformed
 
     /**
      * Salva as vítimas selecionadas
-     * @param evt 
+     *
+     * @param evt
      */
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_SalvarButtonActionPerformed
-    
+
     /**
      * Volta para a tela anterior
-     * @param evt 
+     *
+     * @param evt
      */
     private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
-
+        CadastrarOcorrencia.vitimas.clear();
+        CadastrarOcorrencia.vitimas.addAll(initVitimas);
+        this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -277,9 +306,13 @@ public class AdicionarVitima extends javax.swing.JFrame {
     private javax.swing.JTable TabelaResultados;
     private javax.swing.JTable TableAdicionados;
     private javax.swing.JButton VoltarButton;
+    private java.util.List<model.entity.Cidadao> cidadaoList;
+    private javax.persistence.Query cidadaoQuery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.persistence.EntityManager policiaPUEntityManager;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
