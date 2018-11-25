@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java.view;
+package view;
 
 /**
  *
@@ -430,7 +430,11 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_HoraTextFieldActionPerformed
 
     private void AdicionarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarVitimaButtonActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdicionarVitima().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_AdicionarVitimaButtonActionPerformed
 
     private void AdicionarTestemunhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarTestemunhaButtonActionPerformed
