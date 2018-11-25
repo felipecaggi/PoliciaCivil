@@ -215,7 +215,7 @@ public class Cidadao implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Cidadao[ cpf=" + cpf + " ]";
+        return "Cidadao{" + "cpf=" + cpf + ", nome=" + nome + ", datanasc=" + datanasc + ", rg=" + rg + ", telefone=" + telefone + ", estadoorigem=" + estadoorigem + ", cidadeorigem=" + cidadeorigem + ", status=" + status + ", alcunha=" + alcunha + ", idendereco=" + idendereco + '}';
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
