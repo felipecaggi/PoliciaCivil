@@ -24,3 +24,5 @@ hs_err_pid*
 /PoliciaCivil/nbproject/private/
 /PoliciaCivil/build/
 /PoliciaCivil/dist/
+!/PoliciaCivil/lib/*
+!/PoliciaCivil/lib/*/*
