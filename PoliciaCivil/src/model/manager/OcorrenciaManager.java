@@ -9,11 +9,13 @@ import model.entity.Evidencia;
 import model.entity.Ocorrencia;
 
 public class OcorrenciaManager {
-
-    private EntityManager policiaPUEntityManager;
+    
+    private final DAO dao;
 
     public OcorrenciaManager() {
-        this.policiaPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("policiaPU").createEntityManager();
+        
+        dao = DAO.getDao();
+        
     }
 
     public Cidadao buscaCidadao(int idCidadao) {
@@ -24,8 +26,10 @@ public class OcorrenciaManager {
         return 0;
     }
 
-    public void salvarOcorrencia(Ocorrencia ocorrencia) {
-        policiaPUEntityManager.persist(ocorrencia);
+    public void salvarOcorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
+        
+        dao.persist(new Ocorrencia(idoco, dataocor, status, horario, infracao, segredojustica, idpolicial, idendereco, iddelegacia, iddelegado, idcomunicante));
+        
     }
 
     public Delegado buscaDelegado(int idDelegado) {

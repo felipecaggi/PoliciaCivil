@@ -45,42 +45,53 @@ public class Ocorrencia implements Serializable {
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @Column(name = "idoco")
     private Integer idoco;
+    
     @Basic(optional = false)
     @Column(name = "dataocor")
     @Temporal(TemporalType.DATE)
     private Date dataocor;
+    
     @Basic(optional = false)
     @Column(name = "status")
     private String status;
+    
     @Basic(optional = false)
     @Column(name = "horario")
     @Temporal(TemporalType.DATE)
     private Date horario;
+    
     @Basic(optional = false)
     @Column(name = "infracao")
     private String infracao;
+    
     @Basic(optional = false)
     @Column(name = "segredojustica")
     private boolean segredojustica;
+    
     @Basic(optional = false)
     @Column(name = "idpolicial")
     private int idpolicial;
+    
     @Basic(optional = false)
     @Column(name = "idendereco")
     private int idendereco;
+    
     @Basic(optional = false)
     @Column(name = "iddelegacia")
     private int iddelegacia;
+    
     @Basic(optional = false)
     @Column(name = "iddelegado")
     private int iddelegado;
+    
     @Basic(optional = false)
     @Column(name = "idcomunicante")
-    private String idcomunicante;
+    private int idcomunicante;
 
     public Ocorrencia() {
     }
@@ -89,7 +100,7 @@ public class Ocorrencia implements Serializable {
         this.idoco = idoco;
     }
 
-    public Ocorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, String idcomunicante) {
+    public Ocorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
         this.idoco = idoco;
         this.dataocor = dataocor;
         this.status = status;
@@ -203,12 +214,12 @@ public class Ocorrencia implements Serializable {
         changeSupport.firePropertyChange("iddelegado", oldIddelegado, iddelegado);
     }
 
-    public String getIdcomunicante() {
+    public int getIdcomunicante() {
         return idcomunicante;
     }
 
-    public void setIdcomunicante(String idcomunicante) {
-        String oldIdcomunicante = this.idcomunicante;
+    public void setIdcomunicante(int idcomunicante) {
+        int oldIdcomunicante = this.idcomunicante;
         this.idcomunicante = idcomunicante;
         changeSupport.firePropertyChange("idcomunicante", oldIdcomunicante, idcomunicante);
     }
