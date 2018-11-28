@@ -102,7 +102,7 @@ public class AdicionarComunicante extends javax.swing.JFrame {
 
             },
             new String [] {
-                "null", "Título 2"
+                "Nome", "CPF"
             }
         ));
         TableAdicionados.setColumnSelectionAllowed(true);

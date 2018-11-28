@@ -1,6 +1,7 @@
 package model.manager;
 
 import java.util.Date;
+import javax.persistence.EntityManager;
 import model.entity.Cidadao;
 import model.entity.Delegado;
 import model.entity.Delegacia;
@@ -9,28 +10,34 @@ import model.entity.Ocorrencia;
 
 public class OcorrenciaManager {
 
-	public Cidadao buscaCidadao(int idCidadao) {
-		return null;
-	}
+    private EntityManager policiaPUEntityManager;
 
-	public int buscaEquipe(int idEquipe) {
-		return 0;
-	}
+    public OcorrenciaManager() {
+        this.policiaPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("policiaPU").createEntityManager();
+    }
 
-	public void salvarOcorrencia(Ocorrencia ocorrencia) {
+    public Cidadao buscaCidadao(int idCidadao) {
+        return null;
+    }
 
-	}
+    public int buscaEquipe(int idEquipe) {
+        return 0;
+    }
 
-	public Delegado buscaDelegado(int idDelegado) {
-		return null;
-	}
+    public void salvarOcorrencia(Ocorrencia ocorrencia) {
+        policiaPUEntityManager.persist(ocorrencia);
+    }
 
-	public void excluirOcorrencia(int idOcorrencia) {
+    public Delegado buscaDelegado(int idDelegado) {
+        return null;
+    }
 
-	}
+    public void excluirOcorrencia(int idOcorrencia) {
 
-	public Evidencia buscaEvidencia(int idEvidencia) {
-            return null;
-	}
+    }
+
+    public Evidencia buscaEvidencia(int idEvidencia) {
+        return null;
+    }
 
 }
