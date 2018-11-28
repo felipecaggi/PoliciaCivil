@@ -16,7 +16,10 @@ import java.util.List;
 public class CadastrarOcorrencia extends javax.swing.JFrame {
 
     public static List<Cidadao> vitimas = new LinkedList<Cidadao>();
-    
+    public static List<Cidadao> autores = new LinkedList<Cidadao>();
+    public static List<Cidadao> comunicantes = new LinkedList<Cidadao>();
+    public static List<Cidadao> testemunhas = new LinkedList<Cidadao>();
+
     /**
      * Creates new form CadastrarOcorrencia
      */
@@ -177,6 +180,11 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
         ComunicanteLabel.setText("Comunicante");
 
         AdicionarComunicanteButton.setText("Adicionar Comunicante");
+        AdicionarComunicanteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdicionarComunicanteButtonActionPerformed(evt);
+            }
+        });
 
         TestemunhaLabel.setText("Testemunha");
 
@@ -190,10 +198,20 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
         AutorLabel.setText("Autor");
 
         AdicionarAutorButton.setText("Adicionar Autor");
+        AdicionarAutorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdicionarAutorButtonActionPerformed(evt);
+            }
+        });
 
         EvidenciaLabel.setText("Evidência");
 
         AdicionarEvidenciaButton.setText("AdicionarEvidência");
+        AdicionarEvidenciaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdicionarEvidenciaButtonActionPerformed(evt);
+            }
+        });
 
         DelegadoLabel.setText("Delegado");
 
@@ -207,6 +225,11 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
         EquipePolicialLabel.setText("Equipe Policial");
 
         AdicionarEquipeButton.setText("Adicionar Equipe");
+        AdicionarEquipeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdicionarEquipeButtonActionPerformed(evt);
+            }
+        });
 
         SegredoDeJustiçaRadioButton.setText("Segredo de justiça");
         SegredoDeJustiçaRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -313,9 +336,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CepTextField)
                             .addComponent(ComplementoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SalvarButton))
+                    .addComponent(SalvarButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(InfracaoLabel)
                         .addGap(18, 18, 18)
@@ -400,7 +421,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InfracaoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfracaoTextFieldActionPerformed
-        
+
     }//GEN-LAST:event_InfracaoTextFieldActionPerformed
 
     private void EstadoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadoTextFieldActionPerformed
@@ -445,7 +466,12 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarVitimaButtonActionPerformed
 
     private void AdicionarTestemunhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarTestemunhaButtonActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AdicionarTestemunha().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_AdicionarTestemunhaButtonActionPerformed
 
     private void AdicionarDelegadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarDelegadoButtonActionPerformed
@@ -455,6 +481,32 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     private void SegredoDeJustiçaRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SegredoDeJustiçaRadioButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SegredoDeJustiçaRadioButtonActionPerformed
+
+    private void AdicionarComunicanteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarComunicanteButtonActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AdicionarComunicante().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_AdicionarComunicanteButtonActionPerformed
+
+    private void AdicionarAutorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarAutorButtonActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AdicionarAutor().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_AdicionarAutorButtonActionPerformed
+
+    private void AdicionarEvidenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarEvidenciaButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AdicionarEvidenciaButtonActionPerformed
+
+    private void AdicionarEquipeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarEquipeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AdicionarEquipeButtonActionPerformed
 
     /**
      * @param args the command line arguments
