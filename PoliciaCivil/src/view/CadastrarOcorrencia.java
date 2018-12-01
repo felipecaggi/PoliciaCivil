@@ -8,6 +8,8 @@ package view;
 import model.entity.Cidadao;
 import java.util.LinkedList;
 import java.util.List;
+    import model.entity.Policial;
+import model.entity.Evidencia;
 
 /**
  *
@@ -16,9 +18,12 @@ import java.util.List;
 public class CadastrarOcorrencia extends javax.swing.JFrame {
 
     public static List<Cidadao> vitimas = new LinkedList<Cidadao>();
-    public static List<Cidadao> autores = new LinkedList<Cidadao>();
     public static List<Cidadao> comunicantes = new LinkedList<Cidadao>();
     public static List<Cidadao> testemunhas = new LinkedList<Cidadao>();
+    public static List<Cidadao> autores = new LinkedList<Cidadao>();
+    public static List<Evidencia> evidencias = new LinkedList<Evidencia>();
+    public static List<Policial> delegados = new LinkedList<Policial>();
+    public static List<Policial> equipe = new LinkedList<Policial>();
 
     /**
      * Creates new form CadastrarOcorrencia
