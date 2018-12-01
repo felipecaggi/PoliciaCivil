@@ -136,10 +136,7 @@
                           <Component id="ComplementoTextField" pref="181" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="SalvarButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="SalvarButton" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="InfracaoLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
