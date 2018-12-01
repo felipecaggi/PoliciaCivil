@@ -388,6 +388,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Comunicante"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarComunicanteButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="TestemunhaLabel">
       <Properties>
@@ -411,6 +414,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Autor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarAutorButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="EvidenciaLabel">
       <Properties>
@@ -421,6 +427,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="AdicionarEvid&#xea;ncia"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarEvidenciaButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="DelegadoLabel">
       <Properties>
@@ -444,6 +453,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Equipe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarEquipeButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="SegredoDeJusti&#xe7;aRadioButton">
       <Properties>
