@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
+import model.entity.Autor;
 import model.entity.Cidadao;
 import model.entity.Delegado;
 import model.entity.Evidencia;
@@ -40,7 +41,7 @@ public class Controller {
             List<Cidadao> vitimas,
             Cidadao comunicante,
             List<Cidadao> testemunhas,
-            List<Cidadao> autores,
+            List<Autor> autores,
             List<Evidencia> evidencias,
             Delegado delegado,
             List<Policial> equipe,

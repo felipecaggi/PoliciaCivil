@@ -261,6 +261,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="EstadoTextField">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[2, 2]"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LogradouroLabel">
       <Properties>

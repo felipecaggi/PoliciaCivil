@@ -7,16 +7,15 @@ package view;
 
 import controller.Controller;
 import java.util.Calendar;
-import java.util.Date;
 import model.entity.Cidadao;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.entity.Autor;
 import model.entity.Delegado;
 import model.entity.Policial;
 import model.entity.Evidencia;
-import model.manager.OcorrenciaManager;
 
 /**
  *
@@ -28,6 +27,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     public static Cidadao comunicantes = new Cidadao();
     public static List<Cidadao> testemunhas = new LinkedList<Cidadao>();
     public static List<Cidadao> autores = new LinkedList<Cidadao>();
+    public static List<Autor> autoresPK = new LinkedList<Autor>();
     public static List<Evidencia> evidencias = new LinkedList<Evidencia>();
     public static Delegado delegados = new Delegado();
     public static List<Policial> equipe = new LinkedList<Policial>();
@@ -37,6 +37,21 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
      */
     public CadastrarOcorrencia() {
         initComponents();
+
+        AnoTextField.setText("2018");
+        MesTextField.setText("10");
+        DiaTextField.setText("10");
+        HoraTextField.setText("10");
+        MinutoTextField.setText("10");
+        InfracaoTextField.setText("bla");
+        CidadeTextField.setText("bla");
+        EstadoTextField.setText("ba");
+        LogradouroTextField.setText("bla");
+        NumeroTextField.setText("123");
+        CepTextField.setText("12345");
+        BairroTextField.setText("bla");
+        ReferenciaTextField.setText("bla");
+        ComplementoTextField.setText("bla");
     }
 
     /**
@@ -103,6 +118,8 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
         CidadeLabel.setText("Cidade");
 
         EstadoLabel.setText("Estado");
+
+        EstadoTextField.setMaximumSize(new java.awt.Dimension(2, 2));
 
         LogradouroLabel.setText("Logradouro");
 
@@ -442,47 +459,48 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarEquipeButtonActionPerformed
 
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
-        try {
-            Calendar data = Calendar.getInstance();
-            data.set(Integer.parseInt(AnoTextField.getText()),
-                    Integer.parseInt(MesTextField.getText()),
-                    Integer.parseInt(DiaTextField.getText()),
-                    Integer.parseInt(HoraTextField.getText()),
-                    Integer.parseInt(MinutoTextField.getText()));
+        //try {
+        Calendar data = Calendar.getInstance();
+        data.set(Integer.parseInt(AnoTextField.getText()),
+                Integer.parseInt(MesTextField.getText()),
+                Integer.parseInt(DiaTextField.getText()),
+                Integer.parseInt(HoraTextField.getText()),
+                Integer.parseInt(MinutoTextField.getText()));
 
-            boolean retorno = new Controller().salvarOcorrencia(InfracaoTextField.getText(),
-                    CidadeTextField.getText(),
-                    EstadoTextField.getText(),
-                    LogradouroTextField.getText(),
-                    Integer.parseInt(NumeroTextField.getText()),
-                    CepTextField.getText(),
-                    BairroTextField.getText(),
-                    ReferenciaTextField.getText(),
-                    ComplementoTextField.getText(),
-                    data,
-                    vitimas,
-                    comunicantes,
-                    testemunhas,
-                    autores,
-                    evidencias,
-                    delegados,
-                    equipe,
-                    SegredoDeJusticaCheckBox.isEnabled());
+        boolean retorno = new Controller().salvarOcorrencia(
+                InfracaoTextField.getText(),
+                CidadeTextField.getText(),
+                EstadoTextField.getText(),
+                LogradouroTextField.getText(),
+                Integer.parseInt(NumeroTextField.getText()),
+                CepTextField.getText(),
+                BairroTextField.getText(),
+                ReferenciaTextField.getText(),
+                ComplementoTextField.getText(),
+                data,
+                vitimas,
+                comunicantes,
+                testemunhas,
+                autoresPK,
+                evidencias,
+                delegados,
+                equipe,
+                SegredoDeJusticaCheckBox.isSelected());
 
-            if (retorno) {
-                JOptionPane.showMessageDialog(new JFrame(), "Ocorrência salva com sucesso.", "Resultado", JOptionPane.PLAIN_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(new JFrame(), "Ocorrência não foi salva.", "Resultado", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
+        if (retorno) {
+            JOptionPane.showMessageDialog(new JFrame(), "Ocorrência salva com sucesso.", "Resultado", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Ocorrência não foi salva.", "Resultado", JOptionPane.ERROR_MESSAGE);
+        }
+        /*} catch (Exception e) {
             JOptionPane.showMessageDialog(new JFrame(), "Erro ao salvar.\nErro: " + e.getMessage(), "Resultado", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_SalvarButtonActionPerformed
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

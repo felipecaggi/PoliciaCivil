@@ -57,7 +57,7 @@ idDelegacia INT
 
 CREATE TABLE policiaschema.ocorrencia(
 idOcorrencia INT PRIMARY KEY,
-dataOcor datetime NOT NULL,
+dataOcor TIMESTAMP NOT NULL,
 status VARCHAR (50) NOT NULL,
 infracao VARCHAR (50) NOT NULL,
 segredoJustica BOOLEAN NOT NULL,
@@ -101,9 +101,9 @@ PRIMARY KEY(idOcorrencia, cpfCidadao)
 
 CREATE TABLE policiaschema.autor(
 idOcorrencia INT,
-cpfCidadao VARCHAR (11),
-conduzido boolean,
-PRIMARY KEY(idOcorrencia, cpfCidadao)	
+cpf VARCHAR (11),
+conduzido BOOLEAN,
+PRIMARY KEY(idOcorrencia, cpf)	
 );
 
 CREATE TABLE policiaschema.envolvido(
@@ -226,7 +226,7 @@ ALTER TABLE ONLY policiaschema.autor
 	ADD CONSTRAINT autorOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOcorrencia);
 
 ALTER TABLE ONLY policiaschema.autor
-	ADD CONSTRAINT autorCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
+	ADD CONSTRAINT autorCidadao_fkey FOREIGN KEY (cpf) REFERENCES policiaschema.cidadao(cpf);
 	
 
 ALTER TABLE ONLY policiaschema.cidadao

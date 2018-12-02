@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
+import model.entity.Autor;
+import model.entity.AutorPK;
 import model.entity.Cidadao;
 import model.entity.Delegado;
 import model.entity.Delegacia;
@@ -60,7 +62,7 @@ public class OcorrenciaManager {
             List<Cidadao> vitimas,
             Cidadao comunicante,
             List<Cidadao> testemunhas,
-            List<Cidadao> autores,
+            List<Autor> autores,
             List<Evidencia> evidencias,
             Delegado delegado,
             List<Policial> equipe,

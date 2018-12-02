@@ -10,6 +10,8 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import model.entity.Autor;
+import model.entity.AutorPK;
 import model.entity.Cidadao;
 
 /**
@@ -19,6 +21,7 @@ import model.entity.Cidadao;
 public class AdicionarAutor extends javax.swing.JFrame {
 
     private List<Cidadao> initAutores;
+    private List<Autor> initAutoresPK;
     
     /**
      * Creates new form AdicionarAutor
@@ -30,12 +33,13 @@ public class AdicionarAutor extends javax.swing.JFrame {
         initAutores=new LinkedList<>();
         initAutores.addAll(CadastrarOcorrencia.autores);
         
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initAutores.size(); i++) {
             Cidadao temp = initAutores.get(i);
             row[0] = temp.getNome();
             row[1] = temp.getCpf();
+            row[2] = initAutoresPK.get(i).getAutorPK().isConduzido();
             model2.addRow(row);
         }
     }
@@ -254,6 +258,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
                 return x.getCpf().equals(cpf);
             }).collect(toList());
             CadastrarOcorrencia.autores.addAll(collect);
+            collect.forEach(x -> CadastrarOcorrencia.autoresPK.add(new Autor(new AutorPK(x.getCpf(), false))));
         }
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
@@ -264,6 +269,13 @@ public class AdicionarAutor extends javax.swing.JFrame {
      * @param evt
      */
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+
+        for (int i = 0; i < model2.getRowCount(); i++) {
+            boolean conduzido = (Boolean) model2.getValueAt(i, 2);
+            CadastrarOcorrencia.autoresPK.get(i).getAutorPK().setConduzido(conduzido);
+        }
+        
         this.dispose();
     }//GEN-LAST:event_SalvarButtonActionPerformed
 

@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -57,7 +59,7 @@ public class Ocorrencia implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "dataocor")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataocor;
 
     @Basic(optional = false)
@@ -76,7 +78,7 @@ public class Ocorrencia implements Serializable {
     @JoinColumn(name = "idPolicial", referencedColumnName = "idPolicial")
     private Policial policial;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idendereco", referencedColumnName = "idendereco")
     private Endereco endereco;
 
@@ -93,31 +95,28 @@ public class Ocorrencia implements Serializable {
     private Cidadao comunicante;
 
     @ManyToMany
-    @JoinTable(name = "vitima", joinColumns = {
+    @JoinTable(name = "policia.policiaschema.vitima", joinColumns = {
         @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
-        @JoinColumn(name = "cpfCidadao")})
+        @JoinColumn(name = "cpfCidadao", referencedColumnName = "cpf")})
     private List<Cidadao> vitimas;
 
     @ManyToMany
-    @JoinTable(name = "testemunha", joinColumns = {
+    @JoinTable(name = "policia.policiaschema.testemunha", joinColumns = {
         @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
-        @JoinColumn(name = "cpfCidadao")})
+        @JoinColumn(name = "cpfCidadao", referencedColumnName = "cpf")})
     private List<Cidadao> testemunhas;
 
-    @ManyToMany
-    @JoinTable(name = "autor", joinColumns = {
-        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
-        @JoinColumn(name = "cpfCidadao")})
-    private List<Cidadao> autores;
+    @OneToMany(mappedBy = "idocorrencia", cascade = CascadeType.ALL)
+    private List<Autor> autores;
 
     @ManyToMany
-    @JoinTable(name = "evidencia_ocorrencia", joinColumns = {
+    @JoinTable(name = "policia.policiaschema.evidencia_ocorrencia", joinColumns = {
         @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
         @JoinColumn(name = "idEvidencia")})
     private List<Evidencia> evidencias;
 
     @ManyToMany
-    @JoinTable(name = "envolvido", joinColumns = {
+    @JoinTable(name = "policia.policiaschema.envolvido", joinColumns = {
         @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
         @JoinColumn(name = "idPolicial")})
     private List<Policial> equipe;
@@ -125,7 +124,7 @@ public class Ocorrencia implements Serializable {
     public Ocorrencia() {
     }
 
-    public Ocorrencia(Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
+    public Ocorrencia(Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Autor> autores, List<Evidencia> evidencias, List<Policial> equipe) {
         this.dataocor = dataocor;
         this.status = status;
         this.infracao = infracao;
@@ -142,7 +141,7 @@ public class Ocorrencia implements Serializable {
         this.equipe = equipe;
     }
 
-    public Ocorrencia(Integer idOcorrencia, Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
+    public Ocorrencia(Integer idOcorrencia, Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Autor> autores, List<Evidencia> evidencias, List<Policial> equipe) {
         this.idOcorrencia = idOcorrencia;
         this.dataocor = dataocor;
         this.status = status;
@@ -266,11 +265,11 @@ public class Ocorrencia implements Serializable {
         this.testemunhas = testemunhas;
     }
 
-    public List<Cidadao> getAutores() {
+    public List<Autor> getAutores() {
         return autores;
     }
 
-    public void setAutores(List<Cidadao> autores) {
+    public void setAutores(List<Autor> autores) {
         this.autores = autores;
     }
 
