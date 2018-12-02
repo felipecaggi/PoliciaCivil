@@ -1,4 +1,3 @@
-
 INSERT INTO evidencia VALUES(1,  'A evidencia foi obtida pela equipe policial', 'arma');
 INSERT INTO evidencia VALUES(2,  'A evidencia foi obtida pela equipe policial', 'arma');
 INSERT INTO evidencia VALUES(3,  'A evidencia foi obtida pela equipe policial', 'arma');
@@ -66,8 +65,8 @@ INSERT INTO endereco VALUES(3, '7908-022', 'Rua Dable Cury Nimer', 1199, 'Conjun
 INSERT INTO endereco VALUES(4, '79064140', 'Rua Buenópolis', 9965, 'Vila Cidade Morena', 'casa', 'MS', 'Campo Grande');
 INSERT INTO endereco VALUES(5, '79022403', 'Rua Praia da Costa', 165, 'Jardim Autonomista', 'casa', 'MS', 'Campo Grande');
 INSERT INTO endereco VALUES(6, '79070604', 'Rua Durvalina Constância', 154, 'Colinas de Campo Grande', 'casa', 'MS', 'Campo Grande');
-INSERT INTO endereco VALUES(4, '79050320', 'Rua Rolândias', 41, 'Vila Carlota', 'casa', 'MS', 'Campo Grande');
-INSERT INTO endereco VALUES(4, '79037110', 'Rua Rio Vermelho', 67, 'Jardim Veraneio', 'casa', 'MS', 'Campo Grande');
+INSERT INTO endereco VALUES(7, '79050320', 'Rua Rolândias', 41, 'Vila Carlota', 'casa', 'MS', 'Campo Grande');
+INSERT INTO endereco VALUES(8, '79037110', 'Rua Rio Vermelho', 67, 'Jardim Veraneio', 'casa', 'MS', 'Campo Grande');
 
 
 INSERT INTO delegacia VALUES(1, 'Quinta Delegacia de Policia de Campo Grande', '5ªDP');
@@ -109,42 +108,42 @@ INSERT INTO delegado Values(16, 7);
 INSERT INTO delegado Values(17, 8);
 
 
-INSERT INTO cidadao VALUES(72250513180, 'Larissa Eliane Nunes',       '1983-12-13',  1650140, 28759187,  'MS', 'Campo Grande', 'Ativo', 'Lari',   1);
-INSERT INTO cidadao VALUES(37066750136, 'Rosa Teresinha Dias',        '1989-12-08',  3165888, 99604365,  'MS', 'Campo Grande', 'Ativo', 'Ros',    1);
-INSERT INTO cidadao VALUES(93264108119, 'Mariana Bárbara Pereira',    '1985-10-13',  1931289, 28268397,  'MS', 'Campo Grande', 'Ativo', 'Mari',   1);
-INSERT INTO cidadao VALUES(39474469180, 'Rayssa Benedita Lara Porto', '1991-10-13',  4301074, 99179796,  'MS', 'Campo Grande', 'Ativo', 'Rat',    1);
-INSERT INTO cidadao VALUES(50997400145, 'Esther Maitê Gomes',         '1983-12-13',  4370120, 26037062,  'MS', 'Campo Grande', 'Ativo', 'Esth',   1);
-INSERT INTO cidadao VALUES(47566427130, 'Sophia Caroline Nogueira',   '1991-06-09',  2043665, 99305185,  'MS', 'Campo Grande', 'Ativo', 'Soph',   2);
-INSERT INTO cidadao VALUES(68153338170, 'Nina Stefany Pinto',         '1991-10-20',  1439803, 36703004,  'MS', 'Campo Grande', 'Ativo', 'Nina',   2);
-INSERT INTO cidadao VALUES(89994931130, 'Emanuelly Mariane da Rocha', '1991-07-01',  1009685, 99569482,  'MS', 'Campo Grande', 'Ativo', 'Ema',    2);
-INSERT INTO cidadao VALUES(24850103154, 'Caroline Juliana Costa',     '1993-06-11',  2272960, 28759187,  'MS', 'Campo Grande', 'Ativo', 'Carol',  2);
-INSERT INTO cidadao VALUES(98204567111, 'Isabela Rosa Almada',        '1992-10-13',  4558805, 37826165,  'MS', 'Campo Grande', 'Ativo', 'Isa',    2);
-INSERT INTO cidadao VALUES(96746625109, 'Carolina Teresinha Santos',  '1991-10-19', 1489485,  2875918,   'MS', 'Campo Grande', 'Ativo', 'Lana',   3);
-INSERT INTO cidadao VALUES(72250513180, 'Sônia Giovanna Baptista',    '1991-08-13', 4880287,  37635871,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
-INSERT INTO cidadao VALUES(05035083144, 'Débora Catarina da Paz',     '1991-04-25', 2103729,  38520959,  'MS', 'Campo Grande', 'Ativo', 'Deb',    3);
-INSERT INTO cidadao VALUES(61355164181, 'Sônia Cristiane Costa',      '1991-12-13', 2116019,  26811263,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
-INSERT INTO cidadao VALUES(44462188160, 'Márcia Cecília Moura',       '1991-10-14', 2420657,  37206778,  'MS', 'Campo Grande', 'Ativo', 'Marcia', 3);
-INSERT INTO cidadao VALUES(17102012152, 'Bruno Vitor Nunes',          '1991-11-20', 3574820,  39223734,  'MS', 'Campo Grande', 'Ativo', 'Bruno',  4);
-INSERT INTO cidadao VALUES(72250513181, 'Nicolas Henrique Araújo',    '1991-10-13', 1689374,  36462596,  'MS', 'Campo Grande', 'Ativo', 'Nick',   4);
-INSERT INTO cidadao VALUES(24028964180, 'Osvaldo Antonio Aragão',     '1991-04-22', 4207391,  29711382,  'MS', 'Campo Grande', 'Ativo', 'Olaf',   4);
-INSERT INTO cidadao VALUES(79649908102, 'Giovanni Gustavo da Mota',   '1991-12-13', 3195371,  67288714,  'MS', 'Campo Grande', 'Ativo', 'Gusta',  4);
-INSERT INTO cidadao VALUES(57169095157, 'Danilo Levi Aparício',       '1991-10-15', 1863318,  35980778,  'MS', 'Campo Grande', 'Ativo', 'Dan',    4);
-INSERT INTO cidadao VALUES(01346726159, 'Yago Alexandre Pereira',     '1991-11-13', 2008495,  29698765,  'MS', 'Campo Grande', 'Ativo', 'Yago',   5);
-INSERT INTO cidadao VALUES(01782652175, 'Geraldo Manuel Barros',      '1992-12-16', 2008495,  54238764,  'MS', 'Campo Grande', 'Ativo', 'Gera',   5);
-INSERT INTO cidadao VALUES(20525010106, 'Pedro Henrique Rocha',       '1989-10-15', 4191922,  38024571,  'MS', 'Campo Grande', 'Ativo', 'Henri',  5);
-INSERT INTO cidadao VALUES(70906824125, 'Bryan Felipe Oliveira',      '1990-08-13', 4204415,  27240577,  'MS', 'Campo Grande', 'Ativo', 'Bry',    5);
-INSERT INTO cidadao VALUES(50725142189, 'Joaquim Nicolas Neves',      '1991-12-14', 4680949,  27380815,  'MS', 'Campo Grande', 'Ativo', 'Nic',    5);
-INSERT INTO cidadao VALUES(63832456191, 'Martin Enrico Almada',       '2000-12-14', 4031081,  26284401,  'MS', 'Campo Grande', 'Ativo', 'Mart',   6);
-INSERT INTO cidadao VALUES(56851555140, 'Paulo Antonio Bernardes',    '2000-10-15', 3623524,  67260078,  'MS', 'Campo Grande', 'Ativo', 'Pr',     6);
-INSERT INTO cidadao VALUES(43559013194, 'Ian Igor Ribeiro',           '2000-11-22', 2960143,  27865565,  'MS', 'Campo Grande', 'Ativo', 'Ian',    6);
-INSERT INTO cidadao VALUES(33742872125, 'Enrico Emanuel Almeida',     '2000-09-07', 4411573,  26311325,  'MS', 'Campo Grande', 'Ativo', 'Enrt',   6);
-INSERT INTO cidadao VALUES(46773960193, 'Caio Nicolas Caldeira',      '2000-08-19', 3328575,  39206326,  'MS', 'Campo Grande', 'Ativo', 'Caio',   6);
+INSERT INTO cidadao VALUES('72250513180', 'Larissa Eliane Nunes',       '1983-12-13',  1650140, 28759187,  'MS', 'Campo Grande', 'Ativo', 'Lari',   1);
+INSERT INTO cidadao VALUES('37066750136', 'Rosa Teresinha Dias',        '1989-12-08',  3165888, 99604365,  'MS', 'Campo Grande', 'Ativo', 'Ros',    1);
+INSERT INTO cidadao VALUES('93264108119', 'Mariana Bárbara Pereira',    '1985-10-13',  1931289, 28268397,  'MS', 'Campo Grande', 'Ativo', 'Mari',   1);
+INSERT INTO cidadao VALUES('39474469180', 'Rayssa Benedita Lara Porto', '1991-10-13',  4301074, 99179796,  'MS', 'Campo Grande', 'Ativo', 'Rat',    1);
+INSERT INTO cidadao VALUES('50997400145', 'Esther Maitê Gomes',         '1983-12-13',  4370120, 26037062,  'MS', 'Campo Grande', 'Ativo', 'Esth',   1);
+INSERT INTO cidadao VALUES('47566427130', 'Sophia Caroline Nogueira',   '1991-06-09',  2043665, 99305185,  'MS', 'Campo Grande', 'Ativo', 'Soph',   2);
+INSERT INTO cidadao VALUES('68153338170', 'Nina Stefany Pinto',         '1991-10-20',  1439803, 36703004,  'MS', 'Campo Grande', 'Ativo', 'Nina',   2);
+INSERT INTO cidadao VALUES('89994931130', 'Emanuelly Mariane da Rocha', '1991-07-01',  1009685, 99569482,  'MS', 'Campo Grande', 'Ativo', 'Ema',    2);
+INSERT INTO cidadao VALUES('24850103154', 'Caroline Juliana Costa',     '1993-06-11',  2272960, 28759187,  'MS', 'Campo Grande', 'Ativo', 'Carol',  2);
+INSERT INTO cidadao VALUES('98204567111', 'Isabela Rosa Almada',        '1992-10-13',  4558805, 37826165,  'MS', 'Campo Grande', 'Ativo', 'Isa',    2);
+INSERT INTO cidadao VALUES('96746625109', 'Carolina Teresinha Santos',  '1991-10-19', 1489485,  2875918,   'MS', 'Campo Grande', 'Ativo', 'Lana',   3);
+INSERT INTO cidadao VALUES('72250513185', 'Sônia Giovanna Baptista',    '1991-08-13', 4880287,  37635871,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
+INSERT INTO cidadao VALUES('05035083144', 'Débora Catarina da Paz',     '1991-04-25', 2103729,  38520959,  'MS', 'Campo Grande', 'Ativo', 'Deb',    3);
+INSERT INTO cidadao VALUES('61355164181', 'Sônia Cristiane Costa',      '1991-12-13', 2116019,  26811263,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
+INSERT INTO cidadao VALUES('44462188160', 'Márcia Cecília Moura',       '1991-10-14', 2420657,  37206778,  'MS', 'Campo Grande', 'Ativo', 'Marcia', 3);
+INSERT INTO cidadao VALUES('17102012152', 'Bruno Vitor Nunes',          '1991-11-20', 3574820,  39223734,  'MS', 'Campo Grande', 'Ativo', 'Bruno',  4);
+INSERT INTO cidadao VALUES('72250513181', 'Nicolas Henrique Araújo',    '1991-10-13', 1689374,  36462596,  'MS', 'Campo Grande', 'Ativo', 'Nick',   4);
+INSERT INTO cidadao VALUES('24028964180', 'Osvaldo Antonio Aragão',     '1991-04-22', 4207391,  29711382,  'MS', 'Campo Grande', 'Ativo', 'Olaf',   4);
+INSERT INTO cidadao VALUES('79649908102', 'Giovanni Gustavo da Mota',   '1991-12-13', 3195371,  67288714,  'MS', 'Campo Grande', 'Ativo', 'Gusta',  4);
+INSERT INTO cidadao VALUES('57169095157', 'Danilo Levi Aparício',       '1991-10-15', 1863318,  35980778,  'MS', 'Campo Grande', 'Ativo', 'Dan',    4);
+INSERT INTO cidadao VALUES('01346726159', 'Yago Alexandre Pereira',     '1991-11-13', 2008495,  29698765,  'MS', 'Campo Grande', 'Ativo', 'Yago',   5);
+INSERT INTO cidadao VALUES('01782652175', 'Geraldo Manuel Barros',      '1992-12-16', 2008495,  54238764,  'MS', 'Campo Grande', 'Ativo', 'Gera',   5);
+INSERT INTO cidadao VALUES('20525010106', 'Pedro Henrique Rocha',       '1989-10-15', 4191922,  38024571,  'MS', 'Campo Grande', 'Ativo', 'Henri',  5);
+INSERT INTO cidadao VALUES('70906824125', 'Bryan Felipe Oliveira',      '1990-08-13', 4204415,  27240577,  'MS', 'Campo Grande', 'Ativo', 'Bry',    5);
+INSERT INTO cidadao VALUES('50725142189', 'Joaquim Nicolas Neves',      '1991-12-14', 4680949,  27380815,  'MS', 'Campo Grande', 'Ativo', 'Nic',    5);
+INSERT INTO cidadao VALUES('63832456191', 'Martin Enrico Almada',       '2000-12-14', 4031081,  26284401,  'MS', 'Campo Grande', 'Ativo', 'Mart',   6);
+INSERT INTO cidadao VALUES('56851555140', 'Paulo Antonio Bernardes',    '2000-10-15', 3623524,  67260078,  'MS', 'Campo Grande', 'Ativo', 'Pr',     6);
+INSERT INTO cidadao VALUES('43559013194', 'Ian Igor Ribeiro',           '2000-11-22', 2960143,  27865565,  'MS', 'Campo Grande', 'Ativo', 'Ian',    6);
+INSERT INTO cidadao VALUES('33742872125', 'Enrico Emanuel Almeida',     '2000-09-07', 4411573,  26311325,  'MS', 'Campo Grande', 'Ativo', 'Enrt',   6);
+INSERT INTO cidadao VALUES('46773960193', 'Caio Nicolas Caldeira',      '2000-08-19', 3328575,  39206326,  'MS', 'Campo Grande', 'Ativo', 'Caio',   6);
 
-INSERT INTO possuiPais VALUES(63832456191, 50997400145);
-INSERT INTO possuiPais VALUES(56851555140, 50997400145);
-INSERT INTO possuiPais VALUES(43559013194, 72250513180);
-INSERT INTO possuiPais VALUES(33742872125, 72250513180);
-INSERT INTO possuiPais VALUES(46773960193, 72250513180);
+INSERT INTO possuiPais VALUES('63832456191', '50997400145');
+INSERT INTO possuiPais VALUES('56851555140', '50997400145');
+INSERT INTO possuiPais VALUES('43559013194', '72250513180');
+INSERT INTO possuiPais VALUES('33742872125', '72250513180');
+INSERT INTO possuiPais VALUES('46773960193', '72250513180');
 
 
 
