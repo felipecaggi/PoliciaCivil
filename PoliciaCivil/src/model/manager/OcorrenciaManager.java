@@ -1,6 +1,7 @@
 package model.manager;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import model.entity.Cidadao;
 import model.entity.Delegado;
@@ -28,14 +29,14 @@ public class OcorrenciaManager {
 
     public void salvarOcorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
         
-        dao.persist(new Ocorrencia(idoco, dataocor, status, horario, infracao, segredojustica, idpolicial, idendereco, iddelegacia, iddelegado, idcomunicante));
+        dao.persist(new Ocorrencia(idoco, dataocor, status, infracao, segredojustica, idpolicial, idendereco, iddelegacia, iddelegado, idcomunicante));
         
     }
 
     public Delegado buscaDelegado(int idDelegado) {
         return null;
     }
-
+    
     public void excluirOcorrencia(int idOcorrencia) {
 
     }

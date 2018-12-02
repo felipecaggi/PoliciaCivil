@@ -5,10 +5,13 @@
  */
 package view;
 
+import controller.Controller;
 import model.entity.Cidadao;
 import java.util.LinkedList;
 import java.util.List;
-    import model.entity.Policial;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.entity.Policial;
 import model.entity.Evidencia;
 
 /**
@@ -61,15 +64,9 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
         ComplementoLabel = new javax.swing.JLabel();
         ComplementoTextField = new javax.swing.JTextField();
         DataLabel = new javax.swing.JLabel();
-        DiaTextField = new javax.swing.JTextField();
-        Barra1Label = new javax.swing.JLabel();
-        MesTextField = new javax.swing.JTextField();
-        Barra2Label = new javax.swing.JLabel();
-        AnoTextField = new javax.swing.JTextField();
+        DataTextField = new javax.swing.JTextField();
         HoraLabel = new javax.swing.JLabel();
         HoraTextField = new javax.swing.JTextField();
-        DoisPontosLabel = new javax.swing.JLabel();
-        MinutosTextField = new javax.swing.JTextField();
         VitimaLabel = new javax.swing.JLabel();
         AdicionarVitimaButton = new javax.swing.JButton();
         ComunicanteLabel = new javax.swing.JLabel();
@@ -84,18 +81,12 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
         AdicionarDelegadoButton = new javax.swing.JButton();
         EquipePolicialLabel = new javax.swing.JLabel();
         AdicionarEquipeButton = new javax.swing.JButton();
-        SegredoDeJustiçaRadioButton = new javax.swing.JRadioButton();
         SalvarButton = new javax.swing.JButton();
+        SegredoDeJusticaCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         InfracaoLabel.setText("Infração");
-
-        InfracaoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InfracaoTextFieldActionPerformed(evt);
-            }
-        });
 
         LocalDoCrimeLabel.setText("Local do Crime");
 
@@ -103,75 +94,21 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
 
         EstadoLabel.setText("Estado");
 
-        EstadoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EstadoTextFieldActionPerformed(evt);
-            }
-        });
-
         LogradouroLabel.setText("Logradouro");
 
-        LogradouroTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogradouroTextFieldActionPerformed(evt);
-            }
-        });
-
         NumeroLabel.setText("Nº");
-
-        NumeroTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NumeroTextFieldActionPerformed(evt);
-            }
-        });
 
         CepLabel.setText("CEP");
 
         BairroLabel.setText("Bairro");
 
-        BairroTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BairroTextFieldActionPerformed(evt);
-            }
-        });
-
         ReferenciaLabel.setText("Referencia");
-
-        ReferenciaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReferenciaTextFieldActionPerformed(evt);
-            }
-        });
 
         ComplementoLabel.setText("Complemento");
 
         DataLabel.setText("Data");
 
-        DiaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DiaTextFieldActionPerformed(evt);
-            }
-        });
-
-        Barra1Label.setText("/");
-
-        Barra2Label.setText("/");
-
-        AnoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnoTextFieldActionPerformed(evt);
-            }
-        });
-
         HoraLabel.setText("Hora");
-
-        HoraTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HoraTextFieldActionPerformed(evt);
-            }
-        });
-
-        DoisPontosLabel.setText(":");
 
         VitimaLabel.setText("Vítima");
 
@@ -236,14 +173,14 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
             }
         });
 
-        SegredoDeJustiçaRadioButton.setText("Segredo de justiça");
-        SegredoDeJustiçaRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        SalvarButton.setText("Salvar");
+        SalvarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SegredoDeJustiçaRadioButtonActionPerformed(evt);
+                SalvarButtonActionPerformed(evt);
             }
         });
 
-        SalvarButton.setText("Salvar");
+        SegredoDeJusticaCheckBox.setText("Segredo de justiça");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -290,23 +227,11 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                                         .addComponent(ComplementoLabel)
                                         .addGap(14, 14, 14))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(DiaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Barra1Label)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(MesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Barra2Label)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AnoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
+                                        .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(46, 46, 46)
                                         .addComponent(HoraLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(HoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(DoisPontosLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(MinutosTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(HoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +261,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                                                 .addComponent(EquipePolicialLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(AdicionarEquipeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(SegredoDeJustiçaRadioButton, javax.swing.GroupLayout.Alignment.LEADING))))
+                                            .addComponent(SegredoDeJusticaCheckBox, javax.swing.GroupLayout.Alignment.LEADING))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CepTextField)
@@ -385,15 +310,9 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(DataLabel)
-                            .addComponent(DiaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Barra1Label)
-                            .addComponent(MesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Barra2Label)
-                            .addComponent(AnoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(HoraLabel)
-                            .addComponent(HoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DoisPontosLabel)
-                            .addComponent(MinutosTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(HoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(VitimaLabel)
@@ -416,7 +335,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                         .addComponent(AutorLabel))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(AdicionarAutorButton)
-                        .addComponent(SegredoDeJustiçaRadioButton)))
+                        .addComponent(SegredoDeJusticaCheckBox)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(SalvarButton)
                 .addContainerGap())
@@ -424,42 +343,6 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void InfracaoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfracaoTextFieldActionPerformed
-
-    }//GEN-LAST:event_InfracaoTextFieldActionPerformed
-
-    private void EstadoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadoTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EstadoTextFieldActionPerformed
-
-    private void LogradouroTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogradouroTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogradouroTextFieldActionPerformed
-
-    private void NumeroTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NumeroTextFieldActionPerformed
-
-    private void BairroTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BairroTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BairroTextFieldActionPerformed
-
-    private void ReferenciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReferenciaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ReferenciaTextFieldActionPerformed
-
-    private void DiaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DiaTextFieldActionPerformed
-
-    private void AnoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnoTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AnoTextFieldActionPerformed
-
-    private void HoraTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HoraTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_HoraTextFieldActionPerformed
 
     private void AdicionarVitimaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarVitimaButtonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -480,12 +363,13 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarTestemunhaButtonActionPerformed
 
     private void AdicionarDelegadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarDelegadoButtonActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AdicionarDelegado().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_AdicionarDelegadoButtonActionPerformed
-
-    private void SegredoDeJustiçaRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SegredoDeJustiçaRadioButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SegredoDeJustiçaRadioButtonActionPerformed
 
     private void AdicionarComunicanteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarComunicanteButtonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -506,12 +390,27 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarAutorButtonActionPerformed
 
     private void AdicionarEvidenciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarEvidenciaButtonActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AdicionarEvidencia().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_AdicionarEvidenciaButtonActionPerformed
 
     private void AdicionarEquipeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarEquipeButtonActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AdicionarEquipe().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_AdicionarEquipeButtonActionPerformed
+
+    private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
+        Controller.salvarOcorrencia(InfracaoTextField.getText(), CidadeTextField.getText(), EstadoTextField.getText(), LogradouroTextField.getText(), NumeroTextField.getText(), CepTextField.getText(), BairroTextField.getText(), ReferenciaTextField.getText(), ComplementoTextField.getText(), DataTextField.getText(), HoraTextField.getText(), vitimas, comunicantes, testemunhas, autores, evidencias, delegados, equipe, SegredoDeJusticaCheckBox.isEnabled());
+        JOptionPane.showMessageDialog(new JFrame(), "Printing complete", "Teste", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_SalvarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -556,12 +455,9 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     private javax.swing.JButton AdicionarEvidenciaButton;
     private javax.swing.JButton AdicionarTestemunhaButton;
     private javax.swing.JButton AdicionarVitimaButton;
-    private javax.swing.JTextField AnoTextField;
     private javax.swing.JLabel AutorLabel;
     private javax.swing.JLabel BairroLabel;
     private javax.swing.JTextField BairroTextField;
-    private javax.swing.JLabel Barra1Label;
-    private javax.swing.JLabel Barra2Label;
     private javax.swing.JLabel CepLabel;
     private javax.swing.JTextField CepTextField;
     private javax.swing.JLabel CidadeLabel;
@@ -570,9 +466,8 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     private javax.swing.JTextField ComplementoTextField;
     private javax.swing.JLabel ComunicanteLabel;
     private javax.swing.JLabel DataLabel;
+    private javax.swing.JTextField DataTextField;
     private javax.swing.JLabel DelegadoLabel;
-    private javax.swing.JTextField DiaTextField;
-    private javax.swing.JLabel DoisPontosLabel;
     private javax.swing.JLabel EquipePolicialLabel;
     private javax.swing.JLabel EstadoLabel;
     private javax.swing.JTextField EstadoTextField;
@@ -584,14 +479,12 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     private javax.swing.JLabel LocalDoCrimeLabel;
     private javax.swing.JLabel LogradouroLabel;
     private javax.swing.JTextField LogradouroTextField;
-    private javax.swing.JTextField MesTextField;
-    private javax.swing.JTextField MinutosTextField;
     private javax.swing.JLabel NumeroLabel;
     private javax.swing.JTextField NumeroTextField;
     private javax.swing.JLabel ReferenciaLabel;
     private javax.swing.JTextField ReferenciaTextField;
     private javax.swing.JButton SalvarButton;
-    private javax.swing.JRadioButton SegredoDeJustiçaRadioButton;
+    private javax.swing.JCheckBox SegredoDeJusticaCheckBox;
     private javax.swing.JLabel TestemunhaLabel;
     private javax.swing.JLabel VitimaLabel;
     // End of variables declaration//GEN-END:variables

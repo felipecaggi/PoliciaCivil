@@ -12,8 +12,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,52 +27,47 @@ import javax.persistence.Transient;
 @Table(name = "delegado", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Delegado.findAll", query = "SELECT d FROM Delegado d")
-    , @NamedQuery(name = "Delegado.findByIdpoldelegado", query = "SELECT d FROM Delegado d WHERE d.idpoldelegado = :idpoldelegado")
-    , @NamedQuery(name = "Delegado.findByIddelegacia", query = "SELECT d FROM Delegado d WHERE d.iddelegacia = :iddelegacia")})
-public class Delegado implements Serializable {
+    , @NamedQuery(name = "Delegado.findByIdpoldelegado", query = "SELECT d FROM Delegado d WHERE d.idPolicial = :idpoldelegado")})
+public class Delegado extends Policial implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "idpoldelegado")
-    private Integer idpoldelegado;
-    @Column(name = "iddelegacia")
-    private Integer iddelegacia;
+    
+    @OneToOne
+    @JoinColumn(name = "idDelegacia", referencedColumnName = "idDelegacia")
+    private Delegacia delegacia;
 
     public Delegado() {
     }
 
-    public Delegado(Integer idpoldelegado) {
-        this.idpoldelegado = idpoldelegado;
+    public Delegado(Delegacia delegacia) {
+        this.delegacia = delegacia;
     }
 
-    public Integer getIdpoldelegado() {
-        return idpoldelegado;
+    public Delegado(Delegacia delegacia, Integer idpol) {
+        super(idpol);
+        this.delegacia = delegacia;
     }
 
-    public void setIdpoldelegado(Integer idpoldelegado) {
-        Integer oldIdpoldelegado = this.idpoldelegado;
-        this.idpoldelegado = idpoldelegado;
-        changeSupport.firePropertyChange("idpoldelegado", oldIdpoldelegado, idpoldelegado);
+    public Delegado(Delegacia delegacia, Integer idpol, String nome, String login, String senha, String cargo) {
+        super(idpol, nome, login, senha, cargo);
+        this.delegacia = delegacia;
     }
 
-    public Integer getIddelegacia() {
-        return iddelegacia;
+    public Delegacia getDelegacia() {
+        return delegacia;
     }
 
-    public void setIddelegacia(Integer iddelegacia) {
-        Integer oldIddelegacia = this.iddelegacia;
-        this.iddelegacia = iddelegacia;
-        changeSupport.firePropertyChange("iddelegacia", oldIddelegacia, iddelegacia);
+    public void setDelegacia(Delegacia delegacia) {
+        this.delegacia = delegacia;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idpoldelegado != null ? idpoldelegado.hashCode() : 0);
+        hash += (super.getIdPolicial() != null ? super.getIdPolicial().hashCode() : 0);
         return hash;
     }
 
@@ -81,7 +78,7 @@ public class Delegado implements Serializable {
             return false;
         }
         Delegado other = (Delegado) object;
-        if ((this.idpoldelegado == null && other.idpoldelegado != null) || (this.idpoldelegado != null && !this.idpoldelegado.equals(other.idpoldelegado))) {
+        if ((super.getIdPolicial() == null && other.getIdPolicial() != null) || (super.getIdPolicial() != null && !super.getIdPolicial().equals(other.getIdPolicial()))) {
             return false;
         }
         return true;
@@ -89,7 +86,7 @@ public class Delegado implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Delegado[ idpoldelegado=" + idpoldelegado + " ]";
+        return "view.Delegado[ idpoldelegado=" + super.getIdPolicial() + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

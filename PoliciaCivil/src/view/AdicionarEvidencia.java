@@ -30,12 +30,13 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
         initEvidencia=new LinkedList<>();
         initEvidencia.addAll(CadastrarOcorrencia.evidencias);
         
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initEvidencia.size(); i++) {
             Evidencia temp = initEvidencia.get(i);
-            row[0] = temp.getTipo();
-            row[1] = temp.getProvidencia();
+            row[0] = temp.getIdEvidencia();
+            row[1] = temp.getTipo();
+            row[2] = temp.getProvidencia();
             model2.addRow(row);
         }
     }
@@ -53,6 +54,8 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
         policiaPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("policiaPU").createEntityManager();
         cidadaoQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT c FROM Cidadao c");
         cidadaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : cidadaoQuery.getResultList();
+        evidenciaQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT e FROM Evidencia e");
+        evidenciaList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : evidenciaQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaResultados = new javax.swing.JTable();
         PesquisarTextField = new javax.swing.JTextField();
@@ -68,11 +71,15 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cidadaoList, TabelaResultados);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tipo}"));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evidenciaList, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idEvidencia}"));
+        columnBinding.setColumnName("ID");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tipo}"));
         columnBinding.setColumnName("Tipo");
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${providencia}"));
         columnBinding.setColumnName("Providência");
+        columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
@@ -100,7 +107,7 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tipo", "Providência"
+                "ID", "Tipo", "Providência"
             }
         ));
         TableAdicionados.setColumnSelectionAllowed(true);
@@ -220,7 +227,7 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
 
         int[] index = TabelaResultados.getSelectedRows();
 
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
@@ -228,16 +235,16 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
 
             row[0] = model1.getValueAt(index[i], 0);
             row[1] = model1.getValueAt(index[i], 1);
+            row[2] = model1.getValueAt(index[i], 2);
             model2.addRow(row);
 
-            String idevi = (String) model1.getValueAt(index[i], 1);
+            Integer idevi = Integer.parseInt(model1.getValueAt(index[i], 0).toString());
 
             List<Evidencia> collect = evidenciaList.stream().filter(x -> {
-                return x.getIdevi().equals(idevi);
+                return x.getIdEvidencia().equals(idevi);
             }).collect(toList());
             CadastrarOcorrencia.evidencias.addAll(collect);
         }
-
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 
     /**
@@ -294,7 +301,7 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
             }
         });
     }
-    private java.util.List<model.entity.Evidencia> evidenciaList;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdicionarButton;
     private javax.swing.JButton CadastrarEvidenciaButton;
@@ -306,6 +313,8 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
     private javax.swing.JButton VoltarButton;
     private java.util.List<model.entity.Cidadao> cidadaoList;
     private javax.persistence.Query cidadaoQuery;
+    private java.util.List<model.entity.Evidencia> evidenciaList;
+    private javax.persistence.Query evidenciaQuery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

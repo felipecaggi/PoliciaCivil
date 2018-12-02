@@ -28,7 +28,7 @@ import javax.persistence.Transient;
 @Table(name = "ocorrencia", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Ocorrencia.findAll", query = "SELECT o FROM Ocorrencia o")
-    , @NamedQuery(name = "Ocorrencia.findByIdoco", query = "SELECT o FROM Ocorrencia o WHERE o.idoco = :idoco")
+    , @NamedQuery(name = "Ocorrencia.findByIdoco", query = "SELECT o FROM Ocorrencia o WHERE o.idOcorrencia = :idoco")
     , @NamedQuery(name = "Ocorrencia.findByDataocor", query = "SELECT o FROM Ocorrencia o WHERE o.dataocor = :dataocor")
     , @NamedQuery(name = "Ocorrencia.findByStatus", query = "SELECT o FROM Ocorrencia o WHERE o.status = :status")
     , @NamedQuery(name = "Ocorrencia.findByHorario", query = "SELECT o FROM Ocorrencia o WHERE o.horario = :horario")
@@ -48,8 +48,8 @@ public class Ocorrencia implements Serializable {
     
     @Id
     @Basic(optional = false)
-    @Column(name = "idoco")
-    private Integer idoco;
+    @Column(name = "idOcorrencia")
+    private Integer idOcorrencia;
     
     @Basic(optional = false)
     @Column(name = "dataocor")
@@ -59,11 +59,6 @@ public class Ocorrencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private String status;
-    
-    @Basic(optional = false)
-    @Column(name = "horario")
-    @Temporal(TemporalType.DATE)
-    private Date horario;
     
     @Basic(optional = false)
     @Column(name = "infracao")
@@ -97,14 +92,13 @@ public class Ocorrencia implements Serializable {
     }
 
     public Ocorrencia(Integer idoco) {
-        this.idoco = idoco;
+        this.idOcorrencia = idoco;
     }
 
-    public Ocorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
-        this.idoco = idoco;
+    public Ocorrencia(Integer idoco, Date dataocor, String status, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
+        this.idOcorrencia = idoco;
         this.dataocor = dataocor;
         this.status = status;
-        this.horario = horario;
         this.infracao = infracao;
         this.segredojustica = segredojustica;
         this.idpolicial = idpolicial;
@@ -114,14 +108,14 @@ public class Ocorrencia implements Serializable {
         this.idcomunicante = idcomunicante;
     }
 
-    public Integer getIdoco() {
-        return idoco;
+    public Integer getIdOcorrencia() {
+        return idOcorrencia;
     }
 
-    public void setIdoco(Integer idoco) {
-        Integer oldIdoco = this.idoco;
-        this.idoco = idoco;
-        changeSupport.firePropertyChange("idoco", oldIdoco, idoco);
+    public void setIdOcorrencia(Integer idOcorrencia) {
+        Integer oldIdoco = this.idOcorrencia;
+        this.idOcorrencia = idOcorrencia;
+        changeSupport.firePropertyChange("idoco", oldIdoco, idOcorrencia);
     }
 
     public Date getDataocor() {
@@ -142,16 +136,6 @@ public class Ocorrencia implements Serializable {
         String oldStatus = this.status;
         this.status = status;
         changeSupport.firePropertyChange("status", oldStatus, status);
-    }
-
-    public Date getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Date horario) {
-        Date oldHorario = this.horario;
-        this.horario = horario;
-        changeSupport.firePropertyChange("horario", oldHorario, horario);
     }
 
     public String getInfracao() {
@@ -227,7 +211,7 @@ public class Ocorrencia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idoco != null ? idoco.hashCode() : 0);
+        hash += (idOcorrencia != null ? idOcorrencia.hashCode() : 0);
         return hash;
     }
 
@@ -238,7 +222,7 @@ public class Ocorrencia implements Serializable {
             return false;
         }
         Ocorrencia other = (Ocorrencia) object;
-        if ((this.idoco == null && other.idoco != null) || (this.idoco != null && !this.idoco.equals(other.idoco))) {
+        if ((this.idOcorrencia == null && other.idOcorrencia != null) || (this.idOcorrencia != null && !this.idOcorrencia.equals(other.idOcorrencia))) {
             return false;
         }
         return true;
@@ -246,7 +230,7 @@ public class Ocorrencia implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Ocorrencia[ idoco=" + idoco + " ]";
+        return "view.Ocorrencia[ idoco=" + idOcorrencia + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

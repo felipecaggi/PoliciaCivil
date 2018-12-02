@@ -25,15 +25,13 @@ import javax.persistence.Transient;
 @NamedQueries({
     @NamedQuery(name = "Objeto.findAll", query = "SELECT o FROM Objeto o")
     , @NamedQuery(name = "Objeto.findByNome", query = "SELECT o FROM Objeto o WHERE o.objetoPK.nome = :nome")
-    , @NamedQuery(name = "Objeto.findByDescricao", query = "SELECT o FROM Objeto o WHERE o.descricao = :descricao")
-    , @NamedQuery(name = "Objeto.findByIdevidencia", query = "SELECT o FROM Objeto o WHERE o.objetoPK.idevidencia = :idevidencia")})
-public class Objeto implements Serializable {
+    , @NamedQuery(name = "Objeto.findByDescricao", query = "SELECT o FROM Objeto o WHERE o.descricao = :descricao")})
+public class Objeto extends Evidencia implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
     protected ObjetoPK objetoPK;
     @Column(name = "descricao")
     private String descricao;
@@ -45,8 +43,8 @@ public class Objeto implements Serializable {
         this.objetoPK = objetoPK;
     }
 
-    public Objeto(String nome, int idevidencia) {
-        this.objetoPK = new ObjetoPK(nome, idevidencia);
+    public Objeto(String nome) {
+        this.objetoPK = new ObjetoPK(nome);
     }
 
     public ObjetoPK getObjetoPK() {

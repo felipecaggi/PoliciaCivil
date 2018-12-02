@@ -7,22 +7,22 @@
         <Property name="persistenceUnit" type="java.lang.String" value="policiaPU"/>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="cidadaoQuery">
+    <Component class="javax.persistence.Query" name="delegadoQuery">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT c FROM Cidadao c"/>
+        <Property name="query" type="java.lang.String" value="SELECT d FROM Delegado d"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="policiaPUEntityManager"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="java.util.List" name="cidadaoList">
+    <Component class="java.util.List" name="delegadoList">
       <Properties>
         <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="cidadaoQuery"/>
+          <ComponentRef name="delegadoQuery"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.entity.Cidadao&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.entity.Delegado&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -60,7 +60,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="PesquisarButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="158" max="32767" attributes="0"/>
-                              <Component id="CadastrarComunicanteButton" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="CadastrarDelegadoButton" min="-2" pref="184" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -94,7 +94,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="PesquisarTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="PesquisarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CadastrarComunicanteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CadastrarDelegadoButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -138,6 +138,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -145,13 +150,17 @@
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="cidadaoList" target="TabelaResultados" targetPath="elements" updateStrategy="0" immediately="true">
+            <BindingProperty name="elements" source="delegadoList" target="TabelaResultados" targetPath="elements" updateStrategy="0" immediately="true">
+              <Subbinding sourcePath="${idPolicial}">
+                <BindingParameter name="NAME" value="Matricula"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+              </Subbinding>
               <Subbinding sourcePath="${nome}">
                 <BindingParameter name="NAME" value="Nome"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${cargo}">
-                <BindingParameter name="NAME" value="Cargo"/>
+              <Subbinding sourcePath="${delegacia.nome}">
+                <BindingParameter name="NAME" value="Delegacia"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
@@ -168,12 +177,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PesquisarButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="CadastrarComunicanteButton">
+    <Component class="javax.swing.JButton" name="CadastrarDelegadoButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar Comunicante"/>
+        <Property name="text" type="java.lang.String" value="Cadastrar Delegado"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadastrarComunicanteButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadastrarDelegadoButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -183,7 +192,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Comunicantes adicionados"/>
+        <Property name="text" type="java.lang.String" value="Delegados adicionados"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -196,13 +205,19 @@
         <Component class="javax.swing.JTable" name="TableAdicionados">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="0">
-                <Column editable="true" title="null" type="java.lang.Object"/>
-                <Column editable="true" title="T&#xed;tulo 2" type="java.lang.Object"/>
+              <Table columnCount="3" rowCount="0">
+                <Column editable="true" title="Matricula" type="java.lang.Object"/>
+                <Column editable="true" title="Nome" type="java.lang.Object"/>
+                <Column editable="true" title="Delegacia" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="1">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

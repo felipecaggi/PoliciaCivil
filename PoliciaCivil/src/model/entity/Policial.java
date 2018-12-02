@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,11 +27,12 @@ import javax.persistence.Transient;
 @Table(name = "policial", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Policial.findAll", query = "SELECT p FROM Policial p")
-    , @NamedQuery(name = "Policial.findByIdpol", query = "SELECT p FROM Policial p WHERE p.idpol = :idpol")
+    , @NamedQuery(name = "Policial.findByIdpol", query = "SELECT p FROM Policial p WHERE p.idPolicial = :idpol")
     , @NamedQuery(name = "Policial.findByNome", query = "SELECT p FROM Policial p WHERE p.nome = :nome")
-    , @NamedQuery(name = "Policial.findByLoguin", query = "SELECT p FROM Policial p WHERE p.loguin = :loguin")
+    , @NamedQuery(name = "Policial.findByLogin", query = "SELECT p FROM Policial p WHERE p.login = :login")
     , @NamedQuery(name = "Policial.findBySenha", query = "SELECT p FROM Policial p WHERE p.senha = :senha")
     , @NamedQuery(name = "Policial.findByCargo", query = "SELECT p FROM Policial p WHERE p.cargo = :cargo")})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Policial implements Serializable {
 
     @Transient
@@ -38,14 +41,14 @@ public class Policial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idpol")
-    private Integer idpol;
+    @Column(name = "idPolicial")
+    private Integer idPolicial;
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
     @Basic(optional = false)
-    @Column(name = "loguin")
-    private String loguin;
+    @Column(name = "login")
+    private String login;
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
@@ -57,25 +60,25 @@ public class Policial implements Serializable {
     }
 
     public Policial(Integer idpol) {
-        this.idpol = idpol;
+        this.idPolicial = idpol;
     }
 
-    public Policial(Integer idpol, String nome, String loguin, String senha, String cargo) {
-        this.idpol = idpol;
+    public Policial(Integer idpol, String nome, String login, String senha, String cargo) {
+        this.idPolicial = idpol;
         this.nome = nome;
-        this.loguin = loguin;
+        this.login = login;
         this.senha = senha;
         this.cargo = cargo;
     }
 
-    public Integer getIdpol() {
-        return idpol;
+    public Integer getIdPolicial() {
+        return idPolicial;
     }
 
-    public void setIdpol(Integer idpol) {
-        Integer oldIdpol = this.idpol;
-        this.idpol = idpol;
-        changeSupport.firePropertyChange("idpol", oldIdpol, idpol);
+    public void setIdPolicial(Integer idPolicial) {
+        Integer oldIdpol = this.idPolicial;
+        this.idPolicial = idPolicial;
+        changeSupport.firePropertyChange("idpol", oldIdpol, idPolicial);
     }
 
     public String getNome() {
@@ -88,14 +91,14 @@ public class Policial implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
-    public String getLoguin() {
-        return loguin;
+    public String getLogin() {
+        return login;
     }
 
-    public void setLoguin(String loguin) {
-        String oldLoguin = this.loguin;
-        this.loguin = loguin;
-        changeSupport.firePropertyChange("loguin", oldLoguin, loguin);
+    public void setLogin(String login) {
+        String oldLogin = this.login;
+        this.login = login;
+        changeSupport.firePropertyChange("login", oldLogin, login);
     }
 
     public String getSenha() {
@@ -121,7 +124,7 @@ public class Policial implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idpol != null ? idpol.hashCode() : 0);
+        hash += (idPolicial != null ? idPolicial.hashCode() : 0);
         return hash;
     }
 
@@ -132,7 +135,7 @@ public class Policial implements Serializable {
             return false;
         }
         Policial other = (Policial) object;
-        if ((this.idpol == null && other.idpol != null) || (this.idpol != null && !this.idpol.equals(other.idpol))) {
+        if ((this.idPolicial == null && other.idPolicial != null) || (this.idPolicial != null && !this.idPolicial.equals(other.idPolicial))) {
             return false;
         }
         return true;
@@ -140,7 +143,7 @@ public class Policial implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Policial[ idpol=" + idpol + " ]";
+        return "view.Policial[ idpol=" + idPolicial + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

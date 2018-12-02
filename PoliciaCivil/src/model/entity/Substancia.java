@@ -31,15 +31,14 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Substancia.findByAltura", query = "SELECT s FROM Substancia s WHERE s.altura = :altura")
     , @NamedQuery(name = "Substancia.findByComprimento", query = "SELECT s FROM Substancia s WHERE s.comprimento = :comprimento")
     , @NamedQuery(name = "Substancia.findByLargura", query = "SELECT s FROM Substancia s WHERE s.largura = :largura")
-    , @NamedQuery(name = "Substancia.findByQtd", query = "SELECT s FROM Substancia s WHERE s.qtd = :qtd")
-    , @NamedQuery(name = "Substancia.findByIdevidencia", query = "SELECT s FROM Substancia s WHERE s.substanciaPK.idevidencia = :idevidencia")})
-public class Substancia implements Serializable {
+    , @NamedQuery(name = "Substancia.findByQtd", query = "SELECT s FROM Substancia s WHERE s.qtd = :qtd")})
+public class Substancia extends Evidencia implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
+    
     protected SubstanciaPK substanciaPK;
     @Basic(optional = false)
     @Column(name = "peso")
@@ -67,8 +66,8 @@ public class Substancia implements Serializable {
         this.peso = peso;
     }
 
-    public Substancia(String tipo, int idevidencia) {
-        this.substanciaPK = new SubstanciaPK(tipo, idevidencia);
+    public Substancia(String tipo) {
+        this.substanciaPK = new SubstanciaPK(tipo);
     }
 
     public SubstanciaPK getSubstanciaPK() {

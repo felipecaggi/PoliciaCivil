@@ -25,7 +25,7 @@ import javax.persistence.Transient;
 @Table(name = "delegacia", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Delegacia.findAll", query = "SELECT d FROM Delegacia d")
-    , @NamedQuery(name = "Delegacia.findByIddel", query = "SELECT d FROM Delegacia d WHERE d.iddel = :iddel")
+    , @NamedQuery(name = "Delegacia.findByIddel", query = "SELECT d FROM Delegacia d WHERE d.idDelegacia = :iddel")
     , @NamedQuery(name = "Delegacia.findByNome", query = "SELECT d FROM Delegacia d WHERE d.nome = :nome")
     , @NamedQuery(name = "Delegacia.findBySigla", query = "SELECT d FROM Delegacia d WHERE d.sigla = :sigla")})
 public class Delegacia implements Serializable {
@@ -36,8 +36,8 @@ public class Delegacia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "iddel")
-    private Integer iddel;
+    @Column(name = "idDelegacia")
+    private Integer idDelegacia;
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
@@ -49,23 +49,23 @@ public class Delegacia implements Serializable {
     }
 
     public Delegacia(Integer iddel) {
-        this.iddel = iddel;
+        this.idDelegacia = iddel;
     }
 
     public Delegacia(Integer iddel, String nome, String sigla) {
-        this.iddel = iddel;
+        this.idDelegacia = iddel;
         this.nome = nome;
         this.sigla = sigla;
     }
 
-    public Integer getIddel() {
-        return iddel;
+    public Integer getIdDelegacia() {
+        return idDelegacia;
     }
 
-    public void setIddel(Integer iddel) {
-        Integer oldIddel = this.iddel;
-        this.iddel = iddel;
-        changeSupport.firePropertyChange("iddel", oldIddel, iddel);
+    public void setIdDelegacia(Integer idDelegacia) {
+        Integer oldIddel = this.idDelegacia;
+        this.idDelegacia = idDelegacia;
+        changeSupport.firePropertyChange("iddel", oldIddel, idDelegacia);
     }
 
     public String getNome() {
@@ -91,7 +91,7 @@ public class Delegacia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iddel != null ? iddel.hashCode() : 0);
+        hash += (idDelegacia != null ? idDelegacia.hashCode() : 0);
         return hash;
     }
 
@@ -102,7 +102,7 @@ public class Delegacia implements Serializable {
             return false;
         }
         Delegacia other = (Delegacia) object;
-        if ((this.iddel == null && other.iddel != null) || (this.iddel != null && !this.iddel.equals(other.iddel))) {
+        if ((this.idDelegacia == null && other.idDelegacia != null) || (this.idDelegacia != null && !this.idDelegacia.equals(other.idDelegacia))) {
             return false;
         }
         return true;
@@ -110,7 +110,7 @@ public class Delegacia implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Delegacia[ iddel=" + iddel + " ]";
+        return "view.Delegacia[ iddel=" + idDelegacia + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

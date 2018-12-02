@@ -25,7 +25,7 @@ import javax.persistence.Transient;
 @Table(name = "endereco", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e")
-    , @NamedQuery(name = "Endereco.findByIdend", query = "SELECT e FROM Endereco e WHERE e.idend = :idend")
+    , @NamedQuery(name = "Endereco.findByIdend", query = "SELECT e FROM Endereco e WHERE e.idEndereco = :idend")
     , @NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep")
     , @NamedQuery(name = "Endereco.findByLogradouro", query = "SELECT e FROM Endereco e WHERE e.logradouro = :logradouro")
     , @NamedQuery(name = "Endereco.findByNumero", query = "SELECT e FROM Endereco e WHERE e.numero = :numero")
@@ -41,8 +41,8 @@ public class Endereco implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idend")
-    private Integer idend;
+    @Column(name = "idEndereco")
+    private Integer idEndereco;
     @Basic(optional = false)
     @Column(name = "cep")
     private String cep;
@@ -68,11 +68,11 @@ public class Endereco implements Serializable {
     }
 
     public Endereco(Integer idend) {
-        this.idend = idend;
+        this.idEndereco = idend;
     }
 
     public Endereco(Integer idend, String cep, String logradouro, int numero, String bairro, String estado, String cidade) {
-        this.idend = idend;
+        this.idEndereco = idend;
         this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -81,14 +81,14 @@ public class Endereco implements Serializable {
         this.cidade = cidade;
     }
 
-    public Integer getIdend() {
-        return idend;
+    public Integer getIdEndereco() {
+        return idEndereco;
     }
 
-    public void setIdend(Integer idend) {
-        Integer oldIdend = this.idend;
-        this.idend = idend;
-        changeSupport.firePropertyChange("idend", oldIdend, idend);
+    public void setIdEndereco(Integer idEndereco) {
+        Integer oldIdend = this.idEndereco;
+        this.idEndereco = idEndereco;
+        changeSupport.firePropertyChange("idend", oldIdend, idEndereco);
     }
 
     public String getCep() {
@@ -164,7 +164,7 @@ public class Endereco implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idend != null ? idend.hashCode() : 0);
+        hash += (idEndereco != null ? idEndereco.hashCode() : 0);
         return hash;
     }
 
@@ -175,7 +175,7 @@ public class Endereco implements Serializable {
             return false;
         }
         Endereco other = (Endereco) object;
-        if ((this.idend == null && other.idend != null) || (this.idend != null && !this.idend.equals(other.idend))) {
+        if ((this.idEndereco == null && other.idEndereco != null) || (this.idEndereco != null && !this.idEndereco.equals(other.idEndereco))) {
             return false;
         }
         return true;
@@ -183,7 +183,7 @@ public class Endereco implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Endereco[ idend=" + idend + " ]";
+        return "view.Endereco[ idend=" + idEndereco + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

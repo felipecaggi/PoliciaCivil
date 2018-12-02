@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,9 +27,10 @@ import javax.persistence.Transient;
 @Table(name = "evidencia", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Evidencia.findAll", query = "SELECT e FROM Evidencia e")
-    , @NamedQuery(name = "Evidencia.findByIdevi", query = "SELECT e FROM Evidencia e WHERE e.idevi = :idevi")
+    , @NamedQuery(name = "Evidencia.findByIdevi", query = "SELECT e FROM Evidencia e WHERE e.idEvidencia = :idevi")
     , @NamedQuery(name = "Evidencia.findByProvidencia", query = "SELECT e FROM Evidencia e WHERE e.providencia = :providencia")
     , @NamedQuery(name = "Evidencia.findByTipo", query = "SELECT e FROM Evidencia e WHERE e.tipo = :tipo")})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Evidencia implements Serializable {
 
     @Transient
@@ -36,8 +39,8 @@ public class Evidencia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idevi")
-    private Integer idevi;
+    @Column(name = "idEvidencia")
+    private Integer idEvidencia;
     @Basic(optional = false)
     @Column(name = "providencia")
     private String providencia;
@@ -49,23 +52,23 @@ public class Evidencia implements Serializable {
     }
 
     public Evidencia(Integer idevi) {
-        this.idevi = idevi;
+        this.idEvidencia = idevi;
     }
 
     public Evidencia(Integer idevi, String providencia, String tipo) {
-        this.idevi = idevi;
+        this.idEvidencia = idevi;
         this.providencia = providencia;
         this.tipo = tipo;
     }
 
-    public Integer getIdevi() {
-        return idevi;
+    public Integer getIdEvidencia() {
+        return idEvidencia;
     }
 
-    public void setIdevi(Integer idevi) {
-        Integer oldIdevi = this.idevi;
-        this.idevi = idevi;
-        changeSupport.firePropertyChange("idevi", oldIdevi, idevi);
+    public void setIdEvidencia(Integer idEvidencia) {
+        Integer oldIdevi = this.idEvidencia;
+        this.idEvidencia = idEvidencia;
+        changeSupport.firePropertyChange("idevi", oldIdevi, idEvidencia);
     }
 
     public String getProvidencia() {
@@ -91,7 +94,7 @@ public class Evidencia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idevi != null ? idevi.hashCode() : 0);
+        hash += (idEvidencia != null ? idEvidencia.hashCode() : 0);
         return hash;
     }
 
@@ -102,7 +105,7 @@ public class Evidencia implements Serializable {
             return false;
         }
         Evidencia other = (Evidencia) object;
-        if ((this.idevi == null && other.idevi != null) || (this.idevi != null && !this.idevi.equals(other.idevi))) {
+        if ((this.idEvidencia == null && other.idEvidencia != null) || (this.idEvidencia != null && !this.idEvidencia.equals(other.idEvidencia))) {
             return false;
         }
         return true;
@@ -110,7 +113,7 @@ public class Evidencia implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Evidencia[ idevi=" + idevi + " ]";
+        return "view.Evidencia[ idevi=" + idEvidencia + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

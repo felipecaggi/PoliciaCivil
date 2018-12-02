@@ -20,16 +20,12 @@ public class SubstanciaPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "tipo")
     private String tipo;
-    @Basic(optional = false)
-    @Column(name = "idevidencia")
-    private int idevidencia;
 
     public SubstanciaPK() {
     }
 
-    public SubstanciaPK(String tipo, int idevidencia) {
+    public SubstanciaPK(String tipo) {
         this.tipo = tipo;
-        this.idevidencia = idevidencia;
     }
 
     public String getTipo() {
@@ -40,19 +36,10 @@ public class SubstanciaPK implements Serializable {
         this.tipo = tipo;
     }
 
-    public int getIdevidencia() {
-        return idevidencia;
-    }
-
-    public void setIdevidencia(int idevidencia) {
-        this.idevidencia = idevidencia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (tipo != null ? tipo.hashCode() : 0);
-        hash += (int) idevidencia;
         return hash;
     }
 
@@ -66,15 +53,7 @@ public class SubstanciaPK implements Serializable {
         if ((this.tipo == null && other.tipo != null) || (this.tipo != null && !this.tipo.equals(other.tipo))) {
             return false;
         }
-        if (this.idevidencia != other.idevidencia) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "view.SubstanciaPK[ tipo=" + tipo + ", idevidencia=" + idevidencia + " ]";
-    }
-    
 }
