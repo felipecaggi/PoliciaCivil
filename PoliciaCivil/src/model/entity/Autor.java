@@ -33,6 +33,7 @@ public class Autor implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AutorPK autorPK;
+    private boolean conduzido = false;
 
     public Autor() {
     }
@@ -51,6 +52,14 @@ public class Autor implements Serializable {
 
     public void setAutorPK(AutorPK autorPK) {
         this.autorPK = autorPK;
+    }
+    
+    public boolean isConduzido() {
+        return conduzido;
+    }
+
+    public void setConduzido(boolean conduzido) {
+        this.conduzido = conduzido;
     }
 
     @Override

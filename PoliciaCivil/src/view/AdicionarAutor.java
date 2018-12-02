@@ -102,9 +102,24 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF"
+                "Nome", "CPF", "Conduzido"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableAdicionados.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(TableAdicionados);
         TableAdicionados.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -230,6 +245,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
             row[0] = model1.getValueAt(index[i], 0);
             row[1] = model1.getValueAt(index[i], 1);
+            row[2] = "Não";
             model2.addRow(row);
 
             String cpf = (String) model1.getValueAt(index[i], 1);
