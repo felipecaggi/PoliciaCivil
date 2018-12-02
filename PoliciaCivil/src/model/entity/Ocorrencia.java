@@ -41,12 +41,7 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Ocorrencia.findByDataocor", query = "SELECT o FROM Ocorrencia o WHERE o.dataocor = :dataocor")
     , @NamedQuery(name = "Ocorrencia.findByStatus", query = "SELECT o FROM Ocorrencia o WHERE o.status = :status")
     , @NamedQuery(name = "Ocorrencia.findByInfracao", query = "SELECT o FROM Ocorrencia o WHERE o.infracao = :infracao")
-    , @NamedQuery(name = "Ocorrencia.findBySegredojustica", query = "SELECT o FROM Ocorrencia o WHERE o.segredojustica = :segredojustica")
-    , @NamedQuery(name = "Ocorrencia.findByIdpolicial", query = "SELECT o FROM Ocorrencia o WHERE o.idpolicial = :idpolicial")
-    , @NamedQuery(name = "Ocorrencia.findByIdendereco", query = "SELECT o FROM Ocorrencia o WHERE o.idendereco = :idendereco")
-    , @NamedQuery(name = "Ocorrencia.findByIddelegacia", query = "SELECT o FROM Ocorrencia o WHERE o.iddelegacia = :iddelegacia")
-    , @NamedQuery(name = "Ocorrencia.findByIddelegado", query = "SELECT o FROM Ocorrencia o WHERE o.iddelegado = :iddelegado")
-    , @NamedQuery(name = "Ocorrencia.findByIdcomunicante", query = "SELECT o FROM Ocorrencia o WHERE o.idcomunicante = :idcomunicante")})
+    , @NamedQuery(name = "Ocorrencia.findBySegredojustica", query = "SELECT o FROM Ocorrencia o WHERE o.segredojustica = :segredojustica")})
 public class Ocorrencia implements Serializable {
 
     @Transient
@@ -82,7 +77,7 @@ public class Ocorrencia implements Serializable {
     private int idpolicial;
 
     @ManyToOne
-    @JoinColumn(name = "idpolicial", referencedColumnName = "idpolicial")
+    @JoinColumn(name = "idPolicial", referencedColumnName = "idPolicial")
     private Policial policial;
 
     @ManyToOne
@@ -94,11 +89,11 @@ public class Ocorrencia implements Serializable {
     private Delegacia delegacia;
 
     @ManyToOne
-    @JoinColumn(name = "iddelegado", referencedColumnName = "iddelegado")
+    @JoinColumn(name = "idDelegado", referencedColumnName = "idPolicial")
     private Delegado delegado;
 
     @ManyToOne
-    @JoinColumn(name = "cpf", referencedColumnName = "cpf")
+    @JoinColumn(name = "idComunicante", referencedColumnName = "cpf")
     private Cidadao comunicante;
 
     @ManyToMany
