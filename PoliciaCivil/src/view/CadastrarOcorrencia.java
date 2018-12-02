@@ -31,8 +31,6 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     public static List<Evidencia> evidencias = new LinkedList<Evidencia>();
     public static Delegado delegados = new Delegado();
     public static List<Policial> equipe = new LinkedList<Policial>();
-    private OcorrenciaManager ocorrenciaManager = new OcorrenciaManager();
-    private Policial policialLogado = ocorrenciaManager.buscaPolicial(1);
 
     /**
      * Creates new form CadastrarOcorrencia
@@ -444,7 +442,6 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarEquipeButtonActionPerformed
 
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
-        JOptionPane.showMessageDialog(new JFrame(), policialLogado.getNome(), "Resultado", JOptionPane.PLAIN_MESSAGE);
         try {
             Calendar data = Calendar.getInstance();
             data.set(Integer.parseInt(AnoTextField.getText()),
@@ -479,6 +476,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(new JFrame(), "Erro ao salvar.\nErro: " + e.getMessage(), "Resultado", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_SalvarButtonActionPerformed
 

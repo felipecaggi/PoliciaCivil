@@ -237,7 +237,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
         int[] index = TabelaResultados.getSelectedRows();
 
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
@@ -245,7 +245,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
             row[0] = model1.getValueAt(index[i], 0);
             row[1] = model1.getValueAt(index[i], 1);
-            row[2] = "Não";
+            row[2] = false;
             model2.addRow(row);
 
             String cpf = (String) model1.getValueAt(index[i], 1);

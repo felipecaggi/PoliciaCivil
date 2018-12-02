@@ -72,10 +72,6 @@ public class Ocorrencia implements Serializable {
     @Column(name = "segredojustica")
     private boolean segredojustica;
 
-    @Basic(optional = false)
-    @Column(name = "idpolicial")
-    private int idpolicial;
-
     @ManyToOne
     @JoinColumn(name = "idPolicial", referencedColumnName = "idPolicial")
     private Policial policial;
@@ -129,12 +125,11 @@ public class Ocorrencia implements Serializable {
     public Ocorrencia() {
     }
 
-    public Ocorrencia(Calendar dataocor, String status, String infracao, boolean segredojustica, int idpolicial, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
+    public Ocorrencia(Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
         this.dataocor = dataocor;
         this.status = status;
         this.infracao = infracao;
         this.segredojustica = segredojustica;
-        this.idpolicial = idpolicial;
         this.policial = policial;
         this.endereco = endereco;
         this.delegacia = delegacia;
@@ -147,13 +142,12 @@ public class Ocorrencia implements Serializable {
         this.equipe = equipe;
     }
 
-    public Ocorrencia(Integer idOcorrencia, Calendar dataocor, String status, String infracao, boolean segredojustica, int idpolicial, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
+    public Ocorrencia(Integer idOcorrencia, Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
         this.idOcorrencia = idOcorrencia;
         this.dataocor = dataocor;
         this.status = status;
         this.infracao = infracao;
         this.segredojustica = segredojustica;
-        this.idpolicial = idpolicial;
         this.policial = policial;
         this.endereco = endereco;
         this.delegacia = delegacia;
@@ -165,7 +159,6 @@ public class Ocorrencia implements Serializable {
         this.evidencias = evidencias;
         this.equipe = equipe;
     }
-
 
     public Integer getIdOcorrencia() {
         return idOcorrencia;
@@ -215,16 +208,6 @@ public class Ocorrencia implements Serializable {
         boolean oldSegredojustica = this.segredojustica;
         this.segredojustica = segredojustica;
         changeSupport.firePropertyChange("segredojustica", oldSegredojustica, segredojustica);
-    }
-
-    public int getIdpolicial() {
-        return idpolicial;
-    }
-
-    public void setIdpolicial(int idpolicial) {
-        int oldIdpolicial = this.idpolicial;
-        this.idpolicial = idpolicial;
-        changeSupport.firePropertyChange("idpolicial", oldIdpolicial, idpolicial);
     }
 
     public Endereco getEndereco() {

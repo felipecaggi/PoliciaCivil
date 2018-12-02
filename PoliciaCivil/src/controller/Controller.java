@@ -26,7 +26,8 @@ public class Controller {
     private OcorrenciaManager ocorrenciaManager = new OcorrenciaManager();
     private Policial policialLogado = ocorrenciaManager.buscaPolicial(1);
 
-    public boolean salvarOcorrencia(String infracao,
+    public boolean salvarOcorrencia(
+            String infracao,
             String cidade,
             String estado,
             String logradouro,
@@ -37,15 +38,35 @@ public class Controller {
             String complemento,
             Calendar data,
             List<Cidadao> vitimas,
-            Cidadao comunicantes,
+            Cidadao comunicante,
             List<Cidadao> testemunhas,
             List<Cidadao> autores,
             List<Evidencia> evidencias,
-            Delegado delegados,
+            Delegado delegado,
             List<Policial> equipe,
             boolean segredoJustica)
     {
-        return ocorrenciaManager.salvarOcorrencia(infracao, cidade, estado, logradouro, numero, cep, bairro, referencia, complemento, data, vitimas, comunicantes, testemunhas, autores, evidencias, delegados, equipe, segredoJustica);
+        return ocorrenciaManager.salvarOcorrencia(
+                infracao,
+                cidade,
+                estado,
+                logradouro,
+                numero,
+                cep,
+                bairro,
+                referencia,
+                complemento,
+                data,
+                vitimas,
+                comunicante,
+                testemunhas,
+                autores,
+                evidencias,
+                delegado,
+                equipe,
+                segredoJustica,
+                policialLogado
+        );
     }
 
     public static void main(String[] args) { 
