@@ -9,7 +9,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -25,7 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -106,7 +104,7 @@ public class Ocorrencia implements Serializable {
         @JoinColumn(name = "cpfCidadao", referencedColumnName = "cpf")})
     private List<Cidadao> testemunhas;
 
-    @OneToMany(mappedBy = "idocorrencia", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ocorrencia", cascade = CascadeType.ALL)
     private List<Autor> autores;
 
     @ManyToMany

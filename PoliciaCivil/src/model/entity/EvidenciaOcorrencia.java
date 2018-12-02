@@ -85,5 +85,5 @@ public class EvidenciaOcorrencia implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

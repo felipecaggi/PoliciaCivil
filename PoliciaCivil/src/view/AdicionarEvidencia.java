@@ -68,6 +68,7 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
         AdicionarButton = new javax.swing.JButton();
         VoltarButton = new javax.swing.JButton();
         SalvarButton = new javax.swing.JButton();
+        RemoverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +136,13 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
             }
         });
 
+        RemoverButton.setText("Remover Linhas Selecionadas");
+        RemoverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverButtonRemoverButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,6 +175,10 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SalvarButton)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(286, 286, 286)
+                .addComponent(RemoverButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +198,9 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(RemoverButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VoltarButton)
                     .addComponent(SalvarButton))
@@ -267,6 +281,17 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
 
+    private void RemoverButtonRemoverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverButtonRemoverButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        int[] index = TableAdicionados.getSelectedRows();
+
+        for (int i = 0; i < index.length; i++) {
+            model2.removeRow(index[i]);
+
+            CadastrarOcorrencia.evidencias.remove(index[i]);
+        }
+    }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +332,7 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
     private javax.swing.JButton CadastrarEvidenciaButton;
     private javax.swing.JButton PesquisarButton;
     private javax.swing.JTextField PesquisarTextField;
+    private javax.swing.JButton RemoverButton;
     private javax.swing.JButton SalvarButton;
     private javax.swing.JTable TabelaResultados;
     private javax.swing.JTable TableAdicionados;

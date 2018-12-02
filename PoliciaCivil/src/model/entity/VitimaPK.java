@@ -76,5 +76,5 @@ public class VitimaPK implements Serializable {
     public String toString() {
         return "view.VitimaPK[ idocorrencia=" + idocorrencia + ", cpfcidadao=" + cpfcidadao + " ]";
     }
-    
+
 }

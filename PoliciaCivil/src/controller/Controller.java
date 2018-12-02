@@ -6,10 +6,7 @@
 package controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
 import model.entity.Autor;
 import model.entity.Cidadao;
 import model.entity.Delegado;
@@ -45,8 +42,7 @@ public class Controller {
             List<Evidencia> evidencias,
             Delegado delegado,
             List<Policial> equipe,
-            boolean segredoJustica)
-    {
+            boolean segredoJustica) {
         return ocorrenciaManager.salvarOcorrencia(
                 infracao,
                 cidade,
@@ -70,7 +66,7 @@ public class Controller {
         );
     }
 
-    public static void main(String[] args) { 
+    public static void main(String[] args) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

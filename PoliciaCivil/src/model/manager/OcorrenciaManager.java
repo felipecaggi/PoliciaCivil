@@ -1,11 +1,8 @@
 package model.manager;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
 import model.entity.Autor;
-import model.entity.AutorPK;
 import model.entity.Cidadao;
 import model.entity.Delegado;
 import model.entity.Delegacia;
@@ -67,8 +64,7 @@ public class OcorrenciaManager {
             Delegado delegado,
             List<Policial> equipe,
             boolean segredoJustica,
-            Policial policial)
-    {
+            Policial policial) {
         Endereco endereco = new Endereco(cep, logradouro, numero, bairro, complemento, estado, cidade);
         Delegacia delegacia = delegado.getDelegacia();
         String status = "Ativo";
@@ -86,6 +82,8 @@ public class OcorrenciaManager {
                 autores,
                 evidencias,
                 equipe);
+
+        autores.forEach(x -> x.setOcorrencia(ocorrencia));
 
         return dao.persist(ocorrencia);
     }

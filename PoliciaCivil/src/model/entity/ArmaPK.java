@@ -72,5 +72,4 @@ public class ArmaPK implements Serializable {
         return true;
     }
 
-    
 }
