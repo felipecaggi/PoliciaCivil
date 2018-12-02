@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JCheckBox;
@@ -22,7 +23,7 @@ import view.CadastrarOcorrencia;
 public class Controller {
 
     
-    public static void salvarOcorrencia(String infracao, String cidade, String estado, String logradouro, Integer numero, String cep, String bairro, String referencia, String complemento, Date data, Time hora, List<Cidadao> vitimas, List<Cidadao> comunicantes, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> delegados, List<Policial> equipe, boolean enabled) {
+    public static void salvarOcorrencia(String infracao, String cidade, String estado, String logradouro, Integer numero, String cep, String bairro, String referencia, String complemento, Calendar data, List<Cidadao> vitimas, List<Cidadao> comunicantes, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> delegados, List<Policial> equipe, boolean enabled) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
