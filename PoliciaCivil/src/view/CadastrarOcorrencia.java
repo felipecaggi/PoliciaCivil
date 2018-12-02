@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.entity.Delegado;
 import model.entity.Policial;
 import model.entity.Evidencia;
 
@@ -23,11 +24,11 @@ import model.entity.Evidencia;
 public class CadastrarOcorrencia extends javax.swing.JFrame {
 
     public static List<Cidadao> vitimas = new LinkedList<Cidadao>();
-    public static List<Cidadao> comunicantes = new LinkedList<Cidadao>();
+    public static Cidadao comunicantes = new Cidadao();
     public static List<Cidadao> testemunhas = new LinkedList<Cidadao>();
     public static List<Cidadao> autores = new LinkedList<Cidadao>();
     public static List<Evidencia> evidencias = new LinkedList<Evidencia>();
-    public static List<Policial> delegados = new LinkedList<Policial>();
+    public static Delegado delegados = new Delegado();
     public static List<Policial> equipe = new LinkedList<Policial>();
 
     /**
@@ -249,8 +250,8 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(DataLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AnoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(72, 72, 72)
+                                        .addComponent(AnoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(57, 57, 57)
                                         .addComponent(HoraLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(HoraTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,36 +441,46 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarEquipeButtonActionPerformed
 
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
-        Calendar data = Calendar.getInstance();
-        data.set(Integer.parseInt(AnoTextField.getText()),
-                        Integer.parseInt(MesTextField.getText()),
-                        Integer.parseInt(DiaTextField.getText()),
-                        Integer.parseInt(HoraTextField.getText()),
-                        Integer.parseInt(MinutoTextField.getText()));
-        Controller.salvarOcorrencia(InfracaoTextField.getText(),
-                CidadeTextField.getText(),
-                EstadoTextField.getText(),
-                LogradouroTextField.getText(),
-                Integer.parseInt(NumeroTextField.getText()),
-                CepTextField.getText(),
-                BairroTextField.getText(),
-                ReferenciaTextField.getText(),
-                ComplementoTextField.getText(),
-                data,
-                vitimas,
-                comunicantes,
-                testemunhas,
-                autores,
-                evidencias,
-                delegados,
-                equipe,
-                SegredoDeJusticaCheckBox.isEnabled());
-        JOptionPane.showMessageDialog(new JFrame(), "Printing complete", "Teste", JOptionPane.PLAIN_MESSAGE);
+        try {
+            Calendar data = Calendar.getInstance();
+            data.set(Integer.parseInt(AnoTextField.getText()),
+                    Integer.parseInt(MesTextField.getText()),
+                    Integer.parseInt(DiaTextField.getText()),
+                    Integer.parseInt(HoraTextField.getText()),
+                    Integer.parseInt(MinutoTextField.getText()));
+
+            boolean retorno = new Controller().salvarOcorrencia(InfracaoTextField.getText(),
+                    CidadeTextField.getText(),
+                    EstadoTextField.getText(),
+                    LogradouroTextField.getText(),
+                    Integer.parseInt(NumeroTextField.getText()),
+                    CepTextField.getText(),
+                    BairroTextField.getText(),
+                    ReferenciaTextField.getText(),
+                    ComplementoTextField.getText(),
+                    data,
+                    vitimas,
+                    comunicantes,
+                    testemunhas,
+                    autores,
+                    evidencias,
+                    delegados,
+                    equipe,
+                    SegredoDeJusticaCheckBox.isEnabled());
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(new JFrame(), "Ocorrência salva com sucesso.", "Resultado", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Ocorrência não foi salva.", "Resultado", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JFrame(), "Erro ao salvar.\nErro: " + e.getMessage(), "Resultado", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_SalvarButtonActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

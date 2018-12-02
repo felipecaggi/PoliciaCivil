@@ -31,7 +31,6 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Ocorrencia.findByIdoco", query = "SELECT o FROM Ocorrencia o WHERE o.idOcorrencia = :idoco")
     , @NamedQuery(name = "Ocorrencia.findByDataocor", query = "SELECT o FROM Ocorrencia o WHERE o.dataocor = :dataocor")
     , @NamedQuery(name = "Ocorrencia.findByStatus", query = "SELECT o FROM Ocorrencia o WHERE o.status = :status")
-    , @NamedQuery(name = "Ocorrencia.findByHorario", query = "SELECT o FROM Ocorrencia o WHERE o.horario = :horario")
     , @NamedQuery(name = "Ocorrencia.findByInfracao", query = "SELECT o FROM Ocorrencia o WHERE o.infracao = :infracao")
     , @NamedQuery(name = "Ocorrencia.findBySegredojustica", query = "SELECT o FROM Ocorrencia o WHERE o.segredojustica = :segredojustica")
     , @NamedQuery(name = "Ocorrencia.findByIdpolicial", query = "SELECT o FROM Ocorrencia o WHERE o.idpolicial = :idpolicial")

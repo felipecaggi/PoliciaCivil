@@ -102,6 +102,7 @@ PRIMARY KEY(idOcorrencia, cpfCidadao)
 CREATE TABLE policiaschema.autor(
 idOcorrencia INT,
 cpfCidadao VARCHAR (11),
+conduzido boolean,
 PRIMARY KEY(idOcorrencia, cpfCidadao)	
 );
 

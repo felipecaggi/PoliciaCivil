@@ -18,26 +18,22 @@ import model.entity.Cidadao;
  */
 public class AdicionarComunicante extends javax.swing.JFrame {
 
-    private List<Cidadao> initComunicantes;
-    
+    private Cidadao initComunicantes;
+
     /**
      * Creates new form AdicionarComunicante
      */
     public AdicionarComunicante() {
-        
+
         initComponents();
-        
-        initComunicantes=new LinkedList<>();
-        initComunicantes.addAll(CadastrarOcorrencia.comunicantes);
-        
+
+        initComunicantes = CadastrarOcorrencia.comunicantes;
+
         Object[] row = new Object[2];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
-        for (int i = 0; i < initComunicantes.size(); i++) {
-            Cidadao temp = initComunicantes.get(i);
-            row[0] = temp.getNome();
-            row[1] = temp.getCpf();
-            model2.addRow(row);
-        }
+        row[0] = initComunicantes.getNome();
+        row[1] = initComunicantes.getCpf();
+        model2.addRow(row);
     }
 
     /**
@@ -220,25 +216,23 @@ public class AdicionarComunicante extends javax.swing.JFrame {
 
         TableModel model1 = TabelaResultados.getModel();
 
-        int[] index = TabelaResultados.getSelectedRows();
+        int index = TabelaResultados.getSelectedRow();
 
         Object[] row = new Object[2];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
-        for (int i = 0; i < index.length; i++) {
+        model2.removeRow(0);
+        row[0] = model1.getValueAt(index, 0);
+        row[1] = model1.getValueAt(index, 1);
+        model2.addRow(row);
 
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            model2.addRow(row);
+        String cpf = (String) model1.getValueAt(index, 1);
 
-            String cpf = (String) model1.getValueAt(index[i], 1);
-
-            List<Cidadao> collect = cidadaoList.stream().filter(x -> {
-                return x.getCpf().equals(cpf);
-            }).collect(toList());
-            CadastrarOcorrencia.comunicantes.addAll(collect);
-        }
+        Cidadao collect = cidadaoList.stream().filter(x -> {
+            return x.getCpf().equals(cpf);
+        }).findFirst().get();
+        CadastrarOcorrencia.comunicantes=collect;
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 
@@ -257,8 +251,7 @@ public class AdicionarComunicante extends javax.swing.JFrame {
      * @param evt
      */
     private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
-        CadastrarOcorrencia.comunicantes.clear();
-        CadastrarOcorrencia.comunicantes.addAll(initComunicantes);
+        CadastrarOcorrencia.comunicantes=initComunicantes;
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
 

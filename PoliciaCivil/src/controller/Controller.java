@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.entity.Cidadao;
+import model.entity.Delegado;
 import model.entity.Evidencia;
 import model.entity.Policial;
 import model.manager.OcorrenciaManager;
@@ -22,16 +23,29 @@ import view.CadastrarOcorrencia;
  */
 public class Controller {
 
-    
-    public static void salvarOcorrencia(String infracao, String cidade, String estado, String logradouro, Integer numero, String cep, String bairro, String referencia, String complemento, Calendar data, List<Cidadao> vitimas, List<Cidadao> comunicantes, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> delegados, List<Policial> equipe, boolean enabled) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
     private OcorrenciaManager ocorrenciaManager = new OcorrenciaManager();
 
-
+    public boolean salvarOcorrencia(String infracao,
+            String cidade,
+            String estado,
+            String logradouro,
+            Integer numero,
+            String cep,
+            String bairro,
+            String referencia,
+            String complemento,
+            Calendar data,
+            List<Cidadao> vitimas,
+            Cidadao comunicantes,
+            List<Cidadao> testemunhas,
+            List<Cidadao> autores,
+            List<Evidencia> evidencias,
+            Delegado delegados,
+            List<Policial> equipe,
+            boolean segredoJustica)
+    {
+        return ocorrenciaManager.salvarOcorrencia(infracao, cidade, estado, logradouro, numero, cep, bairro, referencia, complemento, data, vitimas, comunicantes, testemunhas, autores, evidencias, delegados, equipe, segredoJustica);
+    }
 
     public static void main(String[] args) {
         try {

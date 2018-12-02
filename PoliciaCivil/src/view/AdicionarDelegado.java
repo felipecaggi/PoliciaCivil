@@ -10,8 +10,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import model.entity.Policial;
-import model.manager.OcorrenciaManager;
+import model.entity.Delegado;
 
 /**
  *
@@ -19,7 +18,7 @@ import model.manager.OcorrenciaManager;
  */
 public class AdicionarDelegado extends javax.swing.JFrame {
 
-    private List<Policial> initPoliciais;
+    private Delegado initPoliciais;
     
     /**
      * Creates new form AdicionarDelegado
@@ -28,18 +27,14 @@ public class AdicionarDelegado extends javax.swing.JFrame {
         
         initComponents();
 
-        initPoliciais=new LinkedList<>();
-        initPoliciais.addAll(CadastrarOcorrencia.delegados);
+        initPoliciais = CadastrarOcorrencia.delegados;
         
         Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
-        for (int i = 0; i < initPoliciais.size(); i++) {
-            Policial temp = initPoliciais.get(i);
-            row[0] = temp.getIdPolicial();
-            row[1] = temp.getNome();
-            row[2] = temp.getCargo();
-            model2.addRow(row);
-        }
+        row[0] = initPoliciais.getIdPolicial();
+        row[1] = initPoliciais.getNome();
+        row[2] = initPoliciais.getCargo();
+        model2.addRow(row);
     }
 
     /**
@@ -224,26 +219,24 @@ public class AdicionarDelegado extends javax.swing.JFrame {
 
         TableModel model1 = TabelaResultados.getModel();
 
-        int[] index = TabelaResultados.getSelectedRows();
+        int index = TabelaResultados.getSelectedRow();
 
         Object[] row = new Object[3];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
-        for (int i = 0; i < index.length; i++) {
+        model2.removeRow(0);
+        row[0] = model1.getValueAt(index, 0);
+        row[1] = model1.getValueAt(index, 1);
+        row[2] = model1.getValueAt(index, 2);
+        model2.addRow(row);
 
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            row[2] = model1.getValueAt(index[i], 2);
-            model2.addRow(row);
+        Integer matricula = Integer.parseInt(model1.getValueAt(index, 0).toString());
 
-            Integer matricula = Integer.parseInt(model1.getValueAt(index[i], 0).toString());
-
-            List<Policial> collect = delegadoList.stream().filter(x -> {
-                return x.getIdPolicial().equals(matricula);
-            }).collect(toList());
-            CadastrarOcorrencia.delegados.addAll(collect);
-        }
+        Delegado collect = delegadoList.stream().filter(x -> {
+            return x.getIdPolicial().equals(matricula);
+        }).findFirst().get();
+        CadastrarOcorrencia.delegados = collect;
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 
@@ -262,8 +255,7 @@ public class AdicionarDelegado extends javax.swing.JFrame {
      * @param evt
      */
     private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
-        CadastrarOcorrencia.delegados.clear();
-        CadastrarOcorrencia.delegados.addAll(initPoliciais);
+        CadastrarOcorrencia.delegados = initPoliciais;
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
 

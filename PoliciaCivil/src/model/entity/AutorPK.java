@@ -23,6 +23,10 @@ public class AutorPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "cpfcidadao")
     private String cpfcidadao;
+    
+    @Basic(optional = false)
+    @Column(name = "conduzido")
+    private boolean conduzido;
 
     public AutorPK() {
     }
@@ -75,6 +79,14 @@ public class AutorPK implements Serializable {
     @Override
     public String toString() {
         return "view.AutorPK[ idocorrencia=" + idocorrencia + ", cpfcidadao=" + cpfcidadao + " ]";
+    }
+
+    public boolean isConduzido() {
+        return conduzido;
+    }
+
+    public void setConduzido(boolean conduzido) {
+        this.conduzido = conduzido;
     }
     
 }
