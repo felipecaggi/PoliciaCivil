@@ -24,6 +24,7 @@ import view.CadastrarOcorrencia;
 public class Controller {
 
     private OcorrenciaManager ocorrenciaManager = new OcorrenciaManager();
+    private Policial policialLogado = ocorrenciaManager.buscaPolicial(1);
 
     public boolean salvarOcorrencia(String infracao,
             String cidade,
@@ -47,7 +48,7 @@ public class Controller {
         return ocorrenciaManager.salvarOcorrencia(infracao, cidade, estado, logradouro, numero, cep, bairro, referencia, complemento, data, vitimas, comunicantes, testemunhas, autores, evidencias, delegados, equipe, segredoJustica);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

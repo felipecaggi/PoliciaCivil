@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import model.entity.Delegado;
 import model.entity.Policial;
 import model.entity.Evidencia;
+import model.manager.OcorrenciaManager;
 
 /**
  *
@@ -30,6 +31,8 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     public static List<Evidencia> evidencias = new LinkedList<Evidencia>();
     public static Delegado delegados = new Delegado();
     public static List<Policial> equipe = new LinkedList<Policial>();
+    private OcorrenciaManager ocorrenciaManager = new OcorrenciaManager();
+    private Policial policialLogado = ocorrenciaManager.buscaPolicial(1);
 
     /**
      * Creates new form CadastrarOcorrencia
@@ -441,6 +444,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_AdicionarEquipeButtonActionPerformed
 
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
+        JOptionPane.showMessageDialog(new JFrame(), policialLogado.getNome(), "Resultado", JOptionPane.PLAIN_MESSAGE);
         try {
             Calendar data = Calendar.getInstance();
             data.set(Integer.parseInt(AnoTextField.getText()),

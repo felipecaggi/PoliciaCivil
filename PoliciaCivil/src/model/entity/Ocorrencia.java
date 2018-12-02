@@ -8,13 +8,22 @@ package model.entity;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,68 +53,124 @@ public class Ocorrencia implements Serializable {
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "idOcorrencia")
     private Integer idOcorrencia;
-    
+
     @Basic(optional = false)
     @Column(name = "dataocor")
     @Temporal(TemporalType.DATE)
-    private Date dataocor;
-    
+    private Calendar dataocor;
+
     @Basic(optional = false)
     @Column(name = "status")
     private String status;
-    
+
     @Basic(optional = false)
     @Column(name = "infracao")
     private String infracao;
-    
+
     @Basic(optional = false)
     @Column(name = "segredojustica")
     private boolean segredojustica;
-    
+
     @Basic(optional = false)
     @Column(name = "idpolicial")
     private int idpolicial;
-    
-    @Basic(optional = false)
-    @Column(name = "idendereco")
-    private int idendereco;
-    
-    @Basic(optional = false)
-    @Column(name = "iddelegacia")
-    private int iddelegacia;
-    
-    @Basic(optional = false)
-    @Column(name = "iddelegado")
-    private int iddelegado;
-    
-    @Basic(optional = false)
-    @Column(name = "idcomunicante")
-    private int idcomunicante;
+
+    @ManyToOne
+    @JoinColumn(name = "idpolicial", referencedColumnName = "idpolicial")
+    private Policial policial;
+
+    @ManyToOne
+    @JoinColumn(name = "idendereco", referencedColumnName = "idendereco")
+    private Endereco endereco;
+
+    @ManyToOne
+    @JoinColumn(name = "iddelegacia", referencedColumnName = "iddelegacia")
+    private Delegacia delegacia;
+
+    @ManyToOne
+    @JoinColumn(name = "iddelegado", referencedColumnName = "iddelegado")
+    private Delegado delegado;
+
+    @ManyToOne
+    @JoinColumn(name = "cpf", referencedColumnName = "cpf")
+    private Cidadao comunicante;
+
+    @ManyToMany
+    @JoinTable(name = "vitima", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "cpfCidadao")})
+    private List<Cidadao> vitimas;
+
+    @ManyToMany
+    @JoinTable(name = "testemunha", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "cpfCidadao")})
+    private List<Cidadao> testemunhas;
+
+    @ManyToMany
+    @JoinTable(name = "autor", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "cpfCidadao")})
+    private List<Cidadao> autores;
+
+    @ManyToMany
+    @JoinTable(name = "evidencia_ocorrencia", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "idEvidencia")})
+    private List<Evidencia> evidencias;
+
+    @ManyToMany
+    @JoinTable(name = "envolvido", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "idPolicial")})
+    private List<Policial> equipe;
 
     public Ocorrencia() {
     }
 
-    public Ocorrencia(Integer idoco) {
-        this.idOcorrencia = idoco;
-    }
-
-    public Ocorrencia(Integer idoco, Date dataocor, String status, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
-        this.idOcorrencia = idoco;
+    public Ocorrencia(Calendar dataocor, String status, String infracao, boolean segredojustica, int idpolicial, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
         this.dataocor = dataocor;
         this.status = status;
         this.infracao = infracao;
         this.segredojustica = segredojustica;
         this.idpolicial = idpolicial;
-        this.idendereco = idendereco;
-        this.iddelegacia = iddelegacia;
-        this.iddelegado = iddelegado;
-        this.idcomunicante = idcomunicante;
+        this.policial = policial;
+        this.endereco = endereco;
+        this.delegacia = delegacia;
+        this.delegado = delegado;
+        this.comunicante = comunicante;
+        this.vitimas = vitimas;
+        this.testemunhas = testemunhas;
+        this.autores = autores;
+        this.evidencias = evidencias;
+        this.equipe = equipe;
     }
+
+    public Ocorrencia(Integer idOcorrencia, Calendar dataocor, String status, String infracao, boolean segredojustica, int idpolicial, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, List<Policial> equipe) {
+        this.idOcorrencia = idOcorrencia;
+        this.dataocor = dataocor;
+        this.status = status;
+        this.infracao = infracao;
+        this.segredojustica = segredojustica;
+        this.idpolicial = idpolicial;
+        this.policial = policial;
+        this.endereco = endereco;
+        this.delegacia = delegacia;
+        this.delegado = delegado;
+        this.comunicante = comunicante;
+        this.vitimas = vitimas;
+        this.testemunhas = testemunhas;
+        this.autores = autores;
+        this.evidencias = evidencias;
+        this.equipe = equipe;
+    }
+
 
     public Integer getIdOcorrencia() {
         return idOcorrencia;
@@ -117,12 +182,12 @@ public class Ocorrencia implements Serializable {
         changeSupport.firePropertyChange("idoco", oldIdoco, idOcorrencia);
     }
 
-    public Date getDataocor() {
+    public Calendar getDataocor() {
         return dataocor;
     }
 
-    public void setDataocor(Date dataocor) {
-        Date oldDataocor = this.dataocor;
+    public void setDataocor(Calendar dataocor) {
+        Calendar oldDataocor = this.dataocor;
         this.dataocor = dataocor;
         changeSupport.firePropertyChange("dataocor", oldDataocor, dataocor);
     }
@@ -167,44 +232,84 @@ public class Ocorrencia implements Serializable {
         changeSupport.firePropertyChange("idpolicial", oldIdpolicial, idpolicial);
     }
 
-    public int getIdendereco() {
-        return idendereco;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setIdendereco(int idendereco) {
-        int oldIdendereco = this.idendereco;
-        this.idendereco = idendereco;
-        changeSupport.firePropertyChange("idendereco", oldIdendereco, idendereco);
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public int getIddelegacia() {
-        return iddelegacia;
+    public Delegacia getDelegacia() {
+        return delegacia;
     }
 
-    public void setIddelegacia(int iddelegacia) {
-        int oldIddelegacia = this.iddelegacia;
-        this.iddelegacia = iddelegacia;
-        changeSupport.firePropertyChange("iddelegacia", oldIddelegacia, iddelegacia);
+    public void setDelegacia(Delegacia delegacia) {
+        this.delegacia = delegacia;
     }
 
-    public int getIddelegado() {
-        return iddelegado;
+    public Delegado getDelegado() {
+        return delegado;
     }
 
-    public void setIddelegado(int iddelegado) {
-        int oldIddelegado = this.iddelegado;
-        this.iddelegado = iddelegado;
-        changeSupport.firePropertyChange("iddelegado", oldIddelegado, iddelegado);
+    public void setDelegado(Delegado delegado) {
+        this.delegado = delegado;
     }
 
-    public int getIdcomunicante() {
-        return idcomunicante;
+    public Cidadao getComunicante() {
+        return comunicante;
     }
 
-    public void setIdcomunicante(int idcomunicante) {
-        int oldIdcomunicante = this.idcomunicante;
-        this.idcomunicante = idcomunicante;
-        changeSupport.firePropertyChange("idcomunicante", oldIdcomunicante, idcomunicante);
+    public void setComunicante(Cidadao comunicante) {
+        this.comunicante = comunicante;
+    }
+
+    public Policial getPolicial() {
+        return policial;
+    }
+
+    public void setPolicial(Policial policial) {
+        this.policial = policial;
+    }
+
+    public List<Cidadao> getVitimas() {
+        return vitimas;
+    }
+
+    public void setVitimas(List<Cidadao> vitimas) {
+        this.vitimas = vitimas;
+    }
+
+    public List<Cidadao> getTestemunhas() {
+        return testemunhas;
+    }
+
+    public void setTestemunhas(List<Cidadao> testemunhas) {
+        this.testemunhas = testemunhas;
+    }
+
+    public List<Cidadao> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Cidadao> autores) {
+        this.autores = autores;
+    }
+
+    public List<Evidencia> getEvidencias() {
+        return evidencias;
+    }
+
+    public void setEvidencias(List<Evidencia> evidencias) {
+        this.evidencias = evidencias;
+    }
+
+    public List<Policial> getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(List<Policial> equipe) {
+        this.equipe = equipe;
     }
 
     @Override
@@ -239,5 +344,5 @@ public class Ocorrencia implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

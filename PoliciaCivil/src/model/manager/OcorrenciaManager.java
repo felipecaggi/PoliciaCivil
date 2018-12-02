@@ -29,12 +29,6 @@ public class OcorrenciaManager {
         return 0;
     }
 
-    public void salvarOcorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
-        
-        dao.persist(new Ocorrencia(idoco, dataocor, status, infracao, segredojustica, idpolicial, idendereco, iddelegacia, iddelegado, idcomunicante));
-        
-    }
-
     public Delegado buscaDelegado(int idDelegado) {
         return null;
     }
@@ -47,7 +41,13 @@ public class OcorrenciaManager {
         return null;
     }
 
+    public Policial buscaPolicial(int idPolicial) {
+        return (Policial) dao.find(new Policial(), idPolicial);
+    }
+    
     public boolean salvarOcorrencia(String infracao, String cidade, String estado, String logradouro, Integer numero, String cep, String bairro, String referencia, String complemento, Calendar data, List<Cidadao> vitimas, Cidadao comunicantes, List<Cidadao> testemunhas, List<Cidadao> autores, List<Evidencia> evidencias, Delegado delegados, List<Policial> equipe, boolean segredoJustica) {
+
+        
         return false;
     }
 
