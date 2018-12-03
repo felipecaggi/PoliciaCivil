@@ -30,12 +30,13 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         initPoliciais=new LinkedList<>();
         initPoliciais.addAll(CadastrarOcorrencia.equipe);
         
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initPoliciais.size(); i++) {
             Policial temp = initPoliciais.get(i);
-            row[0] = temp.getNome();
-            row[1] = temp.getCargo();
+            row[0] = temp.getIdPolicial();
+            row[1] = temp.getNome();
+            row[2] = temp.getCargo();
             model2.addRow(row);
         }
     }
@@ -53,6 +54,8 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         policiaPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("policiaPU").createEntityManager();
         cidadaoQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT c FROM Cidadao c");
         cidadaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : cidadaoQuery.getResultList();
+        policialQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT p FROM Policial p");
+        policialList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : policialQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaResultados = new javax.swing.JTable();
         PesquisarTextField = new javax.swing.JTextField();
@@ -65,15 +68,19 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         AdicionarButton = new javax.swing.JButton();
         VoltarButton = new javax.swing.JButton();
         SalvarButton = new javax.swing.JButton();
+        RemoverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cidadaoList, TabelaResultados);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, policialList, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPolicial}"));
+        columnBinding.setColumnName("Matricula");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
-        columnBinding.setColumnName("CPF");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cargo}"));
+        columnBinding.setColumnName("Cargo");
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -102,7 +109,7 @@ public class AdicionarEquipe extends javax.swing.JFrame {
 
             },
             new String [] {
-                "null", "Título 2"
+                "Matricula", "Nome", "Cargo"
             }
         ));
         TableAdicionados.setColumnSelectionAllowed(true);
@@ -127,6 +134,13 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         SalvarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SalvarButtonActionPerformed(evt);
+            }
+        });
+
+        RemoverButton.setText("Remover Linhas Selecionadas");
+        RemoverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverButtonRemoverButtonActionPerformed(evt);
             }
         });
 
@@ -162,6 +176,10 @@ public class AdicionarEquipe extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SalvarButton)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(RemoverButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +199,9 @@ public class AdicionarEquipe extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(RemoverButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VoltarButton)
                     .addComponent(SalvarButton))
@@ -222,7 +242,7 @@ public class AdicionarEquipe extends javax.swing.JFrame {
 
         int[] index = TabelaResultados.getSelectedRows();
 
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
@@ -230,12 +250,13 @@ public class AdicionarEquipe extends javax.swing.JFrame {
 
             row[0] = model1.getValueAt(index[i], 0);
             row[1] = model1.getValueAt(index[i], 1);
+            row[2] = model1.getValueAt(index[i], 2);
             model2.addRow(row);
 
-            String cargo = (String) model1.getValueAt(index[i], 1);
+            Integer matricula = Integer.parseInt(model1.getValueAt(index[i], 0).toString());
 
-            List<Policial> collect = equipeList.stream().filter(x -> {
-                return x.getCargo().equals(cargo);
+            List<Policial> collect = policialList.stream().filter(x -> {
+                return x.getIdPolicial().equals(matricula);
             }).collect(toList());
             CadastrarOcorrencia.equipe.addAll(collect);
         }
@@ -261,6 +282,17 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         CadastrarOcorrencia.equipe.addAll(initPoliciais);
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
+
+    private void RemoverButtonRemoverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverButtonRemoverButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        int[] index = TableAdicionados.getSelectedRows();
+
+        for (int i = 0; i < index.length; i++) {
+            model2.removeRow(index[i]);
+
+            CadastrarOcorrencia.equipe.remove(index[i]);
+        }
+    }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,12 +331,13 @@ public class AdicionarEquipe extends javax.swing.JFrame {
             }
         });
     }
-private java.util.List<model.entity.Policial> equipeList;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdicionarButton;
     private javax.swing.JButton CadastrarComunicanteButton;
     private javax.swing.JButton PesquisarButton;
     private javax.swing.JTextField PesquisarTextField;
+    private javax.swing.JButton RemoverButton;
     private javax.swing.JButton SalvarButton;
     private javax.swing.JTable TabelaResultados;
     private javax.swing.JTable TableAdicionados;
@@ -316,6 +349,8 @@ private java.util.List<model.entity.Policial> equipeList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.persistence.EntityManager policiaPUEntityManager;
+    private java.util.List<model.entity.Policial> policialList;
+    private javax.persistence.Query policialQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

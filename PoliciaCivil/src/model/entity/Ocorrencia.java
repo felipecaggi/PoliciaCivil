@@ -8,13 +8,22 @@ package model.entity;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,108 +37,142 @@ import javax.persistence.Transient;
 @Table(name = "ocorrencia", catalog = "policia", schema = "policiaschema")
 @NamedQueries({
     @NamedQuery(name = "Ocorrencia.findAll", query = "SELECT o FROM Ocorrencia o")
-    , @NamedQuery(name = "Ocorrencia.findByIdoco", query = "SELECT o FROM Ocorrencia o WHERE o.idoco = :idoco")
+    , @NamedQuery(name = "Ocorrencia.findByIdoco", query = "SELECT o FROM Ocorrencia o WHERE o.idOcorrencia = :idoco")
     , @NamedQuery(name = "Ocorrencia.findByDataocor", query = "SELECT o FROM Ocorrencia o WHERE o.dataocor = :dataocor")
     , @NamedQuery(name = "Ocorrencia.findByStatus", query = "SELECT o FROM Ocorrencia o WHERE o.status = :status")
-    , @NamedQuery(name = "Ocorrencia.findByHorario", query = "SELECT o FROM Ocorrencia o WHERE o.horario = :horario")
     , @NamedQuery(name = "Ocorrencia.findByInfracao", query = "SELECT o FROM Ocorrencia o WHERE o.infracao = :infracao")
-    , @NamedQuery(name = "Ocorrencia.findBySegredojustica", query = "SELECT o FROM Ocorrencia o WHERE o.segredojustica = :segredojustica")
-    , @NamedQuery(name = "Ocorrencia.findByIdpolicial", query = "SELECT o FROM Ocorrencia o WHERE o.idpolicial = :idpolicial")
-    , @NamedQuery(name = "Ocorrencia.findByIdendereco", query = "SELECT o FROM Ocorrencia o WHERE o.idendereco = :idendereco")
-    , @NamedQuery(name = "Ocorrencia.findByIddelegacia", query = "SELECT o FROM Ocorrencia o WHERE o.iddelegacia = :iddelegacia")
-    , @NamedQuery(name = "Ocorrencia.findByIddelegado", query = "SELECT o FROM Ocorrencia o WHERE o.iddelegado = :iddelegado")
-    , @NamedQuery(name = "Ocorrencia.findByIdcomunicante", query = "SELECT o FROM Ocorrencia o WHERE o.idcomunicante = :idcomunicante")})
+    , @NamedQuery(name = "Ocorrencia.findBySegredojustica", query = "SELECT o FROM Ocorrencia o WHERE o.segredojustica = :segredojustica")})
 public class Ocorrencia implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "idoco")
-    private Integer idoco;
-    
+    @Column(name = "idOcorrencia")
+    private Integer idOcorrencia;
+
     @Basic(optional = false)
     @Column(name = "dataocor")
-    @Temporal(TemporalType.DATE)
-    private Date dataocor;
-    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar dataocor;
+
     @Basic(optional = false)
     @Column(name = "status")
     private String status;
-    
-    @Basic(optional = false)
-    @Column(name = "horario")
-    @Temporal(TemporalType.DATE)
-    private Date horario;
-    
+
     @Basic(optional = false)
     @Column(name = "infracao")
     private String infracao;
-    
+
     @Basic(optional = false)
     @Column(name = "segredojustica")
     private boolean segredojustica;
-    
-    @Basic(optional = false)
-    @Column(name = "idpolicial")
-    private int idpolicial;
-    
-    @Basic(optional = false)
-    @Column(name = "idendereco")
-    private int idendereco;
-    
-    @Basic(optional = false)
-    @Column(name = "iddelegacia")
-    private int iddelegacia;
-    
-    @Basic(optional = false)
-    @Column(name = "iddelegado")
-    private int iddelegado;
-    
-    @Basic(optional = false)
-    @Column(name = "idcomunicante")
-    private int idcomunicante;
+
+    @ManyToOne
+    @JoinColumn(name = "idPolicial", referencedColumnName = "idPolicial")
+    private Policial policial;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idendereco", referencedColumnName = "idendereco")
+    private Endereco endereco;
+
+    @ManyToOne
+    @JoinColumn(name = "iddelegacia", referencedColumnName = "iddelegacia")
+    private Delegacia delegacia;
+
+    @ManyToOne
+    @JoinColumn(name = "idDelegado", referencedColumnName = "idPolicial")
+    private Delegado delegado;
+
+    @ManyToOne
+    @JoinColumn(name = "idComunicante", referencedColumnName = "cpf")
+    private Cidadao comunicante;
+
+    @ManyToMany
+    @JoinTable(name = "policia.policiaschema.vitima", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "cpfCidadao", referencedColumnName = "cpf")})
+    private List<Cidadao> vitimas;
+
+    @ManyToMany
+    @JoinTable(name = "policia.policiaschema.testemunha", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "cpfCidadao", referencedColumnName = "cpf")})
+    private List<Cidadao> testemunhas;
+
+    @OneToMany(mappedBy = "ocorrencia", cascade = CascadeType.ALL)
+    private List<Autor> autores;
+
+    @ManyToMany
+    @JoinTable(name = "policia.policiaschema.evidencia_ocorrencia", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "idEvidencia")})
+    private List<Evidencia> evidencias;
+
+    @ManyToMany
+    @JoinTable(name = "policia.policiaschema.envolvido", joinColumns = {
+        @JoinColumn(name = "idOcorrencia")}, inverseJoinColumns = {
+        @JoinColumn(name = "idPolicial")})
+    private List<Policial> equipe;
 
     public Ocorrencia() {
     }
 
-    public Ocorrencia(Integer idoco) {
-        this.idoco = idoco;
-    }
-
-    public Ocorrencia(Integer idoco, Date dataocor, String status, Date horario, String infracao, boolean segredojustica, int idpolicial, int idendereco, int iddelegacia, int iddelegado, int idcomunicante) {
-        this.idoco = idoco;
+    public Ocorrencia(Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Autor> autores, List<Evidencia> evidencias, List<Policial> equipe) {
         this.dataocor = dataocor;
         this.status = status;
-        this.horario = horario;
         this.infracao = infracao;
         this.segredojustica = segredojustica;
-        this.idpolicial = idpolicial;
-        this.idendereco = idendereco;
-        this.iddelegacia = iddelegacia;
-        this.iddelegado = iddelegado;
-        this.idcomunicante = idcomunicante;
+        this.policial = policial;
+        this.endereco = endereco;
+        this.delegacia = delegacia;
+        this.delegado = delegado;
+        this.comunicante = comunicante;
+        this.vitimas = vitimas;
+        this.testemunhas = testemunhas;
+        this.autores = autores;
+        this.evidencias = evidencias;
+        this.equipe = equipe;
     }
 
-    public Integer getIdoco() {
-        return idoco;
+    public Ocorrencia(Integer idOcorrencia, Calendar dataocor, String status, String infracao, boolean segredojustica, Policial policial, Endereco endereco, Delegacia delegacia, Delegado delegado, Cidadao comunicante, List<Cidadao> vitimas, List<Cidadao> testemunhas, List<Autor> autores, List<Evidencia> evidencias, List<Policial> equipe) {
+        this.idOcorrencia = idOcorrencia;
+        this.dataocor = dataocor;
+        this.status = status;
+        this.infracao = infracao;
+        this.segredojustica = segredojustica;
+        this.policial = policial;
+        this.endereco = endereco;
+        this.delegacia = delegacia;
+        this.delegado = delegado;
+        this.comunicante = comunicante;
+        this.vitimas = vitimas;
+        this.testemunhas = testemunhas;
+        this.autores = autores;
+        this.evidencias = evidencias;
+        this.equipe = equipe;
     }
 
-    public void setIdoco(Integer idoco) {
-        Integer oldIdoco = this.idoco;
-        this.idoco = idoco;
-        changeSupport.firePropertyChange("idoco", oldIdoco, idoco);
+    public Integer getIdOcorrencia() {
+        return idOcorrencia;
     }
 
-    public Date getDataocor() {
+    public void setIdOcorrencia(Integer idOcorrencia) {
+        Integer oldIdoco = this.idOcorrencia;
+        this.idOcorrencia = idOcorrencia;
+        changeSupport.firePropertyChange("idoco", oldIdoco, idOcorrencia);
+    }
+
+    public Calendar getDataocor() {
         return dataocor;
     }
 
-    public void setDataocor(Date dataocor) {
-        Date oldDataocor = this.dataocor;
+    public void setDataocor(Calendar dataocor) {
+        Calendar oldDataocor = this.dataocor;
         this.dataocor = dataocor;
         changeSupport.firePropertyChange("dataocor", oldDataocor, dataocor);
     }
@@ -142,16 +185,6 @@ public class Ocorrencia implements Serializable {
         String oldStatus = this.status;
         this.status = status;
         changeSupport.firePropertyChange("status", oldStatus, status);
-    }
-
-    public Date getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Date horario) {
-        Date oldHorario = this.horario;
-        this.horario = horario;
-        changeSupport.firePropertyChange("horario", oldHorario, horario);
     }
 
     public String getInfracao() {
@@ -174,60 +207,90 @@ public class Ocorrencia implements Serializable {
         changeSupport.firePropertyChange("segredojustica", oldSegredojustica, segredojustica);
     }
 
-    public int getIdpolicial() {
-        return idpolicial;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setIdpolicial(int idpolicial) {
-        int oldIdpolicial = this.idpolicial;
-        this.idpolicial = idpolicial;
-        changeSupport.firePropertyChange("idpolicial", oldIdpolicial, idpolicial);
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public int getIdendereco() {
-        return idendereco;
+    public Delegacia getDelegacia() {
+        return delegacia;
     }
 
-    public void setIdendereco(int idendereco) {
-        int oldIdendereco = this.idendereco;
-        this.idendereco = idendereco;
-        changeSupport.firePropertyChange("idendereco", oldIdendereco, idendereco);
+    public void setDelegacia(Delegacia delegacia) {
+        this.delegacia = delegacia;
     }
 
-    public int getIddelegacia() {
-        return iddelegacia;
+    public Delegado getDelegado() {
+        return delegado;
     }
 
-    public void setIddelegacia(int iddelegacia) {
-        int oldIddelegacia = this.iddelegacia;
-        this.iddelegacia = iddelegacia;
-        changeSupport.firePropertyChange("iddelegacia", oldIddelegacia, iddelegacia);
+    public void setDelegado(Delegado delegado) {
+        this.delegado = delegado;
     }
 
-    public int getIddelegado() {
-        return iddelegado;
+    public Cidadao getComunicante() {
+        return comunicante;
     }
 
-    public void setIddelegado(int iddelegado) {
-        int oldIddelegado = this.iddelegado;
-        this.iddelegado = iddelegado;
-        changeSupport.firePropertyChange("iddelegado", oldIddelegado, iddelegado);
+    public void setComunicante(Cidadao comunicante) {
+        this.comunicante = comunicante;
     }
 
-    public int getIdcomunicante() {
-        return idcomunicante;
+    public Policial getPolicial() {
+        return policial;
     }
 
-    public void setIdcomunicante(int idcomunicante) {
-        int oldIdcomunicante = this.idcomunicante;
-        this.idcomunicante = idcomunicante;
-        changeSupport.firePropertyChange("idcomunicante", oldIdcomunicante, idcomunicante);
+    public void setPolicial(Policial policial) {
+        this.policial = policial;
+    }
+
+    public List<Cidadao> getVitimas() {
+        return vitimas;
+    }
+
+    public void setVitimas(List<Cidadao> vitimas) {
+        this.vitimas = vitimas;
+    }
+
+    public List<Cidadao> getTestemunhas() {
+        return testemunhas;
+    }
+
+    public void setTestemunhas(List<Cidadao> testemunhas) {
+        this.testemunhas = testemunhas;
+    }
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
+    public List<Evidencia> getEvidencias() {
+        return evidencias;
+    }
+
+    public void setEvidencias(List<Evidencia> evidencias) {
+        this.evidencias = evidencias;
+    }
+
+    public List<Policial> getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(List<Policial> equipe) {
+        this.equipe = equipe;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idoco != null ? idoco.hashCode() : 0);
+        hash += (idOcorrencia != null ? idOcorrencia.hashCode() : 0);
         return hash;
     }
 
@@ -238,7 +301,7 @@ public class Ocorrencia implements Serializable {
             return false;
         }
         Ocorrencia other = (Ocorrencia) object;
-        if ((this.idoco == null && other.idoco != null) || (this.idoco != null && !this.idoco.equals(other.idoco))) {
+        if ((this.idOcorrencia == null && other.idOcorrencia != null) || (this.idOcorrencia != null && !this.idOcorrencia.equals(other.idOcorrencia))) {
             return false;
         }
         return true;
@@ -246,7 +309,7 @@ public class Ocorrencia implements Serializable {
 
     @Override
     public String toString() {
-        return "view.Ocorrencia[ idoco=" + idoco + " ]";
+        return "view.Ocorrencia[ idoco=" + idOcorrencia + " ]";
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -256,5 +319,5 @@ public class Ocorrencia implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

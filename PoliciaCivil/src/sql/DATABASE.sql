@@ -26,15 +26,15 @@ DROP TABLE IF EXISTS policiaschema.celular CASCADE;
 DROP TABLE IF EXISTS policiaschema.evidencia_ocorrencia CASCADE;
 
 CREATE TABLE policiaschema.policial(
-idPol INT PRIMARY KEY,
+idPolicial INT PRIMARY KEY,
 nome VARCHAR(80) NOT NULL,
-loguin VARCHAR(20) NOT NULL,
+login VARCHAR(20) NOT NULL,
 senha VARCHAR(20) NOT NULL,
 cargo VARCHAR(80) NOT NULL
 );
 
 CREATE TABLE policiaschema.endereco(
-idEnd INT PRIMARY KEY,
+idEndereco INT PRIMARY KEY,
 cep VARCHAR (8) NOT NULL,
 logradouro VARCHAR (80) NOT NULL,
 numero INTEGER NOT NULL, 
@@ -45,21 +45,20 @@ cidade VARCHAR (80) NOT NULL
 );
 
 CREATE TABLE policiaschema.delegacia(
-idDel INT PRIMARY KEY,
+idDelegacia INT PRIMARY KEY,
 nome VARCHAR (50) NOT NULL,
 sigla VARCHAR (5) NOT NULL
 );
 
 CREATE TABLE policiaschema.delegado(
-idPolDelegado INT PRIMARY KEY,
+idPolicial INT PRIMARY KEY,
 idDelegacia INT
 );
 
 CREATE TABLE policiaschema.ocorrencia(
-idOco INT PRIMARY KEY,
-dataOcor date NOT NULL,
+idOcorrencia INT PRIMARY KEY,
+dataOcor TIMESTAMP NOT NULL,
 status VARCHAR (50) NOT NULL,
-horario date NOT NULL,
 infracao VARCHAR (50) NOT NULL,
 segredoJustica BOOLEAN NOT NULL,
 idPolicial INT NOT NULL,
@@ -102,8 +101,9 @@ PRIMARY KEY(idOcorrencia, cpfCidadao)
 
 CREATE TABLE policiaschema.autor(
 idOcorrencia INT,
-cpfCidadao VARCHAR (11),
-PRIMARY KEY(idOcorrencia, cpfCidadao)	
+cpf VARCHAR (11),
+conduzido BOOLEAN,
+PRIMARY KEY(idOcorrencia, cpf)	
 );
 
 CREATE TABLE policiaschema.envolvido(
@@ -120,7 +120,7 @@ cpfCidadao VARCHAR (11) NOT NULL
 );
 
 CREATE TABLE policiaschema.evidencia(
-idEvi INT PRIMARY KEY,
+idEvidencia INT PRIMARY KEY,
 providencia VARCHAR (50) NOT NULL,
 tipo VARCHAR (50) NOT NULL
 );
@@ -184,25 +184,25 @@ PRIMARY KEY(idOcorrencia, idEvidencia)
 );
 
 ALTER TABLE ONLY policiaschema.delegado 
-	ADD CONSTRAINT delegadoPolicial_fkey FOREIGN KEY (idPolDelegado) REFERENCES policiaschema.policial(idPol);
+	ADD CONSTRAINT delegadoPolicial_fkey FOREIGN KEY (idPolicial) REFERENCES policiaschema.policial(idPolicial);
 
 ALTER TABLE ONLY policiaschema.delegado 
-	ADD CONSTRAINT delegadoDelegacia_fkey FOREIGN KEY (idDelegacia) REFERENCES policiaschema.delegacia(idDel);
+	ADD CONSTRAINT delegadoDelegacia_fkey FOREIGN KEY (idDelegacia) REFERENCES policiaschema.delegacia(idDelegacia);
 	
 ALTER TABLE ONLY policiaschema.ocorrencia 
-	ADD CONSTRAINT ocorrenciaPolicial_fkey FOREIGN KEY (idPolicial) REFERENCES policiaschema.policial(idPol);
+	ADD CONSTRAINT ocorrenciaPolicial_fkey FOREIGN KEY (idPolicial) REFERENCES policiaschema.policial(idPolicial);
 
 ALTER TABLE ONLY policiaschema.ocorrencia 
 	ADD CONSTRAINT ocorrenciaCidadao_fkey FOREIGN KEY (idComunicante) REFERENCES policiaschema.cidadao(cpf);
 
 ALTER TABLE ONLY policiaschema.ocorrencia 
-	ADD CONSTRAINT ocorrenciaEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEnd);
+	ADD CONSTRAINT ocorrenciaEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEndereco);
 
 ALTER TABLE ONLY policiaschema.ocorrencia 
-	ADD CONSTRAINT ocorrenciaDelegacia_fkey FOREIGN KEY (idDelegacia) REFERENCES policiaschema.delegacia(idDel);
+	ADD CONSTRAINT ocorrenciaDelegacia_fkey FOREIGN KEY (idDelegacia) REFERENCES policiaschema.delegacia(idDelegacia);
 	
 ALTER TABLE ONLY policiaschema.ocorrencia 
-	ADD CONSTRAINT ocorrenciaDelegado_fkey FOREIGN KEY (idDelegado) REFERENCES policiaschema.delegado(idPolDelegado);
+	ADD CONSTRAINT ocorrenciaDelegado_fkey FOREIGN KEY (idDelegado) REFERENCES policiaschema.delegado(idPolicial);
 	
 ALTER TABLE ONLY policiaschema.possuiPais 
 	ADD CONSTRAINT possuipaisFilho_fkey FOREIGN KEY (cpf_filho) REFERENCES policiaschema.cidadao(cpf);
@@ -211,56 +211,56 @@ ALTER TABLE ONLY policiaschema.possuiPais
 	ADD CONSTRAINT possuipaisPai_fkey FOREIGN KEY (cpf_pai) REFERENCES policiaschema.cidadao(cpf);
 	
 ALTER TABLE ONLY policiaschema.testemunha
-	ADD CONSTRAINT testemunhaOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+	ADD CONSTRAINT testemunhaOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOcorrencia);
 	
 ALTER TABLE ONLY policiaschema.testemunha
 	ADD CONSTRAINT testemunhaCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
 	
 ALTER TABLE ONLY policiaschema.vitima
-	ADD CONSTRAINT vitimaOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+	ADD CONSTRAINT vitimaOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOcorrencia);
 	
 ALTER TABLE ONLY policiaschema.vitima
 	ADD CONSTRAINT vitimaCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
 	
 ALTER TABLE ONLY policiaschema.autor
-	ADD CONSTRAINT autorOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+	ADD CONSTRAINT autorOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOcorrencia);
 
 ALTER TABLE ONLY policiaschema.autor
-	ADD CONSTRAINT autorCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
+	ADD CONSTRAINT autorCidadao_fkey FOREIGN KEY (cpf) REFERENCES policiaschema.cidadao(cpf);
 	
 
 ALTER TABLE ONLY policiaschema.cidadao
-	ADD CONSTRAINT cidadaoEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEnd);
+	ADD CONSTRAINT cidadaoEndereco_fkey FOREIGN KEY (idEndereco) REFERENCES policiaschema.endereco(idEndereco);
 	
 ALTER TABLE ONLY policiaschema.envolvido
-	ADD CONSTRAINT envolvidoOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+	ADD CONSTRAINT envolvidoOcorrencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOcorrencia);
 	
 ALTER TABLE ONLY policiaschema.envolvido
-	ADD CONSTRAINT envolvidoPolicial_fkey FOREIGN KEY (idPolicial) REFERENCES policiaschema.policial(idPol);
+	ADD CONSTRAINT envolvidoPolicial_fkey FOREIGN KEY (idPolicial) REFERENCES policiaschema.policial(idPolicial);
 
 ALTER TABLE ONLY policiaschema.mandado
-	ADD CONSTRAINT mandadoDelegado_fkey FOREIGN KEY (idDelegado) REFERENCES policiaschema.delegado(idPolDelegado);
+	ADD CONSTRAINT mandadoDelegado_fkey FOREIGN KEY (idDelegado) REFERENCES policiaschema.delegado(idPolicial);
 	
 ALTER TABLE ONLY policiaschema.mandado
 	ADD CONSTRAINT mandadoCidadao_fkey FOREIGN KEY (cpfCidadao) REFERENCES policiaschema.cidadao(cpf);
 	
 ALTER TABLE ONLY policiaschema.arma
-	ADD CONSTRAINT armaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
+	ADD CONSTRAINT armaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvidencia);
 
 ALTER TABLE ONLY policiaschema.veiculo
-	ADD CONSTRAINT veiculoEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
+	ADD CONSTRAINT veiculoEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvidencia);
 	
 ALTER TABLE ONLY policiaschema.objeto
-	ADD CONSTRAINT objetoEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
+	ADD CONSTRAINT objetoEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvidencia);
 	
 ALTER TABLE ONLY policiaschema.substancia
-	ADD CONSTRAINT substanciaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
+	ADD CONSTRAINT substanciaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvidencia);
 	
 ALTER TABLE ONLY policiaschema.celular
-	ADD CONSTRAINT celularEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
+	ADD CONSTRAINT celularEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvidencia);
 
 ALTER TABLE ONLY policiaschema.evidencia_ocorrencia
-	ADD CONSTRAINT OcorrenciaEvidencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOco);
+	ADD CONSTRAINT OcorrenciaEvidencia_fkey FOREIGN KEY (idOcorrencia) REFERENCES policiaschema.ocorrencia(idOcorrencia);
 	
 ALTER TABLE ONLY policiaschema.evidencia_ocorrencia
-	ADD CONSTRAINT evidencia_ocorrenciaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvi);
+	ADD CONSTRAINT evidencia_ocorrenciaEvidencia_fkey FOREIGN KEY (idEvidencia) REFERENCES policiaschema.evidencia(idEvidencia);

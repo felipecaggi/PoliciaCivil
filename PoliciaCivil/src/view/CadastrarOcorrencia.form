@@ -71,21 +71,21 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="DiaTextField" min="-2" pref="30" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Barra1Label" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DataLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="MesTextField" min="-2" pref="30" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Barra2Label" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DataLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="AnoTextField" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="AnoTextField" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                                       <Component id="HoraLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="HoraTextField" min="-2" pref="30" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="DoisPontosLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="MinutosTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="HoraLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      <Component id="MinutoTextField" min="-2" pref="30" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -124,7 +124,7 @@
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="AdicionarEquipeButton" min="-2" pref="136" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="SegredoDeJustiçaRadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="SegredoDeJusticaCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -190,14 +190,14 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="DataLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="DiaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Barra1Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="MesTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Barra2Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="AnoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="HoraLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="HoraTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="DoisPontosLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="MinutosTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AnoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="MesTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DataLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DataLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="MinutoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="HoraLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -225,7 +225,7 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="AdicionarAutorButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SegredoDeJustiçaRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SegredoDeJusticaCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="107" max="32767" attributes="0"/>
@@ -242,9 +242,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="InfracaoTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InfracaoTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="LocalDoCrimeLabel">
       <Properties>
@@ -264,9 +261,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="EstadoTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EstadoTextFieldActionPerformed"/>
-      </Events>
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[2, 2]"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LogradouroLabel">
       <Properties>
@@ -274,9 +273,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="LogradouroTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogradouroTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="NumeroLabel">
       <Properties>
@@ -284,9 +280,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="NumeroTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NumeroTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="CepLabel">
       <Properties>
@@ -301,9 +294,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="BairroTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BairroTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="ReferenciaLabel">
       <Properties>
@@ -311,9 +301,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="ReferenciaTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReferenciaTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="ComplementoLabel">
       <Properties>
@@ -328,26 +315,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="DiaTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DiaTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Barra1Label">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="/"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="MesTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="Barra2Label">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="/"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="AnoTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnoTextFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="HoraLabel">
       <Properties>
@@ -355,16 +322,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="HoraTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HoraTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="DoisPontosLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=":"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="MinutosTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="VitimaLabel">
       <Properties>
@@ -457,17 +414,38 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarEquipeButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="SegredoDeJusti&#xe7;aRadioButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Segredo de justi&#xe7;a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SegredoDeJusti&#xe7;aRadioButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="SalvarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SalvarButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="SegredoDeJusticaCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Segredo de justi&#xe7;a"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="AnoTextField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="MesTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="DataLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="DataLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="MinutoTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="HoraLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=":"/>
       </Properties>
     </Component>
   </SubComponents>

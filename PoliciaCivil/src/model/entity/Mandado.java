@@ -139,5 +139,5 @@ public class Mandado implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

@@ -9,7 +9,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,15 +26,13 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Arma.findByCalibre", query = "SELECT a FROM Arma a WHERE a.armaPK.calibre = :calibre")
     , @NamedQuery(name = "Arma.findByNumserie", query = "SELECT a FROM Arma a WHERE a.armaPK.numserie = :numserie")
     , @NamedQuery(name = "Arma.findByFabricante", query = "SELECT a FROM Arma a WHERE a.fabricante = :fabricante")
-    , @NamedQuery(name = "Arma.findByModelo", query = "SELECT a FROM Arma a WHERE a.modelo = :modelo")
-    , @NamedQuery(name = "Arma.findByIdevidencia", query = "SELECT a FROM Arma a WHERE a.armaPK.idevidencia = :idevidencia")})
-public class Arma implements Serializable {
+    , @NamedQuery(name = "Arma.findByModelo", query = "SELECT a FROM Arma a WHERE a.modelo = :modelo")})
+public class Arma extends Evidencia implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
     protected ArmaPK armaPK;
     @Column(name = "fabricante")
     private String fabricante;
@@ -49,8 +46,8 @@ public class Arma implements Serializable {
         this.armaPK = armaPK;
     }
 
-    public Arma(String calibre, String numserie, int idevidencia) {
-        this.armaPK = new ArmaPK(calibre, numserie, idevidencia);
+    public Arma(String calibre, String numserie) {
+        this.armaPK = new ArmaPK(calibre, numserie);
     }
 
     public ArmaPK getArmaPK() {
@@ -113,5 +110,5 @@ public class Arma implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

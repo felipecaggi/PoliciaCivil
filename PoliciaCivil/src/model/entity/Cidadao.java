@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -38,6 +40,7 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Cidadao.findByStatus", query = "SELECT c FROM Cidadao c WHERE c.status = :status")
     , @NamedQuery(name = "Cidadao.findByAlcunha", query = "SELECT c FROM Cidadao c WHERE c.alcunha = :alcunha")
     , @NamedQuery(name = "Cidadao.findByIdendereco", query = "SELECT c FROM Cidadao c WHERE c.idendereco = :idendereco")})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Cidadao implements Serializable {
 
     @Transient
@@ -225,5 +228,5 @@ public class Cidadao implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

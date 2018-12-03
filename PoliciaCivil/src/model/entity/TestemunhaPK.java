@@ -76,5 +76,5 @@ public class TestemunhaPK implements Serializable {
     public String toString() {
         return "view.TestemunhaPK[ idocorrencia=" + idocorrencia + ", cpfcidadao=" + cpfcidadao + " ]";
     }
-    
+
 }

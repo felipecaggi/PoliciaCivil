@@ -10,7 +10,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import model.entity.Policial;
+import model.entity.Delegado;
 
 /**
  *
@@ -18,26 +18,23 @@ import model.entity.Policial;
  */
 public class AdicionarDelegado extends javax.swing.JFrame {
 
-    private List<Policial> initPoliciais;
+    private Delegado initPoliciais;
     
     /**
-     * Creates new form AdicionarComunicante
+     * Creates new form AdicionarDelegado
      */
     public AdicionarDelegado() {
         
         initComponents();
+
+        initPoliciais = CadastrarOcorrencia.delegados;
         
-        initPoliciais=new LinkedList<>();
-        initPoliciais.addAll(CadastrarOcorrencia.delegados);
-        
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
-        for (int i = 0; i < initPoliciais.size(); i++) {
-            Policial temp = initPoliciais.get(i);
-            row[0] = temp.getNome();
-            row[1] = temp.getCargo();
-            model2.addRow(row);
-        }
+        row[0] = initPoliciais.getIdPolicial();
+        row[1] = initPoliciais.getNome();
+        row[2] = initPoliciais.getCargo();
+        model2.addRow(row);
     }
 
     /**
@@ -51,13 +48,13 @@ public class AdicionarDelegado extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         policiaPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("policiaPU").createEntityManager();
-        cidadaoQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT c FROM Cidadao c");
-        cidadaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : cidadaoQuery.getResultList();
+        delegadoQuery = java.beans.Beans.isDesignTime() ? null : policiaPUEntityManager.createQuery("SELECT d FROM Delegado d");
+        delegadoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : delegadoQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaResultados = new javax.swing.JTable();
         PesquisarTextField = new javax.swing.JTextField();
         PesquisarButton = new javax.swing.JButton();
-        CadastrarComunicanteButton = new javax.swing.JButton();
+        CadastrarDelegadoButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -65,15 +62,19 @@ public class AdicionarDelegado extends javax.swing.JFrame {
         AdicionarButton = new javax.swing.JButton();
         VoltarButton = new javax.swing.JButton();
         SalvarButton = new javax.swing.JButton();
+        RemoverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cidadaoList, TabelaResultados);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, delegadoList, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPolicial}"));
+        columnBinding.setColumnName("Matricula");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cargo}"));
-        columnBinding.setColumnName("Cargo");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${delegacia.nome}"));
+        columnBinding.setColumnName("Delegacia");
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
@@ -85,23 +86,23 @@ public class AdicionarDelegado extends javax.swing.JFrame {
             }
         });
 
-        CadastrarComunicanteButton.setText("Cadastrar Comunicante");
-        CadastrarComunicanteButton.addActionListener(new java.awt.event.ActionListener() {
+        CadastrarDelegadoButton.setText("Cadastrar Delegado");
+        CadastrarDelegadoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarComunicanteButtonActionPerformed(evt);
+                CadastrarDelegadoButtonActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Resultados da pesquisa");
 
-        jLabel2.setText("Comunicantes adicionados");
+        jLabel2.setText("Delegados adicionados");
 
         TableAdicionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "null", "Título 2"
+                "Matricula", "Nome", "Delegacia"
             }
         ));
         TableAdicionados.setColumnSelectionAllowed(true);
@@ -129,6 +130,13 @@ public class AdicionarDelegado extends javax.swing.JFrame {
             }
         });
 
+        RemoverButton.setText("Remover Linhas Selecionadas");
+        RemoverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverButtonRemoverButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,7 +153,7 @@ public class AdicionarDelegado extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(PesquisarButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                                .addComponent(CadastrarComunicanteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(CadastrarDelegadoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -161,6 +169,10 @@ public class AdicionarDelegado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SalvarButton)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(RemoverButton)
+                .addGap(288, 288, 288))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +181,7 @@ public class AdicionarDelegado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PesquisarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PesquisarButton)
-                    .addComponent(CadastrarComunicanteButton))
+                    .addComponent(CadastrarDelegadoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -180,7 +192,9 @@ public class AdicionarDelegado extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(RemoverButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VoltarButton)
                     .addComponent(SalvarButton))
@@ -206,9 +220,9 @@ public class AdicionarDelegado extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void CadastrarComunicanteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarComunicanteButtonActionPerformed
+    private void CadastrarDelegadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarDelegadoButtonActionPerformed
 
-    }//GEN-LAST:event_CadastrarComunicanteButtonActionPerformed
+    }//GEN-LAST:event_CadastrarDelegadoButtonActionPerformed
 
     /**
      * Transfere a pessoa resultado da pesquisa para a tabela de vítimas
@@ -219,25 +233,24 @@ public class AdicionarDelegado extends javax.swing.JFrame {
 
         TableModel model1 = TabelaResultados.getModel();
 
-        int[] index = TabelaResultados.getSelectedRows();
+        int index = TabelaResultados.getSelectedRow();
 
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
-        for (int i = 0; i < index.length; i++) {
+        model2.removeRow(0);
+        row[0] = model1.getValueAt(index, 0);
+        row[1] = model1.getValueAt(index, 1);
+        row[2] = model1.getValueAt(index, 2);
+        model2.addRow(row);
 
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            model2.addRow(row);
+        Integer matricula = Integer.parseInt(model1.getValueAt(index, 0).toString());
 
-            String cargo = (String) model1.getValueAt(index[i], 1);
-
-            List<Policial> collect = delegadosList.stream().filter(x -> {
-                return x.getCargo().equals(cargo);
-            }).collect(toList());
-            CadastrarOcorrencia.delegados.addAll(collect);
-        }
+        Delegado collect = delegadoList.stream().filter(x -> {
+            return x.getIdPolicial().equals(matricula);
+        }).findFirst().get();
+        CadastrarOcorrencia.delegados = collect;
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 
@@ -256,10 +269,21 @@ public class AdicionarDelegado extends javax.swing.JFrame {
      * @param evt
      */
     private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
-        CadastrarOcorrencia.delegados.clear();
-        CadastrarOcorrencia.delegados.addAll(initPoliciais);
+        CadastrarOcorrencia.delegados = initPoliciais;
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
+
+    private void RemoverButtonRemoverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverButtonRemoverButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        int[] index = TableAdicionados.getSelectedRows();
+
+        for (int i = 0; i < index.length; i++) {
+            model2.removeRow(index[i]);
+
+            CadastrarOcorrencia.delegados=new Delegado();
+            model2.addRow(new Object[3]);
+        }
+    }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,18 +320,19 @@ public class AdicionarDelegado extends javax.swing.JFrame {
             }
         });
     }
-private java.util.List<model.entity.Policial> delegadosList;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdicionarButton;
-    private javax.swing.JButton CadastrarComunicanteButton;
+    private javax.swing.JButton CadastrarDelegadoButton;
     private javax.swing.JButton PesquisarButton;
     private javax.swing.JTextField PesquisarTextField;
+    private javax.swing.JButton RemoverButton;
     private javax.swing.JButton SalvarButton;
     private javax.swing.JTable TabelaResultados;
     private javax.swing.JTable TableAdicionados;
     private javax.swing.JButton VoltarButton;
-    private java.util.List<model.entity.Cidadao> cidadaoList;
-    private javax.persistence.Query cidadaoQuery;
+    private java.util.List<model.entity.Delegado> delegadoList;
+    private javax.persistence.Query delegadoQuery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -23,17 +23,13 @@ public class VeiculoPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "placa")
     private String placa;
-    @Basic(optional = false)
-    @Column(name = "idevidencia")
-    private int idevidencia;
 
     public VeiculoPK() {
     }
 
-    public VeiculoPK(String numchassi, String placa, int idevidencia) {
+    public VeiculoPK(String numchassi, String placa) {
         this.numchassi = numchassi;
         this.placa = placa;
-        this.idevidencia = idevidencia;
     }
 
     public String getNumchassi() {
@@ -52,20 +48,11 @@ public class VeiculoPK implements Serializable {
         this.placa = placa;
     }
 
-    public int getIdevidencia() {
-        return idevidencia;
-    }
-
-    public void setIdevidencia(int idevidencia) {
-        this.idevidencia = idevidencia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (numchassi != null ? numchassi.hashCode() : 0);
         hash += (placa != null ? placa.hashCode() : 0);
-        hash += (int) idevidencia;
         return hash;
     }
 
@@ -82,15 +69,7 @@ public class VeiculoPK implements Serializable {
         if ((this.placa == null && other.placa != null) || (this.placa != null && !this.placa.equals(other.placa))) {
             return false;
         }
-        if (this.idevidencia != other.idevidencia) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "view.VeiculoPK[ numchassi=" + numchassi + ", placa=" + placa + ", idevidencia=" + idevidencia + " ]";
-    }
-    
 }

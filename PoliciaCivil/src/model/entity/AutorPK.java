@@ -18,41 +18,38 @@ import javax.persistence.Embeddable;
 public class AutorPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "idocorrencia")
-    private int idocorrencia;
+    @Column(name = "cpf")
+    private String cpf;
+
     @Basic(optional = false)
-    @Column(name = "cpfcidadao")
-    private String cpfcidadao;
+    @Column(name = "conduzido")
+    private boolean conduzido;
 
     public AutorPK() {
     }
 
-    public AutorPK(int idocorrencia, String cpfcidadao) {
-        this.idocorrencia = idocorrencia;
-        this.cpfcidadao = cpfcidadao;
+    public AutorPK(String cpf) {
+        this.cpf = cpf;
     }
 
-    public int getIdocorrencia() {
-        return idocorrencia;
-    }
-
-    public void setIdocorrencia(int idocorrencia) {
-        this.idocorrencia = idocorrencia;
+    public AutorPK(String cpf, boolean conduzido) {
+        this.cpf = cpf;
+        this.conduzido = conduzido;
     }
 
     public String getCpfcidadao() {
-        return cpfcidadao;
+        return cpf;
     }
 
     public void setCpfcidadao(String cpfcidadao) {
-        this.cpfcidadao = cpfcidadao;
+        this.cpf = cpf;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idocorrencia;
-        hash += (cpfcidadao != null ? cpfcidadao.hashCode() : 0);
+        //hash += (int) idocorrencia;
+        hash += (cpf != null ? cpf.hashCode() : 0);
         return hash;
     }
 
@@ -63,18 +60,18 @@ public class AutorPK implements Serializable {
             return false;
         }
         AutorPK other = (AutorPK) object;
-        if (this.idocorrencia != other.idocorrencia) {
-            return false;
-        }
-        if ((this.cpfcidadao == null && other.cpfcidadao != null) || (this.cpfcidadao != null && !this.cpfcidadao.equals(other.cpfcidadao))) {
+        if ((this.cpf == null && other.cpf != null) || (this.cpf != null && !this.cpf.equals(other.cpf))) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "view.AutorPK[ idocorrencia=" + idocorrencia + ", cpfcidadao=" + cpfcidadao + " ]";
+    public boolean isConduzido() {
+        return conduzido;
     }
-    
+
+    public void setConduzido(boolean conduzido) {
+        this.conduzido = conduzido;
+    }
+
 }

@@ -1,3 +1,4 @@
+SET search_path = 'policiaschema';
 
 INSERT INTO evidencia VALUES(1,  'A evidencia foi obtida pela equipe policial', 'arma');
 INSERT INTO evidencia VALUES(2,  'A evidencia foi obtida pela equipe policial', 'arma');
@@ -66,8 +67,8 @@ INSERT INTO endereco VALUES(3, '7908-022', 'Rua Dable Cury Nimer', 1199, 'Conjun
 INSERT INTO endereco VALUES(4, '79064140', 'Rua Buenópolis', 9965, 'Vila Cidade Morena', 'casa', 'MS', 'Campo Grande');
 INSERT INTO endereco VALUES(5, '79022403', 'Rua Praia da Costa', 165, 'Jardim Autonomista', 'casa', 'MS', 'Campo Grande');
 INSERT INTO endereco VALUES(6, '79070604', 'Rua Durvalina Constância', 154, 'Colinas de Campo Grande', 'casa', 'MS', 'Campo Grande');
-INSERT INTO endereco VALUES(4, '79050320', 'Rua Rolândias', 41, 'Vila Carlota', 'casa', 'MS', 'Campo Grande');
-INSERT INTO endereco VALUES(4, '79037110', 'Rua Rio Vermelho', 67, 'Jardim Veraneio', 'casa', 'MS', 'Campo Grande');
+INSERT INTO endereco VALUES(7, '79050320', 'Rua Rolândias', 41, 'Vila Carlota', 'casa', 'MS', 'Campo Grande');
+INSERT INTO endereco VALUES(8, '79037110', 'Rua Rio Vermelho', 67, 'Jardim Veraneio', 'casa', 'MS', 'Campo Grande');
 
 
 INSERT INTO delegacia VALUES(1, 'Quinta Delegacia de Policia de Campo Grande', '5ªDP');
@@ -120,7 +121,7 @@ INSERT INTO cidadao VALUES(89994931130, 'Emanuelly Mariane da Rocha', '1991-07-0
 INSERT INTO cidadao VALUES(24850103154, 'Caroline Juliana Costa',     '1993-06-11',  2272960, 28759187,  'MS', 'Campo Grande', 'Ativo', 'Carol',  2);
 INSERT INTO cidadao VALUES(98204567111, 'Isabela Rosa Almada',        '1992-10-13',  4558805, 37826165,  'MS', 'Campo Grande', 'Ativo', 'Isa',    2);
 INSERT INTO cidadao VALUES(96746625109, 'Carolina Teresinha Santos',  '1991-10-19', 1489485,  2875918,   'MS', 'Campo Grande', 'Ativo', 'Lana',   3);
-INSERT INTO cidadao VALUES(72250513180, 'Sônia Giovanna Baptista',    '1991-08-13', 4880287,  37635871,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
+INSERT INTO cidadao VALUES(72250513182, 'Sônia Giovanna Baptista',    '1991-08-13', 4880287,  37635871,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
 INSERT INTO cidadao VALUES(05035083144, 'Débora Catarina da Paz',     '1991-04-25', 2103729,  38520959,  'MS', 'Campo Grande', 'Ativo', 'Deb',    3);
 INSERT INTO cidadao VALUES(61355164181, 'Sônia Cristiane Costa',      '1991-12-13', 2116019,  26811263,  'MS', 'Campo Grande', 'Ativo', 'Sonia',  3);
 INSERT INTO cidadao VALUES(44462188160, 'Márcia Cecília Moura',       '1991-10-14', 2420657,  37206778,  'MS', 'Campo Grande', 'Ativo', 'Marcia', 3);
@@ -144,31 +145,4 @@ INSERT INTO possuiPais VALUES(63832456191, 50997400145);
 INSERT INTO possuiPais VALUES(56851555140, 50997400145);
 INSERT INTO possuiPais VALUES(43559013194, 72250513180);
 INSERT INTO possuiPais VALUES(33742872125, 72250513180);
-INSERT INTO possuiPais VALUES(46773960193, 72250513180);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO possuiPais VALUES(46773960193, 72250513182);

@@ -23,17 +23,13 @@ public class ArmaPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "numserie")
     private String numserie;
-    @Basic(optional = false)
-    @Column(name = "idevidencia")
-    private int idevidencia;
 
     public ArmaPK() {
     }
 
-    public ArmaPK(String calibre, String numserie, int idevidencia) {
+    public ArmaPK(String calibre, String numserie) {
         this.calibre = calibre;
         this.numserie = numserie;
-        this.idevidencia = idevidencia;
     }
 
     public String getCalibre() {
@@ -52,20 +48,11 @@ public class ArmaPK implements Serializable {
         this.numserie = numserie;
     }
 
-    public int getIdevidencia() {
-        return idevidencia;
-    }
-
-    public void setIdevidencia(int idevidencia) {
-        this.idevidencia = idevidencia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (calibre != null ? calibre.hashCode() : 0);
         hash += (numserie != null ? numserie.hashCode() : 0);
-        hash += (int) idevidencia;
         return hash;
     }
 
@@ -82,15 +69,7 @@ public class ArmaPK implements Serializable {
         if ((this.numserie == null && other.numserie != null) || (this.numserie != null && !this.numserie.equals(other.numserie))) {
             return false;
         }
-        if (this.idevidencia != other.idevidencia) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "view.ArmaPK[ calibre=" + calibre + ", numserie=" + numserie + ", idevidencia=" + idevidencia + " ]";
-    }
-    
 }

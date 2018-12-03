@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,15 +33,14 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Veiculo.findByAnofabricacao", query = "SELECT v FROM Veiculo v WHERE v.anofabricacao = :anofabricacao")
     , @NamedQuery(name = "Veiculo.findByAno", query = "SELECT v FROM Veiculo v WHERE v.ano = :ano")
     , @NamedQuery(name = "Veiculo.findByFabricacao", query = "SELECT v FROM Veiculo v WHERE v.fabricacao = :fabricacao")
-    , @NamedQuery(name = "Veiculo.findByCor", query = "SELECT v FROM Veiculo v WHERE v.cor = :cor")
-    , @NamedQuery(name = "Veiculo.findByIdevidencia", query = "SELECT v FROM Veiculo v WHERE v.veiculoPK.idevidencia = :idevidencia")})
-public class Veiculo implements Serializable {
+    , @NamedQuery(name = "Veiculo.findByCor", query = "SELECT v FROM Veiculo v WHERE v.cor = :cor")})
+public class Veiculo extends Evidencia implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
+
     protected VeiculoPK veiculoPK;
     @Basic(optional = false)
     @Column(name = "modelo")
@@ -76,8 +74,8 @@ public class Veiculo implements Serializable {
         this.cor = cor;
     }
 
-    public Veiculo(String numchassi, String placa, int idevidencia) {
-        this.veiculoPK = new VeiculoPK(numchassi, placa, idevidencia);
+    public Veiculo(String numchassi, String placa) {
+        this.veiculoPK = new VeiculoPK(numchassi, placa);
     }
 
     public VeiculoPK getVeiculoPK() {
@@ -170,5 +168,5 @@ public class Veiculo implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

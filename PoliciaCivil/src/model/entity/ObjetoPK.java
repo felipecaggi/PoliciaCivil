@@ -20,16 +20,12 @@ public class ObjetoPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @Basic(optional = false)
-    @Column(name = "idevidencia")
-    private int idevidencia;
 
     public ObjetoPK() {
     }
 
-    public ObjetoPK(String nome, int idevidencia) {
+    public ObjetoPK(String nome) {
         this.nome = nome;
-        this.idevidencia = idevidencia;
     }
 
     public String getNome() {
@@ -40,19 +36,10 @@ public class ObjetoPK implements Serializable {
         this.nome = nome;
     }
 
-    public int getIdevidencia() {
-        return idevidencia;
-    }
-
-    public void setIdevidencia(int idevidencia) {
-        this.idevidencia = idevidencia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (nome != null ? nome.hashCode() : 0);
-        hash += (int) idevidencia;
         return hash;
     }
 
@@ -66,15 +53,7 @@ public class ObjetoPK implements Serializable {
         if ((this.nome == null && other.nome != null) || (this.nome != null && !this.nome.equals(other.nome))) {
             return false;
         }
-        if (this.idevidencia != other.idevidencia) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "view.ObjetoPK[ nome=" + nome + ", idevidencia=" + idevidencia + " ]";
-    }
-    
 }

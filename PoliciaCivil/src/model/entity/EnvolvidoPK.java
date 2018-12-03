@@ -76,5 +76,5 @@ public class EnvolvidoPK implements Serializable {
     public String toString() {
         return "view.EnvolvidoPK[ idocorrencia=" + idocorrencia + ", idpolicial=" + idpolicial + " ]";
     }
-    
+
 }

@@ -76,5 +76,5 @@ public class EvidenciaOcorrenciaPK implements Serializable {
     public String toString() {
         return "view.EvidenciaOcorrenciaPK[ idocorrencia=" + idocorrencia + ", idevidencia=" + idevidencia + " ]";
     }
-    
+
 }

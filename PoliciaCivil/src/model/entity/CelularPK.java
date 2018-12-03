@@ -20,16 +20,12 @@ public class CelularPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "imei")
     private String imei;
-    @Basic(optional = false)
-    @Column(name = "idevidencia")
-    private int idevidencia;
 
     public CelularPK() {
     }
 
-    public CelularPK(String imei, int idevidencia) {
+    public CelularPK(String imei) {
         this.imei = imei;
-        this.idevidencia = idevidencia;
     }
 
     public String getImei() {
@@ -40,19 +36,10 @@ public class CelularPK implements Serializable {
         this.imei = imei;
     }
 
-    public int getIdevidencia() {
-        return idevidencia;
-    }
-
-    public void setIdevidencia(int idevidencia) {
-        this.idevidencia = idevidencia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (imei != null ? imei.hashCode() : 0);
-        hash += (int) idevidencia;
         return hash;
     }
 
@@ -66,15 +53,7 @@ public class CelularPK implements Serializable {
         if ((this.imei == null && other.imei != null) || (this.imei != null && !this.imei.equals(other.imei))) {
             return false;
         }
-        if (this.idevidencia != other.idevidencia) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "view.CelularPK[ imei=" + imei + ", idevidencia=" + idevidencia + " ]";
-    }
-    
 }

@@ -10,6 +10,8 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import model.entity.Autor;
+import model.entity.AutorPK;
 import model.entity.Cidadao;
 
 /**
@@ -19,6 +21,7 @@ import model.entity.Cidadao;
 public class AdicionarAutor extends javax.swing.JFrame {
 
     private List<Cidadao> initAutores;
+    private List<Autor> initAutoresPK;
     
     /**
      * Creates new form AdicionarAutor
@@ -30,12 +33,17 @@ public class AdicionarAutor extends javax.swing.JFrame {
         initAutores=new LinkedList<>();
         initAutores.addAll(CadastrarOcorrencia.autores);
         
-        Object[] row = new Object[2];
+        initAutoresPK=new LinkedList<>();
+        initAutoresPK.addAll(CadastrarOcorrencia.autoresPK);
+        
+        
+        Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initAutores.size(); i++) {
             Cidadao temp = initAutores.get(i);
             row[0] = temp.getNome();
             row[1] = temp.getCpf();
+            row[2] = initAutoresPK.get(i).getAutorPK().isConduzido();
             model2.addRow(row);
         }
     }
@@ -65,6 +73,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
         AdicionarButton = new javax.swing.JButton();
         VoltarButton = new javax.swing.JButton();
         SalvarButton = new javax.swing.JButton();
+        RemoverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,9 +111,24 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF"
+                "Nome", "CPF", "Conduzido"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableAdicionados.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(TableAdicionados);
         TableAdicionados.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -127,6 +151,13 @@ public class AdicionarAutor extends javax.swing.JFrame {
         SalvarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SalvarButtonActionPerformed(evt);
+            }
+        });
+
+        RemoverButton.setText("Remover Linhas Selecionadas");
+        RemoverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverButtonActionPerformed(evt);
             }
         });
 
@@ -162,6 +193,10 @@ public class AdicionarAutor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SalvarButton)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(RemoverButton)
+                .addGap(285, 285, 285))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +216,9 @@ public class AdicionarAutor extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(RemoverButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VoltarButton)
                     .addComponent(SalvarButton))
@@ -222,7 +259,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
         int[] index = TabelaResultados.getSelectedRows();
 
-        Object[] row = new Object[2];
+        Object[] row = new Object[3];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
@@ -230,6 +267,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
             row[0] = model1.getValueAt(index[i], 0);
             row[1] = model1.getValueAt(index[i], 1);
+            row[2] = false;
             model2.addRow(row);
 
             String cpf = (String) model1.getValueAt(index[i], 1);
@@ -238,6 +276,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
                 return x.getCpf().equals(cpf);
             }).collect(toList());
             CadastrarOcorrencia.autores.addAll(collect);
+            collect.forEach(x -> CadastrarOcorrencia.autoresPK.add(new Autor(new AutorPK(x.getCpf(), false))));
         }
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
@@ -248,6 +287,13 @@ public class AdicionarAutor extends javax.swing.JFrame {
      * @param evt
      */
     private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+
+        for (int i = 0; i < model2.getRowCount(); i++) {
+            boolean conduzido = (Boolean) model2.getValueAt(i, 2);
+            CadastrarOcorrencia.autoresPK.get(i).getAutorPK().setConduzido(conduzido);
+        }
+        
         this.dispose();
     }//GEN-LAST:event_SalvarButtonActionPerformed
 
@@ -261,6 +307,18 @@ public class AdicionarAutor extends javax.swing.JFrame {
         CadastrarOcorrencia.autores.addAll(initAutores);
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
+
+    private void RemoverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        int[] index = TableAdicionados.getSelectedRows();
+        
+        for (int i = 0; i < index.length; i++) {
+            model2.removeRow(index[i]);
+            
+            CadastrarOcorrencia.autores.remove(index[i]);
+            CadastrarOcorrencia.autoresPK.remove(index[i]);
+        }
+    }//GEN-LAST:event_RemoverButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +360,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
     private javax.swing.JButton CadastrarAutorButton;
     private javax.swing.JButton PesquisarButton;
     private javax.swing.JTextField PesquisarTextField;
+    private javax.swing.JButton RemoverButton;
     private javax.swing.JButton SalvarButton;
     private javax.swing.JTable TabelaResultados;
     private javax.swing.JTable TableAdicionados;

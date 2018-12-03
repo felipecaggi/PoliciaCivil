@@ -10,7 +10,6 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,15 +30,13 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Celular.findByModelo", query = "SELECT c FROM Celular c WHERE c.modelo = :modelo")
     , @NamedQuery(name = "Celular.findByNome", query = "SELECT c FROM Celular c WHERE c.nome = :nome")
     , @NamedQuery(name = "Celular.findByCpfproprietario", query = "SELECT c FROM Celular c WHERE c.cpfproprietario = :cpfproprietario")
-    , @NamedQuery(name = "Celular.findByNomeproprietario", query = "SELECT c FROM Celular c WHERE c.nomeproprietario = :nomeproprietario")
-    , @NamedQuery(name = "Celular.findByIdevidencia", query = "SELECT c FROM Celular c WHERE c.celularPK.idevidencia = :idevidencia")})
-public class Celular implements Serializable {
+    , @NamedQuery(name = "Celular.findByNomeproprietario", query = "SELECT c FROM Celular c WHERE c.nomeproprietario = :nomeproprietario")})
+public class Celular extends Evidencia implements Serializable {
 
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
     protected CelularPK celularPK;
     @Basic(optional = false)
     @Column(name = "numero")
@@ -75,8 +72,8 @@ public class Celular implements Serializable {
         this.nomeproprietario = nomeproprietario;
     }
 
-    public Celular(String imei, int idevidencia) {
-        this.celularPK = new CelularPK(imei, idevidencia);
+    public Celular(String imei) {
+        this.celularPK = new CelularPK(imei);
     }
 
     public CelularPK getCelularPK() {
@@ -179,5 +176,5 @@ public class Celular implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

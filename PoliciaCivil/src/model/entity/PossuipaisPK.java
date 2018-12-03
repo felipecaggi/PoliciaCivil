@@ -76,5 +76,5 @@ public class PossuipaisPK implements Serializable {
     public String toString() {
         return "view.PossuipaisPK[ cpfFilho=" + cpfFilho + ", cpfPai=" + cpfPai + " ]";
     }
-    
+
 }

@@ -18,26 +18,22 @@ import model.entity.Cidadao;
  */
 public class AdicionarComunicante extends javax.swing.JFrame {
 
-    private List<Cidadao> initComunicantes;
-    
+    private Cidadao initComunicantes;
+
     /**
      * Creates new form AdicionarComunicante
      */
     public AdicionarComunicante() {
-        
+
         initComponents();
-        
-        initComunicantes=new LinkedList<>();
-        initComunicantes.addAll(CadastrarOcorrencia.comunicantes);
-        
+
+        initComunicantes = CadastrarOcorrencia.comunicantes;
+
         Object[] row = new Object[2];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
-        for (int i = 0; i < initComunicantes.size(); i++) {
-            Cidadao temp = initComunicantes.get(i);
-            row[0] = temp.getNome();
-            row[1] = temp.getCpf();
-            model2.addRow(row);
-        }
+        row[0] = initComunicantes.getNome();
+        row[1] = initComunicantes.getCpf();
+        model2.addRow(row);
     }
 
     /**
@@ -65,6 +61,7 @@ public class AdicionarComunicante extends javax.swing.JFrame {
         AdicionarButton = new javax.swing.JButton();
         VoltarButton = new javax.swing.JButton();
         SalvarButton = new javax.swing.JButton();
+        RemoverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +127,13 @@ public class AdicionarComunicante extends javax.swing.JFrame {
             }
         });
 
+        RemoverButton.setText("Remover Linhas Selecionadas");
+        RemoverButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverButtonRemoverButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,6 +166,10 @@ public class AdicionarComunicante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SalvarButton)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(289, 289, 289)
+                .addComponent(RemoverButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +189,9 @@ public class AdicionarComunicante extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(RemoverButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VoltarButton)
                     .addComponent(SalvarButton))
@@ -220,25 +230,23 @@ public class AdicionarComunicante extends javax.swing.JFrame {
 
         TableModel model1 = TabelaResultados.getModel();
 
-        int[] index = TabelaResultados.getSelectedRows();
+        int index = TabelaResultados.getSelectedRow();
 
         Object[] row = new Object[2];
 
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
-        for (int i = 0; i < index.length; i++) {
+        model2.removeRow(0);
+        row[0] = model1.getValueAt(index, 0);
+        row[1] = model1.getValueAt(index, 1);
+        model2.addRow(row);
 
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            model2.addRow(row);
+        String cpf = (String) model1.getValueAt(index, 1);
 
-            String cpf = (String) model1.getValueAt(index[i], 1);
-
-            List<Cidadao> collect = cidadaoList.stream().filter(x -> {
-                return x.getCpf().equals(cpf);
-            }).collect(toList());
-            CadastrarOcorrencia.comunicantes.addAll(collect);
-        }
+        Cidadao collect = cidadaoList.stream().filter(x -> {
+            return x.getCpf().equals(cpf);
+        }).findFirst().get();
+        CadastrarOcorrencia.comunicantes=collect;
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 
@@ -257,10 +265,21 @@ public class AdicionarComunicante extends javax.swing.JFrame {
      * @param evt
      */
     private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
-        CadastrarOcorrencia.comunicantes.clear();
-        CadastrarOcorrencia.comunicantes.addAll(initComunicantes);
+        CadastrarOcorrencia.comunicantes=initComunicantes;
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
+
+    private void RemoverButtonRemoverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverButtonRemoverButtonActionPerformed
+        DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
+        int[] index = TableAdicionados.getSelectedRows();
+
+        for (int i = 0; i < index.length; i++) {
+            model2.removeRow(index[i]);
+
+            CadastrarOcorrencia.comunicantes=new Cidadao();
+            model2.addRow(new Object[2]);
+        }
+    }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +321,7 @@ public class AdicionarComunicante extends javax.swing.JFrame {
     private javax.swing.JButton CadastrarComunicanteButton;
     private javax.swing.JButton PesquisarButton;
     private javax.swing.JTextField PesquisarTextField;
+    private javax.swing.JButton RemoverButton;
     private javax.swing.JButton SalvarButton;
     private javax.swing.JTable TabelaResultados;
     private javax.swing.JTable TableAdicionados;
