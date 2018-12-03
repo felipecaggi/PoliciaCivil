@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.util.List;
+import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.entity.Cidadao;
@@ -72,6 +74,12 @@ public class AdicionarComunicante extends javax.swing.JFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
+
+        PesquisarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PesquisarTextFieldKeyPressed(evt);
+            }
+        });
 
         PesquisarButton.setText("Pesquisar");
         PesquisarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +214,21 @@ public class AdicionarComunicante extends javax.swing.JFrame {
      * @param evt
      */
     private void PesquisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarButtonActionPerformed
+        String pesquisa = PesquisarTextField.getText().toLowerCase();
+        List<Cidadao> collect = cidadaoList.stream()
+                .filter(x -> x.getNome().toLowerCase().contains(pesquisa) || x.getCpf().startsWith(pesquisa))
+                .collect(toList());
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, collect, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
+        columnBinding.setColumnName("CPF");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(TabelaResultados);
     }//GEN-LAST:event_PesquisarButtonActionPerformed
 
     /**
@@ -243,7 +265,7 @@ public class AdicionarComunicante extends javax.swing.JFrame {
         Cidadao collect = cidadaoList.stream().filter(x -> {
             return x.getCpf().equals(cpf);
         }).findFirst().get();
-        CadastrarOcorrencia.comunicantes=collect;
+        CadastrarOcorrencia.comunicantes = collect;
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 
@@ -262,7 +284,7 @@ public class AdicionarComunicante extends javax.swing.JFrame {
      * @param evt
      */
     private void VoltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarButtonActionPerformed
-        CadastrarOcorrencia.comunicantes=initComunicantes;
+        CadastrarOcorrencia.comunicantes = initComunicantes;
         this.dispose();
     }//GEN-LAST:event_VoltarButtonActionPerformed
 
@@ -273,10 +295,14 @@ public class AdicionarComunicante extends javax.swing.JFrame {
         for (int i = 0; i < index.length; i++) {
             model2.removeRow(index[i]);
 
-            CadastrarOcorrencia.comunicantes=new Cidadao();
+            CadastrarOcorrencia.comunicantes = new Cidadao();
             model2.addRow(new Object[2]);
         }
     }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
+
+    private void PesquisarTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PesquisarTextFieldKeyPressed
+        PesquisarButtonActionPerformed(null);
+    }//GEN-LAST:event_PesquisarTextFieldKeyPressed
 
     /**
      * @param args the command line arguments

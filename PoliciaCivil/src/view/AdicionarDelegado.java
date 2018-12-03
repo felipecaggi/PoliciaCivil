@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.util.List;
+import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.entity.Delegado;
@@ -75,6 +77,12 @@ public class AdicionarDelegado extends javax.swing.JFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
+
+        PesquisarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PesquisarTextFieldKeyPressed(evt);
+            }
+        });
 
         PesquisarButton.setText("Pesquisar");
         PesquisarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +217,23 @@ public class AdicionarDelegado extends javax.swing.JFrame {
      * @param evt
      */
     private void PesquisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarButtonActionPerformed
+        String pesquisa = PesquisarTextField.getText().toLowerCase();
+        List<Delegado> collect = delegadoList.stream()
+                .filter(x -> x.getNome().toLowerCase().contains(pesquisa) || x.getDelegacia().getNome().toLowerCase().contains(pesquisa))
+                .collect(toList());
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, collect, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPolicial}"));
+        columnBinding.setColumnName("Matricula");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${delegacia.nome}"));
+        columnBinding.setColumnName("Delegacia");
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(TabelaResultados);
     }//GEN-LAST:event_PesquisarButtonActionPerformed
 
     /**
@@ -281,6 +305,10 @@ public class AdicionarDelegado extends javax.swing.JFrame {
             model2.addRow(new Object[3]);
         }
     }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
+
+    private void PesquisarTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PesquisarTextFieldKeyPressed
+        PesquisarButtonActionPerformed(null);
+    }//GEN-LAST:event_PesquisarTextFieldKeyPressed
 
     /**
      * @param args the command line arguments

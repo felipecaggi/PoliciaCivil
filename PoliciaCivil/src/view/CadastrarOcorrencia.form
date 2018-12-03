@@ -382,7 +382,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="AdicionarEvidenciaButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="AdicionarEvid&#xea;ncia"/>
+        <Property name="text" type="java.lang.String" value="Adicionar Evid&#xea;ncia"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdicionarEvidenciaButtonActionPerformed"/>

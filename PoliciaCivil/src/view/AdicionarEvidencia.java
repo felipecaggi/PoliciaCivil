@@ -85,6 +85,12 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
 
+        PesquisarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PesquisarTextFieldKeyPressed(evt);
+            }
+        });
+
         PesquisarButton.setText("Pesquisar");
         PesquisarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +224,23 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
      * @param evt
      */
     private void PesquisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarButtonActionPerformed
+        String pesquisa = PesquisarTextField.getText().toLowerCase();
+        List<Evidencia> collect = evidenciaList.stream()
+                .filter(x -> x.getTipo().toLowerCase().contains(pesquisa) || x.getProvidencia().toLowerCase().contains(pesquisa))
+                .collect(toList());
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, collect, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idEvidencia}"));
+        columnBinding.setColumnName("ID");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tipo}"));
+        columnBinding.setColumnName("Tipo");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${providencia}"));
+        columnBinding.setColumnName("Providência");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(TabelaResultados);
     }//GEN-LAST:event_PesquisarButtonActionPerformed
 
     /**
@@ -295,6 +317,10 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
             CadastrarOcorrencia.evidencias.remove(index[i]);
         }
     }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
+
+    private void PesquisarTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PesquisarTextFieldKeyPressed
+        PesquisarButtonActionPerformed(null);
+    }//GEN-LAST:event_PesquisarTextFieldKeyPressed
 
     /**
      * @param args the command line arguments
