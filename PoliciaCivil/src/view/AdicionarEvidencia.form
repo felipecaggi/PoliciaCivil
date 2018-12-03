@@ -193,6 +193,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="PesquisarTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PesquisarTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="PesquisarButton">
       <Properties>

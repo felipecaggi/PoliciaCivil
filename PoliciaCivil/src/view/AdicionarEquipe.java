@@ -86,6 +86,12 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(TabelaResultados);
 
+        PesquisarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PesquisarTextFieldKeyPressed(evt);
+            }
+        });
+
         PesquisarButton.setText("Pesquisar");
         PesquisarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,7 +225,24 @@ public class AdicionarEquipe extends javax.swing.JFrame {
      * @param evt
      */
     private void PesquisarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarButtonActionPerformed
+        String pesquisa = PesquisarTextField.getText().toLowerCase();
+        List<Policial> collect = policialList.stream()
+                .filter(x -> x.getNome().toLowerCase().contains(pesquisa) || x.getCargo().toLowerCase().contains(pesquisa))
+                .collect(toList());
 
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, collect, TabelaResultados);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idPolicial}"));
+        columnBinding.setColumnName("Matricula");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cargo}"));
+        columnBinding.setColumnName("Cargo");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(TabelaResultados);
     }//GEN-LAST:event_PesquisarButtonActionPerformed
 
     /**
@@ -296,6 +319,10 @@ public class AdicionarEquipe extends javax.swing.JFrame {
             CadastrarOcorrencia.equipe.remove(index[i]);
         }
     }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed
+
+    private void PesquisarTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PesquisarTextFieldKeyPressed
+        PesquisarButtonActionPerformed(null);
+    }//GEN-LAST:event_PesquisarTextFieldKeyPressed
 
     /**
      * @param args the command line arguments

@@ -160,7 +160,7 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
 
         EvidenciaLabel.setText("Evidência");
 
-        AdicionarEvidenciaButton.setText("AdicionarEvidência");
+        AdicionarEvidenciaButton.setText("Adicionar Evidência");
         AdicionarEvidenciaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AdicionarEvidenciaButtonActionPerformed(evt);
