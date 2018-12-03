@@ -22,21 +22,20 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
     private List<Cidadao> initAutores;
     private List<Autor> initAutoresPK;
-    
+
     /**
      * Creates new form AdicionarAutor
      */
     public AdicionarAutor() {
-        
+
         initComponents();
-        
-        initAutores=new LinkedList<>();
+
+        initAutores = new LinkedList<>();
         initAutores.addAll(CadastrarOcorrencia.autores);
-        
-        initAutoresPK=new LinkedList<>();
+
+        initAutoresPK = new LinkedList<>();
         initAutoresPK.addAll(CadastrarOcorrencia.autoresPK);
-        
-        
+
         Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initAutores.size(); i++) {
@@ -265,18 +264,22 @@ public class AdicionarAutor extends javax.swing.JFrame {
 
         for (int i = 0; i < index.length; i++) {
 
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            row[2] = false;
-            model2.addRow(row);
-
             String cpf = (String) model1.getValueAt(index[i], 1);
-
-            List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+            if (CadastrarOcorrencia.autores.stream().filter(x -> {
                 return x.getCpf().equals(cpf);
-            }).collect(toList());
-            CadastrarOcorrencia.autores.addAll(collect);
-            collect.forEach(x -> CadastrarOcorrencia.autoresPK.add(new Autor(new AutorPK(x.getCpf(), false))));
+            }).collect(toList()).isEmpty()) {
+                row[0] = model1.getValueAt(index[i], 0);
+                row[1] = model1.getValueAt(index[i], 1);
+                row[2] = false;
+                model2.addRow(row);
+
+                List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+                    return x.getCpf().equals(cpf);
+                }).collect(toList());
+                CadastrarOcorrencia.autores.addAll(collect);
+                collect.forEach(x -> CadastrarOcorrencia.autoresPK.add(new Autor(new AutorPK(x.getCpf(), false))));
+            }
+
         }
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
@@ -293,7 +296,7 @@ public class AdicionarAutor extends javax.swing.JFrame {
             boolean conduzido = (Boolean) model2.getValueAt(i, 2);
             CadastrarOcorrencia.autoresPK.get(i).getAutorPK().setConduzido(conduzido);
         }
-        
+
         this.dispose();
     }//GEN-LAST:event_SalvarButtonActionPerformed
 
@@ -311,10 +314,10 @@ public class AdicionarAutor extends javax.swing.JFrame {
     private void RemoverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverButtonActionPerformed
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         int[] index = TableAdicionados.getSelectedRows();
-        
+
         for (int i = 0; i < index.length; i++) {
             model2.removeRow(index[i]);
-            
+
             CadastrarOcorrencia.autores.remove(index[i]);
             CadastrarOcorrencia.autoresPK.remove(index[i]);
         }

@@ -19,17 +19,17 @@ import model.entity.Cidadao;
 public class AdicionarTestemunha extends javax.swing.JFrame {
 
     private List<Cidadao> initTestemunha;
-    
+
     /**
      * Creates new form AdicionarTestemunha
      */
     public AdicionarTestemunha() {
-        
+
         initComponents();
-        
-        initTestemunha=new LinkedList<>();
+
+        initTestemunha = new LinkedList<>();
         initTestemunha.addAll(CadastrarOcorrencia.testemunhas);
-        
+
         Object[] row = new Object[2];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initTestemunha.size(); i++) {
@@ -241,17 +241,21 @@ public class AdicionarTestemunha extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
         for (int i = 0; i < index.length; i++) {
-
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            model2.addRow(row);
-
             String cpf = (String) model1.getValueAt(index[i], 1);
 
-            List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+            if (CadastrarOcorrencia.testemunhas.stream().filter(x -> {
                 return x.getCpf().equals(cpf);
-            }).collect(toList());
-            CadastrarOcorrencia.testemunhas.addAll(collect);
+            }).collect(toList()).isEmpty()) {
+                row[0] = model1.getValueAt(index[i], 0);
+                row[1] = model1.getValueAt(index[i], 1);
+                model2.addRow(row);
+
+                List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+                    return x.getCpf().equals(cpf);
+                }).collect(toList());
+                CadastrarOcorrencia.testemunhas.addAll(collect);
+            }
+
         }
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed

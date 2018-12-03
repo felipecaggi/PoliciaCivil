@@ -19,17 +19,17 @@ import model.entity.Cidadao;
 public class AdicionarVitima extends javax.swing.JFrame {
 
     private List<Cidadao> initVitimas;
-    
+
     /**
      * Creates new form AdicionarVitima
      */
     public AdicionarVitima() {
-        
+
         initComponents();
-        
-        initVitimas=new LinkedList<>();
+
+        initVitimas = new LinkedList<>();
         initVitimas.addAll(CadastrarOcorrencia.vitimas);
-        
+
         Object[] row = new Object[2];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initVitimas.size(); i++) {
@@ -241,17 +241,20 @@ public class AdicionarVitima extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
         for (int i = 0; i < index.length; i++) {
-
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            model2.addRow(row);
-
             String cpf = (String) model1.getValueAt(index[i], 1);
 
-            List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+            if (CadastrarOcorrencia.testemunhas.stream().filter(x -> {
                 return x.getCpf().equals(cpf);
-            }).collect(toList());
-            CadastrarOcorrencia.vitimas.addAll(collect);
+            }).collect(toList()).isEmpty()) {
+                row[0] = model1.getValueAt(index[i], 0);
+                row[1] = model1.getValueAt(index[i], 1);
+                model2.addRow(row);
+
+                List<Cidadao> collect = cidadaoList.stream().filter(x -> {
+                    return x.getCpf().equals(cpf);
+                }).collect(toList());
+                CadastrarOcorrencia.vitimas.addAll(collect);
+            }
         }
 
     }//GEN-LAST:event_AdicionarVitimaButtonActionPerformed

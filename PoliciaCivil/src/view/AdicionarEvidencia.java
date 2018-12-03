@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -19,17 +19,17 @@ import model.entity.Evidencia;
 public class AdicionarEvidencia extends javax.swing.JFrame {
 
     private List<Evidencia> initEvidencia;
-    
+
     /**
      * Creates new form AdicionarEvidencia
      */
     public AdicionarEvidencia() {
-        
+
         initComponents();
-        
-        initEvidencia=new LinkedList<>();
+
+        initEvidencia = new LinkedList<>();
         initEvidencia.addAll(CadastrarOcorrencia.evidencias);
-        
+
         Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initEvidencia.size(); i++) {
@@ -246,18 +246,22 @@ public class AdicionarEvidencia extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
         for (int i = 0; i < index.length; i++) {
-
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            row[2] = model1.getValueAt(index[i], 2);
-            model2.addRow(row);
-
             Integer idevi = Integer.parseInt(model1.getValueAt(index[i], 0).toString());
 
-            List<Evidencia> collect = evidenciaList.stream().filter(x -> {
+            if (CadastrarOcorrencia.evidencias.stream().filter(x -> {
                 return x.getIdEvidencia().equals(idevi);
-            }).collect(toList());
-            CadastrarOcorrencia.evidencias.addAll(collect);
+            }).collect(toList()).isEmpty()) {
+                row[0] = model1.getValueAt(index[i], 0);
+                row[1] = model1.getValueAt(index[i], 1);
+                row[2] = model1.getValueAt(index[i], 2);
+                model2.addRow(row);
+
+                List<Evidencia> collect = evidenciaList.stream().filter(x -> {
+                    return x.getIdEvidencia().equals(idevi);
+                }).collect(toList());
+                CadastrarOcorrencia.evidencias.addAll(collect);
+            }
+
         }
     }//GEN-LAST:event_AdicionarButtonActionPerformed
 

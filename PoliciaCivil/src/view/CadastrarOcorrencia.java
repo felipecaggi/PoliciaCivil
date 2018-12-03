@@ -37,21 +37,6 @@ public class CadastrarOcorrencia extends javax.swing.JFrame {
      */
     public CadastrarOcorrencia() {
         initComponents();
-
-        AnoTextField.setText("2018");
-        MesTextField.setText("10");
-        DiaTextField.setText("10");
-        HoraTextField.setText("10");
-        MinutoTextField.setText("10");
-        InfracaoTextField.setText("bla");
-        CidadeTextField.setText("bla");
-        EstadoTextField.setText("ba");
-        LogradouroTextField.setText("bla");
-        NumeroTextField.setText("123");
-        CepTextField.setText("12345");
-        BairroTextField.setText("bla");
-        ReferenciaTextField.setText("bla");
-        ComplementoTextField.setText("bla");
     }
 
     /**
