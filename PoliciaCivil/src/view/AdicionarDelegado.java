@@ -5,9 +5,6 @@
  */
 package view;
 
-import java.util.LinkedList;
-import java.util.List;
-import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.entity.Delegado;
@@ -19,16 +16,16 @@ import model.entity.Delegado;
 public class AdicionarDelegado extends javax.swing.JFrame {
 
     private Delegado initPoliciais;
-    
+
     /**
      * Creates new form AdicionarDelegado
      */
     public AdicionarDelegado() {
-        
+
         initComponents();
 
         initPoliciais = CadastrarOcorrencia.delegados;
-        
+
         Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         row[0] = initPoliciais.getIdPolicial();
@@ -280,7 +277,7 @@ public class AdicionarDelegado extends javax.swing.JFrame {
         for (int i = 0; i < index.length; i++) {
             model2.removeRow(index[i]);
 
-            CadastrarOcorrencia.delegados=new Delegado();
+            CadastrarOcorrencia.delegados = new Delegado();
             model2.addRow(new Object[3]);
         }
     }//GEN-LAST:event_RemoverButtonRemoverButtonActionPerformed

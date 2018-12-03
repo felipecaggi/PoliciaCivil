@@ -19,17 +19,17 @@ import model.entity.Policial;
 public class AdicionarEquipe extends javax.swing.JFrame {
 
     private List<Policial> initPoliciais;
-    
+
     /**
      * Creates new form AdicionarComunicante
      */
     public AdicionarEquipe() {
-        
+
         initComponents();
-        
-        initPoliciais=new LinkedList<>();
+
+        initPoliciais = new LinkedList<>();
         initPoliciais.addAll(CadastrarOcorrencia.equipe);
-        
+
         Object[] row = new Object[3];
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
         for (int i = 0; i < initPoliciais.size(); i++) {
@@ -247,18 +247,21 @@ public class AdicionarEquipe extends javax.swing.JFrame {
         DefaultTableModel model2 = (DefaultTableModel) TableAdicionados.getModel();
 
         for (int i = 0; i < index.length; i++) {
-
-            row[0] = model1.getValueAt(index[i], 0);
-            row[1] = model1.getValueAt(index[i], 1);
-            row[2] = model1.getValueAt(index[i], 2);
-            model2.addRow(row);
-
             Integer matricula = Integer.parseInt(model1.getValueAt(index[i], 0).toString());
 
-            List<Policial> collect = policialList.stream().filter(x -> {
+            if (CadastrarOcorrencia.equipe.stream().filter(x -> {
                 return x.getIdPolicial().equals(matricula);
-            }).collect(toList());
-            CadastrarOcorrencia.equipe.addAll(collect);
+            }).collect(toList()).isEmpty()) {
+                row[0] = model1.getValueAt(index[i], 0);
+                row[1] = model1.getValueAt(index[i], 1);
+                row[2] = model1.getValueAt(index[i], 2);
+                model2.addRow(row);
+
+                List<Policial> collect = policialList.stream().filter(x -> {
+                    return x.getIdPolicial().equals(matricula);
+                }).collect(toList());
+                CadastrarOcorrencia.equipe.addAll(collect);
+            }
         }
 
     }//GEN-LAST:event_AdicionarButtonActionPerformed
@@ -331,7 +334,7 @@ public class AdicionarEquipe extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdicionarButton;
     private javax.swing.JButton CadastrarComunicanteButton;

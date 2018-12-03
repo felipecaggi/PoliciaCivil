@@ -5,9 +5,6 @@
  */
 package view;
 
-import java.util.LinkedList;
-import java.util.List;
-import static java.util.stream.Collectors.toList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.entity.Cidadao;
